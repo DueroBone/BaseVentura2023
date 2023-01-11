@@ -4,11 +4,16 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
-import frc.robot.commands.ExampleCommand;
-import frc.robot.subsystems.ExampleSubsystem;
+import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.Hammer;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -18,9 +23,31 @@ import edu.wpi.first.wpilibj2.command.Command;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final ExampleSubsystem m_exampleSubsystem = new ExampleSubsystem();
+  private final Piston m_piston = new Piston();
+  private final Hammer m_hammer = new Hammer();
 
-  private final ExampleCommand m_autoCommand = new ExampleCommand(m_exampleSubsystem);
+  Compressor c = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  //boolean enabled = c.enabled();
+  boolean pressureSwitch = c.getPressureSwitchValue();
+  //double current = c.getCompressorCurrent();
+  //System.out.println("**Compressor is on: " + enabled + "  pressure switch: " + pressureSwitch);
+
+  public static final XboxController controller0 = new XboxController(0);
+
+    public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
+    public static final JoystickButton con0ButtonB = new JoystickButton(controller0, OIConstants.kXboxButtonB);
+    public static final JoystickButton con0ButtonX = new JoystickButton(controller0, OIConstants.kXboxButtonX);
+    public static final JoystickButton con0ButtonY = new JoystickButton(controller0, OIConstants.kXboxButtonY);
+    public static final JoystickButton con0ButtonBack = new JoystickButton(controller0, OIConstants.kXboxButtonBack);
+    public static final JoystickButton con0ButtonStart = new JoystickButton(controller0, OIConstants.kXboxButtonStart);
+    public static final JoystickButton con0BumperLeft =  new JoystickButton(controller0, OIConstants.kXboxBumperLeft);
+    public static final JoystickButton con0BumperRight = new JoystickButton(controller0, OIConstants.kXboxBumperRight);
+    public static final JoystickButton con0StickPressLeft = new JoystickButton(controller0, OIConstants.kXboxStickPressLeft);
+    public static final JoystickButton con0StickPressRight = new JoystickButton(controller0, OIConstants.kXboxStickPressRight);
+    public POVButton con0PovUp = new POVButton(controller0, 0);
+    public POVButton con0PovRight = new POVButton(controller0, 90);
+    public POVButton con0PovDown = new POVButton(controller0, 180);
+    public POVButton con0PovLeft = new POVButton(controller0, 270);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -34,7 +61,17 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj.Joystick} or {@link XboxController}), and then passing it to a {@link
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
-  private void configureButtonBindings() {}
+  private void configureButtonBindings() {
+    con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
+    //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent()));
+    con0PovUp.whenPressed(() -> Piston.contract(true));
+    con0PovDown.whenPressed(() -> Piston.contract(false));
+    con0PovLeft.whenPressed(() -> Hammer.contract(true));
+    con0PovRight.whenPressed(() -> Hammer.contract(false));
+    con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
+    con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
+    //We are only using the hammer for testing. The lights on the solenoid change, but the air output doesn't change.
+  }
 
   /**
    * Use this to pass the autonomous command to the main {@link Robot} class.
@@ -43,6 +80,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return m_autoCommand;
+    return null;
   }
 }
