@@ -13,7 +13,12 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-
+    public static final class DriveConstants {
+        public static final int leftDrive1Id = 1;
+        public static final int leftDrive2Id = 1;
+        public static final int rightDrive1Id = 1;
+        public static final int rightDrive2Id = 1;
+    }
     public static final class OIConstants {
         // Xbox controller button mappings
         public static final int kXboxButtonA = 1;

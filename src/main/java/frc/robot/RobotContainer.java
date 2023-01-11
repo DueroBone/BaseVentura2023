@@ -5,11 +5,15 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.JoystickButton;
+import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.subsystems.Hammer;
 import frc.robot.subsystems.Piston;
+//i
+//*port frc.robot.subsystems.Piston;
 import frc.robot.subsystems.Hammer;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -30,7 +34,7 @@ public class RobotContainer {
   //boolean enabled = c.enabled();
   boolean pressureSwitch = c.getPressureSwitchValue();
   //double current = c.getCompressorCurrent();
-  //System.out.println("**Compressor is on: " + enabled + "  pressure switch: " + pressureSwitch);
+  //System.out.println("**Compressor is on " + enabled + "  pressure switch: " + pressureSwitch);
 
   public static final XboxController controller0 = new XboxController(0);
 
@@ -40,8 +44,7 @@ public class RobotContainer {
     public static final JoystickButton con0ButtonY = new JoystickButton(controller0, OIConstants.kXboxButtonY);
     public static final JoystickButton con0ButtonBack = new JoystickButton(controller0, OIConstants.kXboxButtonBack);
     public static final JoystickButton con0ButtonStart = new JoystickButton(controller0, OIConstants.kXboxButtonStart);
-    public static final JoystickButton con0BumperLeft =  new JoystickButton(controller0, OIConstants.kXboxBumperLeft);
-    public static final JoystickButton con0BumperRight = new JoystickButton(controller0, OIConstants.kXboxBumperRight);
+	  public static final JoystickButton con0BumperLeft =  new JoystickButton(controller0, OIConstants.kXboxBumperLeft);
     public static final JoystickButton con0StickPressLeft = new JoystickButton(controller0, OIConstants.kXboxStickPressLeft);
     public static final JoystickButton con0StickPressRight = new JoystickButton(controller0, OIConstants.kXboxStickPressRight);
     public POVButton con0PovUp = new POVButton(controller0, 0);
@@ -80,6 +83,6 @@ public class RobotContainer {
    */
   public Command getAutonomousCommand() {
     // An ExampleCommand will run in autonomous
-    return null;
+    //return null;
   }
 }
