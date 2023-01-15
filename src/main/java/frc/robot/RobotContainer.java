@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.DriveCommand;
 import frc.robot.subsystems.Hammer;
 import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.DriveTrain;
@@ -53,6 +54,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
   }
@@ -68,6 +70,7 @@ public class RobotContainer {
     //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent()));
     con0PovUp.whenPressed(() -> Piston.contract(true));
     con0PovDown.whenPressed(() -> Piston.contract(false));
+    con0ButtonA.whenPressed(() -> Piston.pistonToggle());
     con0PovLeft.whenPressed(() -> Hammer.contract(true));
     con0PovRight.whenPressed(() -> Hammer.contract(false));
     con0ButtonY.whenPressed(() -> Hammer.hammerToggle());

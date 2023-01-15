@@ -10,17 +10,19 @@ import com.ctre.phoenix.motorcontrol.SupplyCurrentLimitConfiguration;
 import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 
 import com.kauailabs.navx.frc.AHRS;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMax.IdleMode;
+import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.SpeedControllerGroup;
+//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-import frc.robot.Constants.DriveConstants;
 
 import static frc.robot.Constants.DriveConstants;
 
@@ -30,10 +32,10 @@ public class DriveTrain extends SubsystemBase {
 
   //// ----- Motor Controllers ----- /////
   // There are 4 separate motor controllers with 1 pwm channel per controller
-  private static final WPI_TalonSRX motorDriveLeft1 = new WPI_TalonSRX(DriveConstants.leftDrive1Id);
-  private static final WPI_TalonSRX motorDriveLeft2 = new WPI_TalonSRX(DriveConstants.leftDrive2Id);
-  private static final WPI_TalonSRX motorDriveRight1 = new WPI_TalonSRX(DriveConstants.rightDrive1Id);
-  private static final WPI_TalonSRX motorDriveRight2 = new WPI_TalonSRX(DriveConstants.rightDrive2Id);
+  private static final CANSparkMax motorDriveLeft1 = new CANSparkMax(DriveConstants.leftDrive1Id, MotorType.kBrushless);
+  private static final CANSparkMax motorDriveLeft2 = new CANSparkMax(DriveConstants.leftDrive2Id, MotorType.kBrushless);
+  private static final CANSparkMax motorDriveRight1 = new CANSparkMax(DriveConstants.rightDrive1Id, MotorType.kBrushless);
+  private static final CANSparkMax motorDriveRight2 = new CANSparkMax(DriveConstants.rightDrive2Id, MotorType.kBrushless);
 
   // define Speed Controller Groups and Differential Drive for use in drive train
   private static final MotorControllerGroup driveGroupLeft = new MotorControllerGroup(motorDriveLeft1, motorDriveLeft2);
@@ -60,16 +62,17 @@ public class DriveTrain extends SubsystemBase {
    */
   public DriveTrain() {
 
-    motorDriveLeft1.configFactoryDefault(); // Clear any non default configuration/settings
-    motorDriveLeft2.configFactoryDefault();
-    motorDriveRight1.configFactoryDefault();
-    motorDriveRight2.configFactoryDefault();
+    motorDriveLeft1.restoreFactoryDefaults(); // Clear any non default configuration/settings
+    motorDriveLeft2.restoreFactoryDefaults();
+    motorDriveRight1.restoreFactoryDefaults();
+    motorDriveRight2.restoreFactoryDefaults();
 
-    SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
-    motorDriveLeft1.configSupplyCurrentLimit(supplyLimit);
-    motorDriveLeft2.configSupplyCurrentLimit(supplyLimit); // set current limits
-    motorDriveRight1.configSupplyCurrentLimit(supplyLimit);
-    motorDriveRight2.configSupplyCurrentLimit(supplyLimit);
+    //SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
+    int ampsMax = 40;
+    motorDriveLeft1.setSmartCurrentLimit(ampsMax); //Set current limist
+    motorDriveLeft2.setSmartCurrentLimit(ampsMax);
+    motorDriveRight1.setSmartCurrentLimit(ampsMax);
+    motorDriveRight2.setSmartCurrentLimit(ampsMax);
 
     // DifferentialDrive inverts right side by default, so no need to setInvert()
     // here
@@ -77,10 +80,10 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight1.setInverted(true); // Invert 1 side of robot so will drive forward
     motorDriveRight2.setInverted(true);
 
-    motorDriveLeft1.setNeutralMode(NeutralMode.Coast); // set neutral mode
-    motorDriveLeft2.setNeutralMode(NeutralMode.Coast);
-    motorDriveRight1.setNeutralMode(NeutralMode.Coast);
-    motorDriveRight2.setNeutralMode(NeutralMode.Coast);
+    motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set neutral mode
+    motorDriveLeft2.setIdleMode(IdleMode.kCoast);
+    motorDriveRight1.setIdleMode(IdleMode.kCoast);
+    motorDriveRight2.setIdleMode(IdleMode.kCoast);
 
     // driveStraightControl.setTolerance(0.02); // set tolerance around setpoint
 
@@ -138,11 +141,15 @@ public class DriveTrain extends SubsystemBase {
     // is still 1
     // differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent,
     // kSquareInputs); // send output to drive train
-
-    motorDriveLeft1.set(ControlMode.PercentOutput, leftDrivePercent);
-    motorDriveLeft2.set(ControlMode.PercentOutput, leftDrivePercent);
-    motorDriveRight1.set(ControlMode.PercentOutput, rightDrivePercent);
-    motorDriveRight2.set(ControlMode.PercentOutput, rightDrivePercent);
+    System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
+    motorDriveLeft1.set(leftDrivePercent);
+    motorDriveLeft2.set(leftDrivePercent);
+    motorDriveRight1.set(rightDrivePercent);
+    motorDriveRight2.set(rightDrivePercent);
+    /*
+    driveGroupLeft.set(leftDrivePercent);
+    driveGroupRight.set(rightDrivePercent);
+    */
   }
 
   public void doTankDriveDefault(double leftDrivePercent, double rightDrivePercent) {

@@ -53,7 +53,6 @@ public class DriveCommand extends CommandBase {
     // Check if in deadband range of joysticks in which robot should not respond
     // if (Math.abs(leftDrivePower) < kDeadbandRange) { leftDrivePower = 0; }
     // if (Math.abs(rightDrivePower) < kDeadbandRange) { rightDrivePower = 0; }
-
     DriveTrain.doTankDrive(leftDrivePower, rightDrivePower);
     //if (counter1++ % 40 == 0) {
     //  System.out.println("   Drive leftPower "+leftDrivePower + " rightPower "+rightDrivePower);
