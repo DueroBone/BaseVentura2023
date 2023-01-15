@@ -77,8 +77,8 @@ public class DriveTrain extends SubsystemBase {
     // DifferentialDrive inverts right side by default, so no need to setInvert()
     // here
     // differentialDrive.setRightSideInverted(true);
-    motorDriveRight1.setInverted(true); // Invert 1 side of robot so will drive forward
-    motorDriveRight2.setInverted(true);
+    motorDriveLeft1.setInverted(true); // Invert 1 side of robot so will drive forward
+    motorDriveLeft2.setInverted(true);
 
     motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set neutral mode
     motorDriveLeft2.setIdleMode(IdleMode.kCoast);
@@ -135,13 +135,13 @@ public class DriveTrain extends SubsystemBase {
   public static void doTankDrive(double leftDrivePercent, double rightDrivePercent) {
 
     if (counter++ % 100 == 0) {
-      System.out.println("**driveTrain power L/R: " + leftDrivePercent + "-" + rightDrivePercent);
+      System.out.println("**driveTrain power L/R: " + leftDrivePercent + " | " + rightDrivePercent);
     }
     // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0
     // is still 1
     // differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent,
     // kSquareInputs); // send output to drive train
-    System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
+    //System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
     motorDriveLeft1.set(leftDrivePercent);
     motorDriveLeft2.set(leftDrivePercent);
     motorDriveRight1.set(rightDrivePercent);
