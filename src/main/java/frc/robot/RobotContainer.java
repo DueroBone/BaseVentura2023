@@ -11,8 +11,8 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.DriveCommand;
-import frc.robot.subsystems.Hammer;
-import frc.robot.subsystems.Piston;
+//import frc.robot.subsystems.Hammer;
+//import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -26,13 +26,13 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
  */
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Piston m_piston = new Piston();
-  private final Hammer m_hammer = new Hammer();
+  //private final Piston m_piston = new Piston();
+  //private final Hammer m_hammer = new Hammer();
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
-  Compressor c = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  //Compressor c = new Compressor(0, PneumaticsModuleType.CTREPCM);
   //boolean enabled = c.enabled();
-  boolean pressureSwitch = c.getPressureSwitchValue();
+  //boolean pressureSwitch = c.getPressureSwitchValue();
   //double current = c.getCompressorCurrent();
   //System.out.println("**Compressor is on " + enabled + "  pressure switch: " + pressureSwitch);
 
@@ -66,15 +66,15 @@ public class RobotContainer {
    * edu.wpi.first.wpilibj2.command.button.JoystickButton}.
    */
   private void configureButtonBindings() {
-    con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
+    //con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
     //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent()));
-    con0PovUp.whenPressed(() -> Piston.contract(true));
+    /**con0PovUp.whenPressed(() -> Piston.contract(true));
     con0PovDown.whenPressed(() -> Piston.contract(false));
     con0ButtonA.whenPressed(() -> Piston.pistonToggle());
     con0PovLeft.whenPressed(() -> Hammer.contract(true));
     con0PovRight.whenPressed(() -> Hammer.contract(false));
-    con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
-    con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
+    con0ButtonY.whenPressed(() -> Hammer.hammerToggle()); */ 
+    //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
     //We are only using the hammer for testing. The lights on the solenoid change, but the air output doesn't change.
   }
 
