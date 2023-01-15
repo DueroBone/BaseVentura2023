@@ -30,15 +30,15 @@ public class DriveTrain extends SubsystemBase {
 
   //// ----- Motor Controllers ----- /////
   // There are 4 separate motor controllers with 1 pwm channel per controller
-  private final WPI_TalonSRX motorDriveLeft1 = new WPI_TalonSRX(DriveConstants.leftDrive1Id);
-  private final WPI_TalonSRX motorDriveLeft2 = new WPI_TalonSRX(DriveConstants.leftDrive2Id);
-  private final WPI_TalonSRX motorDriveRight1 = new WPI_TalonSRX(DriveConstants.rightDrive1Id);
-  private final WPI_TalonSRX motorDriveRight2 = new WPI_TalonSRX(DriveConstants.rightDrive2Id);
+  private static final WPI_TalonSRX motorDriveLeft1 = new WPI_TalonSRX(DriveConstants.leftDrive1Id);
+  private static final WPI_TalonSRX motorDriveLeft2 = new WPI_TalonSRX(DriveConstants.leftDrive2Id);
+  private static final WPI_TalonSRX motorDriveRight1 = new WPI_TalonSRX(DriveConstants.rightDrive1Id);
+  private static final WPI_TalonSRX motorDriveRight2 = new WPI_TalonSRX(DriveConstants.rightDrive2Id);
 
   // define Speed Controller Groups and Differential Drive for use in drive train
-  private final MotorControllerGroup driveGroupLeft = new MotorControllerGroup(motorDriveLeft1, motorDriveLeft2);
-  private final MotorControllerGroup driveGroupRight = new MotorControllerGroup(motorDriveRight1, motorDriveRight2);
-  private final DifferentialDrive differentialDrive = new DifferentialDrive(driveGroupLeft, driveGroupRight);
+  private static final MotorControllerGroup driveGroupLeft = new MotorControllerGroup(motorDriveLeft1, motorDriveLeft2);
+  private static final MotorControllerGroup driveGroupRight = new MotorControllerGroup(motorDriveRight1, motorDriveRight2);
+  private static final DifferentialDrive differentialDrive = new DifferentialDrive(driveGroupLeft, driveGroupRight);
 
   // Pneumatic solenoids for Hammer
   // private Solenoid solenoidHammerRaise; // The solenoids we use have two
@@ -129,7 +129,7 @@ public class DriveTrain extends SubsystemBase {
    * @param left  Speed in range [-1,1]
    * @param right Speed in range [-1,1]
    */
-  public void doTankDrive(double leftDrivePercent, double rightDrivePercent) {
+  public static void doTankDrive(double leftDrivePercent, double rightDrivePercent) {
 
     if (counter++ % 100 == 0) {
       System.out.println("**driveTrain power L/R: " + leftDrivePercent + "-" + rightDrivePercent);
