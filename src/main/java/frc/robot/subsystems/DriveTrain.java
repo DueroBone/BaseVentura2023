@@ -140,20 +140,11 @@ public class DriveTrain extends SubsystemBase {
     // is still 1
     // differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent,
     // kSquareInputs); // send output to drive train
-<<<<<<< HEAD
-    System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
+    //System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
     //motorDriveLeft1.set(leftDrivePercent);
     //motorDriveLeft2.set(leftDrivePercent);
     //motorDriveRight1.set(rightDrivePercent);
     //motorDriveRight2.set(rightDrivePercent);
-=======
-    //System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
-    motorDriveLeft1.set(leftDrivePercent);
-    motorDriveLeft2.set(leftDrivePercent);
-    motorDriveRight1.set(rightDrivePercent);
-    motorDriveRight2.set(rightDrivePercent);
-    /*
->>>>>>> 5488e27d113c8449bbbf09d4380c05bbbd8306f4
     driveGroupLeft.set(leftDrivePercent);
     driveGroupRight.set(rightDrivePercent);
   }
