@@ -19,7 +19,6 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.drive.DifferentialDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorControllerGroup;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-//import edu.wpi.first.wpilibj.SpeedControllerGroup;
 import edu.wpi.first.wpilibj.SPI;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -142,14 +141,12 @@ public class DriveTrain extends SubsystemBase {
     // differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent,
     // kSquareInputs); // send output to drive train
     System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
-    motorDriveLeft1.set(leftDrivePercent);
-    motorDriveLeft2.set(leftDrivePercent);
-    motorDriveRight1.set(rightDrivePercent);
-    motorDriveRight2.set(rightDrivePercent);
-    /*
+    //motorDriveLeft1.set(leftDrivePercent);
+    //motorDriveLeft2.set(leftDrivePercent);
+    //motorDriveRight1.set(rightDrivePercent);
+    //motorDriveRight2.set(rightDrivePercent);
     driveGroupLeft.set(leftDrivePercent);
     driveGroupRight.set(rightDrivePercent);
-    */
   }
 
   public void doTankDriveDefault(double leftDrivePercent, double rightDrivePercent) {
@@ -178,59 +175,59 @@ public class DriveTrain extends SubsystemBase {
   // http://pdocs.kauailabs.com/navx-mxp/guidance/terminology (for pitch, roll,
   // yaw, IMU terminology)
   public double getHeadingAngle() {
-    // return m_Gyro.getAngle(); // get current heading
+    return m_Gyro.getAngle(); // get current heading
     // return Math.IEEEremainder(m_Gyro.getAngle(), 360.0);
-    return 0.0;
+    //return 0.0;
   }
 
   public double getYaw() {
-    // return m_Gyro.getYaw(); // get rotation around Z axis for current heading
-    return 0.0;
+    return m_Gyro.getYaw(); // get rotation around Z axis for current heading
+    //return 0.0;
   }
 
   public void resetGyro() {
-    // m_Gyro.reset();
+    m_Gyro.reset();
     // "Zero" yaw (whatever direction sensor is pointing now becomes new "Zero"
     // degrees
-    // m_Gyro.zeroYaw();
+    m_Gyro.zeroYaw();
   }
 
   // public void resetEncoder() {
   public void resetEncoders() {
-    // ** m_leftEncoder.reset();
-    // ** m_rightEncoder.reset();
+    //m_leftEncoder.reset();
+    //m_rightEncoder.reset();
   }
 
   public int getLeftEncoderCount() {
-    // ** return m_leftEncoder.get();
+    //return m_leftEncoder.get();
     return 0;
   }
 
   public int getRightEncoderCount() {
-    // ** return m_rightEncoder.get();
+    //return m_rightEncoder.get();
     return 0;
   }
 
   // get current distance since last encoder reset
   public double getLeftDistance() {
-    // ** return m_leftEncoder.getDistance();
+    //return m_leftEncoder.getDistance();
     return 0.0;
   }
 
   public double getLeftDistanceInch() {
-    // ** return Math.PI * DriveConstants.WHEEL_DIAMETER * (getLeftEncoderCount() /
-    // DriveConstants.PULSES_PER_REVOLUTION);
+  //  return Math.PI * DriveConstants.WHEEL_DIAMETER * (getLeftEncoderCount() /
+  //   DriveConstants.PULSES_PER_REVOLUTION);
     return 0.0;
   }
 
   public double getRightDistanceInch() {
-    // ** return Math.PI * DriveConstants.WHEEL_DIAMETER * (getRightEncoderCount() /
-    // DriveConstants.PULSES_PER_REVOLUTION);
+  //  return Math.PI * DriveConstants.WHEEL_DIAMETER * (getRightEncoderCount() /
+  //   DriveConstants.PULSES_PER_REVOLUTION);
     return 0.0;
   }
 
   public double getAveDistanceInch() {
-    // ** return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
+    //return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
     return 0.0;
   }
 
