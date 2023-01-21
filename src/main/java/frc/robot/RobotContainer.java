@@ -33,7 +33,6 @@ public class RobotContainer {
   //System.out.println("**Compressor is on " + enabled + "  pressure switch: " + pressureSwitch);
 
   public static final XboxController controller0 = new XboxController(0);
-
     public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
     public static final JoystickButton con0ButtonB = new JoystickButton(controller0, OIConstants.kXboxButtonB);
     public static final JoystickButton con0ButtonX = new JoystickButton(controller0, OIConstants.kXboxButtonX);
@@ -48,9 +47,25 @@ public class RobotContainer {
     public POVButton con0PovDown = new POVButton(controller0, 180);
     public POVButton con0PovLeft = new POVButton(controller0, 270);
 
+  public static final XboxController controller2 = new XboxController(2);
+    public static final JoystickButton con2ButtonA = new JoystickButton(controller2, OIConstants.kXboxButtonA);
+    public static final JoystickButton con2ButtonB = new JoystickButton(controller2, OIConstants.kXboxButtonB);
+    public static final JoystickButton con2ButtonX = new JoystickButton(controller2, OIConstants.kXboxButtonX);
+    public static final JoystickButton con2ButtonY = new JoystickButton(controller2, OIConstants.kXboxButtonY);
+    public static final JoystickButton con2ButtonBack = new JoystickButton(controller2, OIConstants.kXboxButtonBack);
+    public static final JoystickButton con2ButtonStart = new JoystickButton(controller2, OIConstants.kXboxButtonStart);
+    public static final JoystickButton con2BumperLeft =  new JoystickButton(controller2, OIConstants.kXboxBumperLeft);
+    public static final JoystickButton con2StickPressLeft = new JoystickButton(controller2, OIConstants.kXboxStickPressLeft);
+    public static final JoystickButton con2StickPressRight = new JoystickButton(controller2, OIConstants.kXboxStickPressRight);
+    public POVButton con2PovUp = new POVButton(controller2, 0);
+    public POVButton con2PovRight = new POVButton(controller2, 90);
+    public POVButton con2PovDown = new POVButton(controller2, 180);
+    public POVButton con2PovLeft = new POVButton(controller2, 270);
+
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_driveTrain.setDefaultCommand(new GoTele());
+    //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
   }

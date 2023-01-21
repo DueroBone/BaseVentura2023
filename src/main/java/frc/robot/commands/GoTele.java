@@ -4,9 +4,11 @@ import java.text.MessageFormat;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.commands.DriveCommand;
+import java.lang.Math;
 
 public class GoTele extends CommandBase {
     @Override
@@ -26,30 +28,58 @@ public class GoTele extends CommandBase {
 
     @Override
     public void execute() {
-      DriveCommand dcObj = new DriveCommand(() -> teleLeft, () -> teleRight);
-      double deadzone = 0.1;
+      double deadzone = 0.05;
       boolean usingCon0 = Math.abs(RobotContainer.controller0.getLeftY()) < deadzone || Math.abs(RobotContainer.controller0.getRightY()) < deadzone;
       double teleLeft = 0;
       double teleRight = 0;
-      if (RobotContainer.controller0.isConnected() && usingCon0) {
+      if (RobotContainer.controller0.isConnected()) {
         //Using two controllers
-        teleLeft = RobotContainer.controller0.getLeftY();
-        teleRight = RobotContainer.controller0.getRightY();
+        teleLeft = RobotContainer.controller0.getLeftY() * -1;
+        teleRight = RobotContainer.controller0.getRightY() * -1;
+      } else { 
+        if (RobotContainer.controller2.isConnected()) {
+          //Using two controllers
+          teleLeft = RobotContainer.controller2.getLeftY() * -0.25;
+          teleRight = RobotContainer.controller2.getRightY() * -0.25;
+        }
       }
 
+      double speedMultiplier = 1;
       double a = 1 - deadzone;
       a = 1 / a;
-      teleLeft = teleLeft - deadzone;
-      teleLeft = teleLeft * a;
-      teleRight = teleRight - deadzone;
-      teleRight = teleRight * a;
 
-      dcObj.execute();
+      if (Math.abs(teleLeft) > deadzone) {
+        if (teleLeft>0){
+          teleLeft = teleLeft - deadzone;
+        } else {
+          teleLeft = teleLeft + deadzone;
+        }
+        teleLeft = teleLeft * a;
+        //teleLeft = smartSquare(teleLeft, 2);
+        teleLeft = teleLeft * speedMultiplier;
+      } else {teleLeft = 0;}
+
+      if (Math.abs(teleRight) > deadzone) {
+        teleRight = teleRight - deadzone;
+        teleRight = teleRight * a;
+        //teleRight = smartSquare(teleRight, 2);
+        teleRight = teleRight * speedMultiplier;
+      } else {teleRight = 0;}
+
+      //System.out.println("Left Y:" + RobotContainer.controller0.getLeftY() + " Left speed:" + teleLeft + " Right Y:" + RobotContainer.controller0.getRightY() + " Right speed:" + teleRight);
+      DriveTrain.doTankDrive(teleLeft, teleRight);
       SmartDashboard.putNumber("Left Drive Speed", teleLeft);
       SmartDashboard.putNumber("Right Drive Speed", teleRight);
     }
     @Override
     public boolean isFinished() {
       return false;   // this command just turns off shooter
+    }
+    private static double smartSquare(double input, double exponent) {
+      double output = Math.pow(input, exponent);
+      if (Math.signum(input) != Math.signum(output)) {
+        output = output * -1;
+      }
+      return output;
     }
 }
