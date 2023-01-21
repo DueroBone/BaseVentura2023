@@ -5,6 +5,7 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
@@ -16,6 +17,7 @@ import frc.robot.subsystems.Hammer;
 import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.StartEndCommand;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 
@@ -57,6 +59,7 @@ public class RobotContainer {
     public static final JoystickButton con2BumperLeft =  new JoystickButton(controller2, OIConstants.kXboxBumperLeft);
     public static final JoystickButton con2StickPressLeft = new JoystickButton(controller2, OIConstants.kXboxStickPressLeft);
     public static final JoystickButton con2StickPressRight = new JoystickButton(controller2, OIConstants.kXboxStickPressRight);
+    public static final JoystickButton con2Whatever = new JoystickButton(controller2, 8);
     public POVButton con2PovUp = new POVButton(controller2, 0);
     public POVButton con2PovRight = new POVButton(controller2, 90);
     public POVButton con2PovDown = new POVButton(controller2, 180);
@@ -64,7 +67,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele());
+    m_driveTrain.setDefaultCommand(new GoTele(false));
     //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
@@ -79,6 +82,8 @@ public class RobotContainer {
     con0PovLeft.whenPressed(() -> Hammer.contract(true));
     con0PovRight.whenPressed(() -> Hammer.contract(false));
     con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
+    con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
+      () -> Hammer.contract(false)));
     //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
   }
 

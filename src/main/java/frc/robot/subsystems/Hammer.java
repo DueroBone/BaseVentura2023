@@ -10,7 +10,7 @@ public class Hammer {
     private static DoubleSolenoid hammer;
     public Hammer() {
     hammer = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 3, 4);
-    //hammer.set(DoubleSolenoid.Value.kOff);
+    hammer.set(DoubleSolenoid.Value.kReverse);
     //hammer.close();
     }
     public static Command contract(final boolean contracted) {
@@ -22,7 +22,8 @@ public class Hammer {
         }
         return null;
     }
-    public static void hammerToggle(){
+    public static Command hammerToggle(){
       hammer.toggle();
+      return null;
     }
 }
