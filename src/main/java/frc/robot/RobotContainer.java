@@ -59,6 +59,7 @@ public class RobotContainer {
     public static final JoystickButton con2BumperLeft =  new JoystickButton(controller2, OIConstants.kXboxBumperLeft);
     public static final JoystickButton con2StickPressLeft = new JoystickButton(controller2, OIConstants.kXboxStickPressLeft);
     public static final JoystickButton con2StickPressRight = new JoystickButton(controller2, OIConstants.kXboxStickPressRight);
+    public static final JoystickButton con2Pad = new JoystickButton(controller2, 14);
     public static final JoystickButton con2Whatever = new JoystickButton(controller2, 8);
     public POVButton con2PovUp = new POVButton(controller2, 0);
     public POVButton con2PovRight = new POVButton(controller2, 90);
@@ -67,7 +68,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(false));
+    m_driveTrain.setDefaultCommand(new GoTele(true));
     //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
@@ -82,6 +83,7 @@ public class RobotContainer {
     con0PovLeft.whenPressed(() -> Hammer.contract(true));
     con0PovRight.whenPressed(() -> Hammer.contract(false));
     con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
+    con2Pad.whenPressed(() -> Hammer.hammerToggle());
     con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
       () -> Hammer.contract(false)));
     //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));

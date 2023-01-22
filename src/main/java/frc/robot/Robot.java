@@ -10,6 +10,8 @@ import edu.wpi.first.cscore.VideoMode.PixelFormat;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
+import frc.robot.subsystems.Hammer;
+import edu.wpi.first.wpilibj.DoubleSolenoid;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -32,9 +34,10 @@ public class Robot extends TimedRobot {
     // autonomous chooser on the dashboard.
     m_robotContainer = new RobotContainer();
     UsbCamera camera = CameraServer.startAutomaticCapture();
-    camera.setVideoMode(PixelFormat.kYUYV, 640, 480, 15);
+    //camera.setPixelFormat(PixelFormat.kYUYV);
+    camera.setVideoMode(PixelFormat.kYUYV, 160, 120, 30);
     camera.setWhiteBalanceManual(50);
-    camera.setExposureManual(10);
+    camera.setExposureManual(20);
   }
 
   /**
@@ -55,10 +58,14 @@ public class Robot extends TimedRobot {
 
   /** This function is called once each time the robot enters Disabled mode. */
   @Override
-  public void disabledInit() {}
+  public void disabledInit() {
+    Hammer.hammer.set(DoubleSolenoid.Value.kReverse);
+  }
 
   @Override
-  public void disabledPeriodic() {}
+  public void disabledPeriodic() {
+    
+  }
 
   /** This autonomous runs the autonomous command selected by your {@link RobotContainer} class. */
   @Override

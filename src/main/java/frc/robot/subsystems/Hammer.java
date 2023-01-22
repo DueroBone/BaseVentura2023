@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 
 public class Hammer {
-    private static DoubleSolenoid hammer;
+    public static DoubleSolenoid hammer;
     public Hammer() {
     hammer = new DoubleSolenoid(PneumaticsModuleType.CTREPCM, 3, 4);
     hammer.set(DoubleSolenoid.Value.kReverse);
