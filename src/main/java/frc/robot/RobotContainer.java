@@ -6,7 +6,9 @@ package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -24,11 +26,11 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  private final Piston m_piston = new Piston();
-  private final Hammer m_hammer = new Hammer();
+  //private final Piston m_piston = new Piston();
+  //private final Hammer m_hammer = new Hammer();
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
-  Compressor c = new Compressor(0, PneumaticsModuleType.CTREPCM);
+  //Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
   //boolean enabled = c.enabled();
   //boolean pressureSwitch = c.getPressureSwitchValue();
   //double current = c.getCompressorCurrent();
@@ -65,6 +67,20 @@ public class RobotContainer {
     public POVButton con2PovRight = new POVButton(controller2, 90);
     public POVButton con2PovDown = new POVButton(controller2, 180);
     public POVButton con2PovLeft = new POVButton(controller2, 270);
+  
+    public static final Joystick controller5 = new Joystick(5);
+     public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.kATK3BigTrigge);
+     public static final JoystickButton con5Button2 = new JoystickButton(controller5, OIConstants.kATK3Button2);
+     public static final JoystickButton con5Button3 = new JoystickButton(controller5, OIConstants.kATK3Button3);
+     public static final JoystickButton con5Button4 = new JoystickButton(controller5, OIConstants.kATK3Button4);
+     public static final JoystickButton con5Button5 = new JoystickButton(controller5, OIConstants.kATK3Button5);
+     public static final JoystickButton con5Button6 = new JoystickButton(controller5, OIConstants.kATK3Button6);
+     public static final JoystickButton con5Button7 = new JoystickButton(controller5, OIConstants.kATK3Button7);
+     public static final JoystickButton con5Button8 = new JoystickButton(controller5, OIConstants.kATK3Button8);
+     public static final JoystickButton con5Button9 = new JoystickButton(controller5, OIConstants.kATK3Button9);
+     public static final JoystickButton con5Button10 = new JoystickButton(controller5, OIConstants.kATK3Button10);
+     public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
+     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -76,7 +92,8 @@ public class RobotContainer {
 
   private void configureButtonBindings() {
     //con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
-    //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent()));
+    //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent())); 
+    /**
     con0PovUp.whenPressed(() -> Piston.contract(true));
     con0PovDown.whenPressed(() -> Piston.contract(false));
     con0ButtonA.whenPressed(() -> Piston.pistonToggle());
@@ -85,7 +102,8 @@ public class RobotContainer {
     con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
     con2Pad.whenPressed(() -> Hammer.hammerToggle());
     con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
-      () -> Hammer.contract(false)));
+      () -> Hammer.contract(false))); */
+    con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
     //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
   }
 

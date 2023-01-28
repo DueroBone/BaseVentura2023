@@ -88,9 +88,9 @@ public class DriveTrain extends SubsystemBase {
 
     // Initialize the solenoids
     //solenoidHammerRaise = new Solenoid(0);
-    solenoidGearChange = new Solenoid(PneumaticsModuleType.CTREPCM, 0);
+    solenoidGearChange = new Solenoid(PneumaticsModuleType.REVPH, 0);
     //solenoidHammerDown = new Solenoid(1);
-    solenoidGearDef = new Solenoid(PneumaticsModuleType.CTREPCM, 1);
+    solenoidGearDef = new Solenoid(PneumaticsModuleType.REVPH, 1);
 
     if (kSkipGyro) {
       m_Gyro = null;
@@ -166,7 +166,7 @@ public class DriveTrain extends SubsystemBase {
    * @param speed    Speed in range [-1,1]
    * @param rotation Rotation in range [-1,1]
    */
-  public void doArcadeDrive(double speed, double rotation) {
+  public static void doArcadeDrive(double speed, double rotation) {
     // if (counter++ % 100 == 0) { System.out.println("**arcadeDrive power
     // speed/rotation: " + speed+"-"rotation); }
     // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0

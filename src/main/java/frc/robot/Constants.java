@@ -57,5 +57,50 @@ public final class Constants {
         public static final int kLogiButtonStart = 8; 
         public static final int kLogiStickPressLeft = 9; 
         public static final int kLogiStickPressRight = 10;
+
+        // Playstation controller axis mappings
+        public static final int kPlaystationAxisLeftStickX = 0;
+        public static final int kPlaystationAxisLeftStickY = 1;
+        public static final int kPlaystationAxisLeftTrigger = 3; 
+        public static final int kPlaystationAxisRightTrigger = 4; 
+        public static final int kPlaystationAxisRightStickX = 2;
+        public static final int kPlaystationAxisRightStickY = 5;
+        public static final int kPlaystationAxisDpad = 6;
+
+        public static final int kPlaystationButtonSquare = 1;
+        public static final int kPlaystationButtonX = 2;
+        public static final int kPlaystationButtonCircle = 3;
+        public static final int kPlaystationButtonTriangle = 4;
+        public static final int kPlaystationBumperLeft = 5;
+        public static final int kPlaystationBumperRight = 6;
+        public static final int kPlaystationLeftBumper = 7; 
+        public static final int kPlaystationRightBumper = 8; 
+        public static final int kPlaystationStickPressLeft = 11; 
+        public static final int kPlaystationStickPressRight = 12;
+        public static final int kPlaystationShareButton = 9;
+        public static final int kPlaystationOptions = 10;
+        public static final int kPlaystationStartButton = 13;
+        public static final int kPlaystationDuelsBigButton = 14;
+
+        
+        // ATK3 controller axis mappings
+        public static final int kATK3AxisStickyLeftyRighty = 0;
+        public static final int kATK3AxisStickyUpDown = 1;
+        public static final int kATK3AxisBackSlidey = 2; 
+
+        public static final int kATK3BigTrigge = 1;
+        public static final int kATK3Button2 = 2;
+        public static final int kATK3Button3 = 3;
+        public static final int kATK3Button4 = 4;
+        public static final int kATK3Button5 = 5;
+        public static final int kATK3Button6 = 6;
+        public static final int kATK3Button7 = 7; 
+        public static final int kATK3Button8 = 8; 
+        public static final int kATK3Button9 = 9; 
+        public static final int kATK3Button10 = 10;
+        public static final int kATK3Button11 = 11;
+        public static final int kATK3Button12 = 12;
+        public static final int kATK3Button13 = 13;
+        public static final int kATK3Button14 = 14;
     }
 }

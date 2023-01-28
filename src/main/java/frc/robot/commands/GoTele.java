@@ -7,7 +7,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.commands.DriveCommand;
 import java.lang.Math;
 
 public class GoTele extends CommandBase {
@@ -32,8 +31,12 @@ public class GoTele extends CommandBase {
       double deadzone = 0.05;
       boolean usingCon0 = Math.abs(RobotContainer.controller0.getLeftY()) > deadzone || Math.abs(RobotContainer.controller0.getRightY()) > deadzone;
       boolean usingCon2 = Math.abs(RobotContainer.controller2.getLeftY()) > deadzone || Math.abs(RobotContainer.controller2.getRightY()) > deadzone;
+      boolean usingCon5 = Math.abs(RobotContainer.controller5.getY()) > deadzone || Math.abs(RobotContainer.controller5.getX()) > deadzone;
       double teleLeft = 0;
       double teleRight = 0;
+      double teleRotate = 0;
+      double teleSpeed = 0;
+
       if (RobotContainer.controller0.isConnected() && usingCon0) {
         //Using two controllers
         teleLeft = RobotContainer.controller0.getLeftY() * -1;
@@ -44,8 +47,14 @@ public class GoTele extends CommandBase {
           teleLeft = RobotContainer.controller2.getLeftY() * -0.5;
           teleRight = RobotContainer.controller2.getRightY() * -0.5;
         } else {
-          teleLeft = 0;
-          teleRight = 0;
+          if (RobotContainer.controller5.isConnected() && usingCon5) {
+            //Using single joystick
+            teleRotate = RobotContainer.controller5.getX();
+            teleSpeed = RobotContainer.controller5.getY() * -1;
+          } else {
+            teleLeft = 0;
+            teleRight = 0;
+          }
         }
       }
 
@@ -60,20 +69,40 @@ public class GoTele extends CommandBase {
           teleLeft = teleLeft + deadzone;
         }
         teleLeft = teleLeft * a;
-        teleLeft = smartSquare(teleLeft, 2);
+        teleLeft = smartSquare(teleLeft, 1);
         teleLeft = teleLeft * speedMultiplier;
       } else {teleLeft = 0;}
 
       if (Math.abs(teleRight) > deadzone) {
-        teleRight = teleRight - deadzone;
+        if (teleRight>0){
+          teleRight = teleRight - deadzone;
+        } else {
+          teleRight = teleRight + deadzone;
+        }
         teleRight = teleRight * a;
-        teleRight = smartSquare(teleRight, 2);
+        teleRight = smartSquare(teleRight, 1);
         teleRight = teleRight * speedMultiplier;
       } else {teleRight = 0;}
 
+      if (Math.abs(teleSpeed) > deadzone) {
+        if (teleSpeed>0){
+          teleSpeed = teleSpeed - deadzone;
+        } else {
+          teleSpeed = teleSpeed + deadzone;
+        }
+        teleSpeed = teleSpeed * a;
+        teleSpeed = smartSquare(teleSpeed, 1);
+        teleSpeed = teleSpeed * speedMultiplier;
+      } else {teleSpeed = 0;}
+
+
       //System.out.println("Left Y:" + RobotContainer.controller0.getLeftY() + " Left speed:" + teleLeft + " Right Y:" + RobotContainer.controller0.getRightY() + " Right speed:" + teleRight);
       if (GoTeleEnabled){
-        DriveTrain.doTankDrive(teleLeft, teleRight);
+        if (usingCon5) {
+          DriveTrain.doArcadeDrive(teleSpeed, teleRotate); 
+        } else {
+          DriveTrain.doTankDrive(teleLeft, teleRight);
+        }
       }
       SmartDashboard.putNumber("Left Drive Speed", teleLeft);
       SmartDashboard.putNumber("Right Drive Speed", teleRight);
