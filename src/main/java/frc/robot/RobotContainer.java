@@ -30,7 +30,7 @@ public class RobotContainer {
   //private final Hammer m_hammer = new Hammer();
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
-  //Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
+  Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
   //boolean enabled = c.enabled();
   //boolean pressureSwitch = c.getPressureSwitchValue();
   //double current = c.getCompressorCurrent();
@@ -61,8 +61,8 @@ public class RobotContainer {
     public static final JoystickButton con2BumperLeft =  new JoystickButton(controller2, OIConstants.kXboxBumperLeft);
     public static final JoystickButton con2StickPressLeft = new JoystickButton(controller2, OIConstants.kXboxStickPressLeft);
     public static final JoystickButton con2StickPressRight = new JoystickButton(controller2, OIConstants.kXboxStickPressRight);
-    public static final JoystickButton con2Pad = new JoystickButton(controller2, 14);
-    public static final JoystickButton con2Whatever = new JoystickButton(controller2, 8);
+    public static final JoystickButton con2Pad = new JoystickButton(controller2, OIConstants.kPlaystationDuelsBigButton);
+    public static final JoystickButton con2Whatever = new JoystickButton(controller2, OIConstants.kPlaystationRightTrigger);
     public POVButton con2PovUp = new POVButton(controller2, 0);
     public POVButton con2PovRight = new POVButton(controller2, 90);
     public POVButton con2PovDown = new POVButton(controller2, 180);
@@ -84,16 +84,13 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(true));
+    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
   }
 
   private void configureButtonBindings() {
-    //con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
-    //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent())); 
-    /**
     con0PovUp.whenPressed(() -> Piston.contract(true));
     con0PovDown.whenPressed(() -> Piston.contract(false));
     con0ButtonA.whenPressed(() -> Piston.pistonToggle());
@@ -102,9 +99,8 @@ public class RobotContainer {
     con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
     con2Pad.whenPressed(() -> Hammer.hammerToggle());
     con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
-      () -> Hammer.contract(false))); */
+      () -> Hammer.contract(false)));
     con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
-    //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
   }
 
   public Command getAutonomousCommand() {

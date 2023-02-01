@@ -73,8 +73,8 @@ public final class Constants {
         public static final int kPlaystationButtonTriangle = 4;
         public static final int kPlaystationBumperLeft = 5;
         public static final int kPlaystationBumperRight = 6;
-        public static final int kPlaystationLeftBumper = 7; 
-        public static final int kPlaystationRightBumper = 8; 
+        public static final int kPlaystationLeftTrigger = 7; 
+        public static final int kPlaystationRightTrigger = 8; 
         public static final int kPlaystationStickPressLeft = 11; 
         public static final int kPlaystationStickPressRight = 12;
         public static final int kPlaystationShareButton = 9;
@@ -102,5 +102,8 @@ public final class Constants {
         public static final int kATK3Button12 = 12;
         public static final int kATK3Button13 = 13;
         public static final int kATK3Button14 = 14;
+    }
+    public static final class SmartControllerMap {
+        // I don't want to do this right now
     }
 }

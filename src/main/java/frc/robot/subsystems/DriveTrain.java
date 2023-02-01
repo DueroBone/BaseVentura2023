@@ -67,11 +67,16 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight2.restoreFactoryDefaults();
 
     //SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
-    int ampsMax = 40;
+    int ampsMax = 20;
     motorDriveLeft1.setSmartCurrentLimit(ampsMax); //Set current limist
     motorDriveLeft2.setSmartCurrentLimit(ampsMax);
     motorDriveRight1.setSmartCurrentLimit(ampsMax);
     motorDriveRight2.setSmartCurrentLimit(ampsMax);
+
+    motorDriveLeft1.setClosedLoopRampRate(5);
+    motorDriveLeft2.setClosedLoopRampRate(5);
+    motorDriveRight1.setClosedLoopRampRate(5);
+    motorDriveRight2.setClosedLoopRampRate(5);
 
     // DifferentialDrive inverts right side by default, so no need to setInvert()
     // here
