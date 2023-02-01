@@ -5,7 +5,6 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.RobotController;
@@ -13,16 +12,12 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.DriveCommand;
 import frc.robot.commands.GoTele;
 import frc.robot.subsystems.Hammer;
 import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
-
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -68,19 +63,19 @@ public class RobotContainer {
     public POVButton con2PovDown = new POVButton(controller2, 180);
     public POVButton con2PovLeft = new POVButton(controller2, 270);
   
-    public static final Joystick controller5 = new Joystick(5);
-     public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.kATK3BigTrigge);
-     public static final JoystickButton con5Button2 = new JoystickButton(controller5, OIConstants.kATK3Button2);
-     public static final JoystickButton con5Button3 = new JoystickButton(controller5, OIConstants.kATK3Button3);
-     public static final JoystickButton con5Button4 = new JoystickButton(controller5, OIConstants.kATK3Button4);
-     public static final JoystickButton con5Button5 = new JoystickButton(controller5, OIConstants.kATK3Button5);
-     public static final JoystickButton con5Button6 = new JoystickButton(controller5, OIConstants.kATK3Button6);
-     public static final JoystickButton con5Button7 = new JoystickButton(controller5, OIConstants.kATK3Button7);
-     public static final JoystickButton con5Button8 = new JoystickButton(controller5, OIConstants.kATK3Button8);
-     public static final JoystickButton con5Button9 = new JoystickButton(controller5, OIConstants.kATK3Button9);
-     public static final JoystickButton con5Button10 = new JoystickButton(controller5, OIConstants.kATK3Button10);
-     public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
-     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
+  public static final Joystick controller5 = new Joystick(5);
+    public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.SmartMap(controller5, "B"));
+    public static final JoystickButton con5Button2 = new JoystickButton(controller5, -1);
+    public static final JoystickButton con5Button3 = new JoystickButton(controller5, OIConstants.kATK3Button3);
+    public static final JoystickButton con5Button4 = new JoystickButton(controller5, OIConstants.kATK3Button4);
+    public static final JoystickButton con5Button5 = new JoystickButton(controller5, OIConstants.kATK3Button5);
+    public static final JoystickButton con5Button6 = new JoystickButton(controller5, OIConstants.kATK3Button6);
+    public static final JoystickButton con5Button7 = new JoystickButton(controller5, OIConstants.kATK3Button7);
+    public static final JoystickButton con5Button8 = new JoystickButton(controller5, OIConstants.kATK3Button8);
+    public static final JoystickButton con5Button9 = new JoystickButton(controller5, OIConstants.kATK3Button9);
+    public static final JoystickButton con5Button10 = new JoystickButton(controller5, OIConstants.kATK3Button10);
+    public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
+    public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
@@ -101,6 +96,7 @@ public class RobotContainer {
     con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
       () -> Hammer.contract(false)));
     con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
+    con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
   }
 
   public Command getAutonomousCommand() {

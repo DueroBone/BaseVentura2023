@@ -4,6 +4,9 @@
 
 package frc.robot;
 
+import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.GenericHID.HIDType;
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -102,8 +105,45 @@ public final class Constants {
         public static final int kATK3Button12 = 12;
         public static final int kATK3Button13 = 13;
         public static final int kATK3Button14 = 14;
-    }
-    public static final class SmartControllerMap {
-        // I don't want to do this right now
+
+         // RobotContainer.controller0.getType()  Ps4 = kHIDGamepad  Xbox = kXInputGamepad  ATK3 = kHIDJoystick 
+         public static int SmartMap(GenericHID controller, String ButtonName) {
+             int ButtonID = -1;
+             HIDType hidType = controller.getType();
+             HIDType isPS4 = HIDType.kHIDGamepad;
+             HIDType isXbox = HIDType.kXInputGamepad;
+             HIDType isJoystick = HIDType.kHIDJoystick;
+             switch (ButtonName) {
+                 case "A":
+                     if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                     break;
+                 case "B":
+                       if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       break;
+                 case "X":
+                       if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       break;
+                 case "Y":
+                       if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       break;
+                 case "LBump":
+                       if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       break;
+                 case "RBump":
+                       if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       break;
+                 case "":
+                       if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       break;
+                 default:
+                 try {
+                     ButtonID = Integer.parseInt(ButtonName);
+                     break;
+                     } catch (NumberFormatException e) {
+                     break;
+                     }
+             }
+             return ButtonID;
+         }
     }
 }
