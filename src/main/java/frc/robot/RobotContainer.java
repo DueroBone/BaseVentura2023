@@ -15,8 +15,9 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.GoTele;
-import frc.robot.subsystems.Hammer;
+import frc.robot.subsystems.Light;
 import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -24,12 +25,12 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //private final Piston m_piston = new Piston();
-  //private final Hammer m_hammer = new Hammer();
+  private final Light m_hammer = new Light();
   public static final DriveTrain m_driveTrain = new DriveTrain();
   
 
   Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
-
+  public static class legacyControllers {
   public static final XboxController controller0 = new XboxController(0);
     public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
     public static final JoystickButton con0ButtonB = new JoystickButton(controller0, OIConstants.kXboxButtonB);
@@ -75,39 +76,10 @@ public class RobotContainer {
     public static final JoystickButton con5Button10 = new JoystickButton(controller5, OIConstants.kATK3Button10);
     public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
-
-  
-
-  public static class newControllerP0 {
-    public static XboxController object = new XboxController(0);
-    public static JoystickButton A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
-    public static JoystickButton B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
-    public static JoystickButton X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
-    public static JoystickButton Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
-    public static JoystickButton LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
-    public static JoystickButton RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
-    public static JoystickButton LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
-    public static JoystickButton RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
-    public static JoystickButton Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
-    public static JoystickButton Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
-  }
-  public static class newControllerP2 {
-    public static XboxController object = new XboxController(2);
-    public static JoystickButton A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
-    public static JoystickButton B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
-    public static JoystickButton X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
-    public static JoystickButton Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
-    public static JoystickButton LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
-    public static JoystickButton RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
-    public static JoystickButton LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
-    public static JoystickButton RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
-    public static JoystickButton Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
-    public static JoystickButton Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
   }
 
-
-  public static class dynamicControllerXbox {
-    public static XboxController object = new XboxController(-1);
+  public static class dynamicControllerXbox1 {
+    public static XboxController object = new XboxController(5);
     public static JoystickButton A;
     public static JoystickButton B;
     public static JoystickButton X;
@@ -118,7 +90,12 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      assignButtons();
+    }
     public static void assignButtons() {
+      System.out.println("Assigning dXbox: " + object.getPort());
       A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
       B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
       X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -131,8 +108,8 @@ public class RobotContainer {
       Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
     }
   }
-  public static class dynamicControllerPlaystation {
-    public static XboxController object = new XboxController(-1);
+  public static class dynamicControllerPlaystation1 {
+    public static XboxController object = new XboxController(5);
     public static JoystickButton A;
     public static JoystickButton B;
     public static JoystickButton X;
@@ -143,7 +120,12 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      assignButtons();
+    }
     public static void assignButtons() {
+      System.out.println("Assigning dPlaystations: " + object.getPort());
       A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
       B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
       X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -156,21 +138,57 @@ public class RobotContainer {
       Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
     }
   }
-  public static class dynamicJoystick {
-    public static Joystick object = new Joystick(-1);
+  public static class dynamicJoystick1 {
+    public static Joystick object = new Joystick(5);
+    public static JoystickButton Trigger;
+    public static JoystickButton Two;
+    public static JoystickButton Three;
+    public static JoystickButton Four;
+    public static JoystickButton Five;
+    public static JoystickButton Six;
+    public static JoystickButton Seven;
+    public static JoystickButton Eight;
+    public static JoystickButton Nine;
+    public static JoystickButton Ten;
+    public static JoystickButton Eleven;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      assignButtons();
+    }
+    public static void assignButtons() {
+      System.out.println("Assigning dJoystick: " + object.getPort());
+      Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+      Two = new JoystickButton(object, 2);
+      Three = new JoystickButton(object, 3);
+      Four = new JoystickButton(object, 4);
+      Five = new JoystickButton(object,5 );
+      Six = new JoystickButton(object, 6);
+      Seven = new JoystickButton(object, 7);
+      Eight = new JoystickButton(object, 8);
+      Nine = new JoystickButton(object, 9);
+      Ten = new JoystickButton(object, 10);
+      Eleven = new JoystickButton(object, 11);
+    }
   }
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    System.out.println("RobotContainer");
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     configureButtonBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
-    dynamicControllerXbox.A.toggleWhenPressed(getAutonomousCommand(), false);
   }
 
   private void configureButtonBindings() {
-    con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
-    con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
+    dynamicControllerXbox1.updateController();    
+    dynamicControllerPlaystation1.updateController();
+    dynamicJoystick1.updateController();
+    //con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
+    //con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
+    dynamicControllerXbox1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
+    dynamicControllerPlaystation1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
+    dynamicJoystick1.Trigger.whenPressed(()-> Light.toggle());
+    dynamicControllerXbox1.RightBumper.whenPressed(()-> Light.toggle());
   }
 
   public Command getAutonomousCommand() {
