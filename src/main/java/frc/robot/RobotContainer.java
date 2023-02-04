@@ -5,6 +5,8 @@
 package frc.robot;
 
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.RobotController;
@@ -24,12 +26,9 @@ public class RobotContainer {
   //private final Piston m_piston = new Piston();
   //private final Hammer m_hammer = new Hammer();
   public static final DriveTrain m_driveTrain = new DriveTrain();
+  
 
   Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
-  //boolean enabled = c.enabled();
-  //boolean pressureSwitch = c.getPressureSwitchValue();
-  //double current = c.getCompressorCurrent();
-  //System.out.println("**Compressor is on " + enabled + "  pressure switch: " + pressureSwitch);
 
   public static final XboxController controller0 = new XboxController(0);
     public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
@@ -64,8 +63,8 @@ public class RobotContainer {
     public POVButton con2PovLeft = new POVButton(controller2, 270);
   
   public static final Joystick controller5 = new Joystick(5);
-    public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.SmartMap(controller5, "B"));
-    public static final JoystickButton con5Button2 = new JoystickButton(controller5, -1);
+    public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.kATK3BigTrigge);
+    public static final JoystickButton con5Button2 = new JoystickButton(controller5, OIConstants.kATK3Button2);
     public static final JoystickButton con5Button3 = new JoystickButton(controller5, OIConstants.kATK3Button3);
     public static final JoystickButton con5Button4 = new JoystickButton(controller5, OIConstants.kATK3Button4);
     public static final JoystickButton con5Button5 = new JoystickButton(controller5, OIConstants.kATK3Button5);
@@ -77,30 +76,104 @@ public class RobotContainer {
     public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
 
+  
+
+  public static class newControllerP0 {
+    public static XboxController object = new XboxController(0);
+    public static JoystickButton A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+    public static JoystickButton B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+    public static JoystickButton X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+    public static JoystickButton Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+    public static JoystickButton LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+    public static JoystickButton RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+    public static JoystickButton LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+    public static JoystickButton RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+    public static JoystickButton Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+    public static JoystickButton Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+  }
+  public static class newControllerP2 {
+    public static XboxController object = new XboxController(2);
+    public static JoystickButton A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+    public static JoystickButton B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+    public static JoystickButton X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+    public static JoystickButton Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+    public static JoystickButton LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+    public static JoystickButton RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+    public static JoystickButton LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+    public static JoystickButton RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+    public static JoystickButton Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+    public static JoystickButton Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+  }
+
+
+  public static class dynamicControllerXbox {
+    public static XboxController object = new XboxController(-1);
+    public static JoystickButton A;
+    public static JoystickButton B;
+    public static JoystickButton X;
+    public static JoystickButton Y;
+    public static JoystickButton LeftBumper;
+    public static JoystickButton RightBumper;
+    public static JoystickButton LeftStickPress;
+    public static JoystickButton RightStickPress;
+    public static JoystickButton Share;
+    public static JoystickButton Options;
+    public static void assignButtons() {
+      A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+      B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+      X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+      Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+      LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+      RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+      LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+      RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+      Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+      Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+    }
+  }
+  public static class dynamicControllerPlaystation {
+    public static XboxController object = new XboxController(-1);
+    public static JoystickButton A;
+    public static JoystickButton B;
+    public static JoystickButton X;
+    public static JoystickButton Y;
+    public static JoystickButton LeftBumper;
+    public static JoystickButton RightBumper;
+    public static JoystickButton LeftStickPress;
+    public static JoystickButton RightStickPress;
+    public static JoystickButton Share;
+    public static JoystickButton Options;
+    public static void assignButtons() {
+      A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+      B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+      X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+      Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+      LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+      RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+      LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+      RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+      Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+      Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+    }
+  }
+  public static class dynamicJoystick {
+    public static Joystick object = new Joystick(-1);
+  }
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
-    //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
-    // Configure the button bindings
     configureButtonBindings();
+    DriverStation.silenceJoystickConnectionWarning(true);
+    dynamicControllerXbox.A.toggleWhenPressed(getAutonomousCommand(), false);
   }
 
   private void configureButtonBindings() {
-    con0PovUp.whenPressed(() -> Piston.contract(true));
-    con0PovDown.whenPressed(() -> Piston.contract(false));
-    con0ButtonA.whenPressed(() -> Piston.pistonToggle());
-    con0PovLeft.whenPressed(() -> Hammer.contract(true));
-    con0PovRight.whenPressed(() -> Hammer.contract(false));
-    con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
-    con2Pad.whenPressed(() -> Hammer.hammerToggle());
-    con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
-      () -> Hammer.contract(false)));
     con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
     con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
   }
 
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
     return null;
   }
 }
