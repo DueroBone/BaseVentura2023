@@ -15,16 +15,16 @@ public class ControllerTracking {
         GenericHID testHID;
         for (int i = 0; i < JoystickTypes.length; i++) {
             testHID = new GenericHID(i);
-            if (testHID.isConnected()) {
+            if (!testHID.isConnected()) {
                 JoystickTypes[i] = testHID.getType();
                 JoystickNames[i] = DriverStation.getJoystickName(i);
             }
         }
         dynamicControllerXbox.object = new XboxController(indexOf(JoystickTypes, HIDType.kXInputGamepad));
         dynamicControllerXbox.assignButtons();
-        dynamicControllerPlaystation.object= new XboxController(indexOf(JoystickTypes, HIDType.kHIDGamepad));
-        dynamicControllerPlaystation.assignButtons();
-        dynamicJoystick.object = new Joystick(indexOf(JoystickTypes, HIDType.kHIDJoystick));
+        //dynamicControllerPlaystation.object= new XboxController(indexOf(JoystickTypes, HIDType.kHIDGamepad));
+        //dynamicControllerPlaystation.assignButtons();
+        //dynamicJoystick.object = new Joystick(indexOf(JoystickTypes, HIDType.kHIDJoystick));
     }
 
     private static int indexOf(HIDType[] array, HIDType type) {
@@ -33,7 +33,7 @@ public class ControllerTracking {
             return i;
           }
         }
-        return -1;
+        return 0;
       }
       
 }

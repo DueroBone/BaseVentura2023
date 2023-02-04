@@ -109,7 +109,13 @@ public final class Constants {
          // RobotContainer.controller0.getType()  Ps4 = kHIDGamepad  Xbox = kXInputGamepad  ATK3 = kHIDJoystick 
          public static int SmartMap(GenericHID controller, String ButtonName) {
              int ButtonID = 0;
-             HIDType hidType = controller.getType();
+             HIDType hidType = null;
+             try {
+                hidType = controller.getType();
+             } catch (java.lang.IllegalArgumentException e) {
+                System.out.println("Exception: " + e + " || " + controller.getPort());
+                return 0;
+             }
              HIDType isXBox = HIDType.kXInputGamepad;
              HIDType isPS4 = HIDType.kHIDGamepad;
              HIDType isJoystick = HIDType.kHIDJoystick;
@@ -164,6 +170,7 @@ public final class Constants {
                      break;
                      }
              }
+             System.out.println("SmartMap " + ButtonName + " Port:" + ButtonID);
              return ButtonID;
          }
     }

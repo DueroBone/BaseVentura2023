@@ -17,6 +17,7 @@ import frc.robot.Constants.OIConstants;
 import frc.robot.commands.GoTele;
 import frc.robot.subsystems.Hammer;
 import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -107,7 +108,7 @@ public class RobotContainer {
 
 
   public static class dynamicControllerXbox {
-    public static XboxController object = new XboxController(-1);
+    public static XboxController object = new XboxController(0);
     public static JoystickButton A;
     public static JoystickButton B;
     public static JoystickButton X;
@@ -118,7 +119,12 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      assignButtons();
+    }
     public static void assignButtons() {
+      System.out.println("Assigning dXbox");
       A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
       B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
       X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -132,7 +138,7 @@ public class RobotContainer {
     }
   }
   public static class dynamicControllerPlaystation {
-    public static XboxController object = new XboxController(-1);
+    public static XboxController object = new XboxController(0);
     public static JoystickButton A;
     public static JoystickButton B;
     public static JoystickButton X;
@@ -157,20 +163,25 @@ public class RobotContainer {
     }
   }
   public static class dynamicJoystick {
-    public static Joystick object = new Joystick(-1);
+    public static Joystick object = new Joystick(0);
   }
   
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
+    System.out.println("RobotContainer");
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     configureButtonBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
-    dynamicControllerXbox.A.toggleWhenPressed(getAutonomousCommand(), false);
   }
 
   private void configureButtonBindings() {
-    con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
-    con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
+    dynamicControllerXbox.updateController();
+    //con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
+    //con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
+    dynamicControllerXbox.RightStickPress.whileActiveContinuous(()-> System.out.println(dynamicControllerXbox.object.getPort() + " dynamic XBOX"));
+    newControllerP0.RightStickPress.whenPressed(()-> System.out.println("new XBOX"));
+    con0StickPressRight.whenPressed(()-> System.out.println("old xbox"));
+
   }
 
   public Command getAutonomousCommand() {
