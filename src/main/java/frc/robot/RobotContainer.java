@@ -4,23 +4,20 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.GoTele;
 import frc.robot.subsystems.Light;
-import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.StartEndCommand;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -90,11 +87,9 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static String Name = null;
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
-      assignButtons();
-    }
-    public static void assignButtons() {
       System.out.println("Assigning dXbox: " + object.getPort());
       A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
       B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
@@ -120,6 +115,7 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static String Name = null;
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
       assignButtons();
@@ -151,6 +147,7 @@ public class RobotContainer {
     public static JoystickButton Nine;
     public static JoystickButton Ten;
     public static JoystickButton Eleven;
+    public static String Name = null;
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
       assignButtons();
@@ -183,8 +180,6 @@ public class RobotContainer {
     dynamicControllerXbox1.updateController();    
     dynamicControllerPlaystation1.updateController();
     dynamicJoystick1.updateController();
-    //con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
-    //con5Trigger.whileActiveContinuous(() -> System.out.println("HELLO"));
     dynamicControllerXbox1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
     dynamicControllerPlaystation1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
     dynamicJoystick1.Trigger.whenPressed(()-> Light.toggle());
