@@ -116,51 +116,51 @@ public final class Constants {
                 System.out.println("Exception: " + e + " || " + controller.getPort());
                 return 0;
              }
-             HIDType isXBox = HIDType.kXInputGamepad;
+             HIDType isXbox = HIDType.kXInputGamepad;
              HIDType isPS4 = HIDType.kHIDGamepad;
              HIDType isJoystick = HIDType.kHIDJoystick;
              switch (ButtonName) {
                  case "A":
-                     if (hidType == isXBox) {ButtonID = 1;} else if (hidType == isPS4) {ButtonID = 2;} else if (hidType == isJoystick) {} else {}
+                     if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isPS4) {ButtonID = 2;} else if (hidType == isJoystick) {} else {}
                      break;
                  case "B":
-                       if (hidType == isXBox) {ButtonID = 2;} else if (hidType == isPS4) {ButtonID = 3;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 2;} else if (hidType == isPS4) {ButtonID = 3;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "X":
-                       if (hidType == isXBox) {ButtonID = 3;} else if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 3;} else if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "Y":
-                       if (hidType == isXBox) {ButtonID = 4;} else if (hidType == isPS4) {ButtonID = 4;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 4;} else if (hidType == isPS4) {ButtonID = 4;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "LBump":
-                       if (hidType == isXBox) {ButtonID = 5;} else if (hidType == isPS4) {ButtonID = 5;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 5;} else if (hidType == isPS4) {ButtonID = 5;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "RBump":
-                       if (hidType == isXBox) {ButtonID = 6;} else if (hidType == isPS4) {ButtonID = 6;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 6;} else if (hidType == isPS4) {ButtonID = 6;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "LStick":
-                       if (hidType == isXBox) {ButtonID = 9;} else if (hidType == isPS4) {ButtonID = 11;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 9;} else if (hidType == isPS4) {ButtonID = 11;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "RStick":
-                       if (hidType == isXBox) {ButtonID = 10;} else if (hidType == isPS4) {ButtonID = 12;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 10;} else if (hidType == isPS4) {ButtonID = 12;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "DoubleSquare": //PS4 = share  XBOX IS UNSURE
-                       if (hidType == isXBox) {ButtonID = 7;} else if (hidType == isPS4) {ButtonID = 9;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 7;} else if (hidType == isPS4) {ButtonID = 9;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "Options":
-                       if (hidType == isXBox) {ButtonID = 8;} else if (hidType == isPS4) {ButtonID = 10;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 8;} else if (hidType == isPS4) {ButtonID = 10;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "Xbox": //XBOX IS UNSURE
-                       if (hidType == isXBox) {} else if (hidType == isPS4) {ButtonID = 13;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {} else if (hidType == isPS4) {ButtonID = 13;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "Touchpad": //XBOX DOES NOT EXIST (map as xbox button once found)
-                       if (hidType == isXBox) {} else if (hidType == isPS4) {ButtonID = 14;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {} else if (hidType == isPS4) {ButtonID = 14;} else if (hidType == isJoystick) {} else {}
                        break;
                  case "Trigger":
-                       if (hidType == isXBox) {} else if (hidType == isPS4) {} else if (hidType == isJoystick) {ButtonID = 1;} else {}
+                       if (hidType == isXbox) {} else if (hidType == isPS4) {} else if (hidType == isJoystick) {ButtonID = 1;} else {}
                        break;
                  case "":
-                       if (hidType == isXBox) {ButtonID = 1;} else if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
+                       if (hidType == isXbox) {ButtonID = 1;} else if (hidType == isPS4) {ButtonID = 1;} else if (hidType == isJoystick) {} else {}
                        break;
                  default:
                  try {
