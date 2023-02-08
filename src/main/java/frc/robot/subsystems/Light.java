@@ -3,12 +3,6 @@ package frc.robot.subsystems;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
-import edu.wpi.first.wpilibj.DoubleSolenoid;
-import edu.wpi.first.wpilibj.DriverStation;
-import edu.wpi.first.wpilibj.Solenoid;
-import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
-
 
 public class Light {
     //public static Solenoid hammer;

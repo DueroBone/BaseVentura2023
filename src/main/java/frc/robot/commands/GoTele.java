@@ -4,7 +4,6 @@ import java.text.MessageFormat;
 
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import java.lang.Math;
@@ -14,8 +13,8 @@ public class GoTele extends CommandBase {
     public void initialize() {
       System.out.println(MessageFormat.format("**Started {0} ", this.getName()));
     }
-    private double teleLeft = 0;
-    private double teleRight = 0;
+    //private double teleLeft = 0;
+    //private double teleRight = 0;
     private boolean GoTeleEnabled = true;
     private double deadzone = -1;
     private final DriveTrain drivetrain;

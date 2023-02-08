@@ -4,16 +4,11 @@
 
 package frc.robot;
 
-import javax.management.InstanceAlreadyExistsException;
-
 import edu.wpi.first.cameraserver.CameraServer;
-import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.UsbCamera;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.RobotContainer.dynamicControllerXbox1;
 
 /**
