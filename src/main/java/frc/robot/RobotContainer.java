@@ -4,19 +4,18 @@
 
 package frc.robot;
 
+
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.GenericHID;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
-import edu.wpi.first.wpilibj.RobotController;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
-import frc.robot.commands.DriveCommand;
 import frc.robot.commands.GoTele;
-import frc.robot.subsystems.Hammer;
-import frc.robot.subsystems.Piston;
+import frc.robot.subsystems.Light;
+import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
@@ -25,15 +24,12 @@ import edu.wpi.first.wpilibj2.command.StartEndCommand;
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   //private final Piston m_piston = new Piston();
-  //private final Hammer m_hammer = new Hammer();
+  private final Light m_hammer = new Light();
   public static final DriveTrain m_driveTrain = new DriveTrain();
+  
 
-  //Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
-  //boolean enabled = c.enabled();
-  //boolean pressureSwitch = c.getPressureSwitchValue();
-  //double current = c.getCompressorCurrent();
-  //System.out.println("**Compressor is on " + enabled + "  pressure switch: " + pressureSwitch);
-
+  Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
+  public static class legacyControllers {
   public static final XboxController controller0 = new XboxController(0);
     public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
     public static final JoystickButton con0ButtonB = new JoystickButton(controller0, OIConstants.kXboxButtonB);
@@ -59,33 +55,128 @@ public class RobotContainer {
     public static final JoystickButton con2BumperLeft =  new JoystickButton(controller2, OIConstants.kXboxBumperLeft);
     public static final JoystickButton con2StickPressLeft = new JoystickButton(controller2, OIConstants.kXboxStickPressLeft);
     public static final JoystickButton con2StickPressRight = new JoystickButton(controller2, OIConstants.kXboxStickPressRight);
-    public static final JoystickButton con2Pad = new JoystickButton(controller2, 14);
-    public static final JoystickButton con2Whatever = new JoystickButton(controller2, 8);
+    public static final JoystickButton con2Pad = new JoystickButton(controller2, OIConstants.kPlaystationDuelsBigButton);
+    public static final JoystickButton con2Whatever = new JoystickButton(controller2, OIConstants.kPlaystationRightTrigger);
     public POVButton con2PovUp = new POVButton(controller2, 0);
     public POVButton con2PovRight = new POVButton(controller2, 90);
     public POVButton con2PovDown = new POVButton(controller2, 180);
     public POVButton con2PovLeft = new POVButton(controller2, 270);
   
-    public static final Joystick controller5 = new Joystick(5);
-     public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.kATK3BigTrigge);
-     public static final JoystickButton con5Button2 = new JoystickButton(controller5, OIConstants.kATK3Button2);
-     public static final JoystickButton con5Button3 = new JoystickButton(controller5, OIConstants.kATK3Button3);
-     public static final JoystickButton con5Button4 = new JoystickButton(controller5, OIConstants.kATK3Button4);
-     public static final JoystickButton con5Button5 = new JoystickButton(controller5, OIConstants.kATK3Button5);
-     public static final JoystickButton con5Button6 = new JoystickButton(controller5, OIConstants.kATK3Button6);
-     public static final JoystickButton con5Button7 = new JoystickButton(controller5, OIConstants.kATK3Button7);
-     public static final JoystickButton con5Button8 = new JoystickButton(controller5, OIConstants.kATK3Button8);
-     public static final JoystickButton con5Button9 = new JoystickButton(controller5, OIConstants.kATK3Button9);
-     public static final JoystickButton con5Button10 = new JoystickButton(controller5, OIConstants.kATK3Button10);
-     public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
-     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
+  public static final Joystick controller5 = new Joystick(5);
+    public static final JoystickButton con5Trigger = new JoystickButton(controller5, OIConstants.kATK3BigTrigge);
+    public static final JoystickButton con5Button2 = new JoystickButton(controller5, OIConstants.kATK3Button2);
+    public static final JoystickButton con5Button3 = new JoystickButton(controller5, OIConstants.kATK3Button3);
+    public static final JoystickButton con5Button4 = new JoystickButton(controller5, OIConstants.kATK3Button4);
+    public static final JoystickButton con5Button5 = new JoystickButton(controller5, OIConstants.kATK3Button5);
+    public static final JoystickButton con5Button6 = new JoystickButton(controller5, OIConstants.kATK3Button6);
+    public static final JoystickButton con5Button7 = new JoystickButton(controller5, OIConstants.kATK3Button7);
+    public static final JoystickButton con5Button8 = new JoystickButton(controller5, OIConstants.kATK3Button8);
+    public static final JoystickButton con5Button9 = new JoystickButton(controller5, OIConstants.kATK3Button9);
+    public static final JoystickButton con5Button10 = new JoystickButton(controller5, OIConstants.kATK3Button10);
+    public static final JoystickButton con5Button11 = new JoystickButton(controller5, OIConstants.kATK3Button11);
+    public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
+  }
 
+  public static class dynamicControllerXbox1 {
+    public static XboxController object = new XboxController(5);
+    public static JoystickButton A;
+    public static JoystickButton B;
+    public static JoystickButton X;
+    public static JoystickButton Y;
+    public static JoystickButton LeftBumper;
+    public static JoystickButton RightBumper;
+    public static JoystickButton LeftStickPress;
+    public static JoystickButton RightStickPress;
+    public static JoystickButton Share;
+    public static JoystickButton Options;
+    public static String Name = null;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      System.out.println("Assigning dXbox: " + object.getPort());
+      A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+      B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+      X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+      Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+      LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+      RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+      LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+      RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+      Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+      Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+    }
+  }
+  public static class dynamicControllerPlaystation1 {
+    public static XboxController object = new XboxController(5);
+    public static JoystickButton A;
+    public static JoystickButton B;
+    public static JoystickButton X;
+    public static JoystickButton Y;
+    public static JoystickButton LeftBumper;
+    public static JoystickButton RightBumper;
+    public static JoystickButton LeftStickPress;
+    public static JoystickButton RightStickPress;
+    public static JoystickButton Share;
+    public static JoystickButton Options;
+    public static String Name = null;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      assignButtons();
+    }
+    public static void assignButtons() {
+      System.out.println("Assigning dPlaystations: " + object.getPort());
+      A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+      B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+      X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+      Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+      LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+      RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+      LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+      RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+      Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+      Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+    }
+  }
+  public static class dynamicJoystick1 {
+    public static Joystick object = new Joystick(5);
+    public static JoystickButton Trigger;
+    public static JoystickButton Two;
+    public static JoystickButton Three;
+    public static JoystickButton Four;
+    public static JoystickButton Five;
+    public static JoystickButton Six;
+    public static JoystickButton Seven;
+    public static JoystickButton Eight;
+    public static JoystickButton Nine;
+    public static JoystickButton Ten;
+    public static JoystickButton Eleven;
+    public static String Name = null;
+    public static void updateController() {
+      ControllerTracking.updatePortNumbers();
+      assignButtons();
+    }
+    public static void assignButtons() {
+      System.out.println("Assigning dJoystick: " + object.getPort());
+      Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+      Two = new JoystickButton(object, 2);
+      Three = new JoystickButton(object, 3);
+      Four = new JoystickButton(object, 4);
+      Five = new JoystickButton(object,5 );
+      Six = new JoystickButton(object, 6);
+      Seven = new JoystickButton(object, 7);
+      Eight = new JoystickButton(object, 8);
+      Nine = new JoystickButton(object, 9);
+      Ten = new JoystickButton(object, 10);
+      Eleven = new JoystickButton(object, 11);
+    }
+  }
+  
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
+    DriverStation.silenceJoystickConnectionWarning(true);
   }
 
   private void configureButtonBindings() {
@@ -93,10 +184,16 @@ public class RobotContainer {
     //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent())); 
     con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
     //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
+    dynamicControllerXbox1.updateController();    
+    dynamicControllerPlaystation1.updateController();
+    dynamicJoystick1.updateController();
+    dynamicControllerXbox1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
+    dynamicControllerPlaystation1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
+    dynamicJoystick1.Trigger.whenPressed(()-> Light.toggle());
+    dynamicControllerXbox1.RightBumper.whenPressed(()-> Light.toggle());
   }
 
   public Command getAutonomousCommand() {
-    // An ExampleCommand will run in autonomous
     return null;
   }
 }

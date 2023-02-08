@@ -68,10 +68,16 @@ public class DriveTrain extends SubsystemBase {
 
     //SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
     int ampsMax = 20;
+    int ampsMax = 2; //CHANGE TO 20
     motorDriveLeft1.setSmartCurrentLimit(ampsMax); //Set current limist
     motorDriveLeft2.setSmartCurrentLimit(ampsMax);
     motorDriveRight1.setSmartCurrentLimit(ampsMax);
     motorDriveRight2.setSmartCurrentLimit(ampsMax);
+
+    motorDriveLeft1.setClosedLoopRampRate(5);
+    motorDriveLeft2.setClosedLoopRampRate(5);
+    motorDriveRight1.setClosedLoopRampRate(5);
+    motorDriveRight2.setClosedLoopRampRate(5);
 
     motorDriveLeft1.setClosedLoopRampRate(5);
     motorDriveLeft2.setClosedLoopRampRate(5);

@@ -9,10 +9,12 @@ import javax.management.InstanceAlreadyExistsException;
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.CvSink;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import edu.wpi.first.wpilibj2.command.InstantCommand;
+import frc.robot.RobotContainer.dynamicControllerXbox1;
 
 /**
  * The VM is configured to automatically run this class, and to call the functions corresponding to
@@ -60,6 +62,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     //Hammer.hammer.set(DoubleSolenoid.Value.kReverse);
+    //System.out.println("Disabled Init");
   }
 
   @Override
@@ -91,6 +94,9 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
+    //m_robotContainer = new RobotContainer();
+    dynamicControllerXbox1.updateController();
+    //System.out.println("Teleop Init");
   }
 
   /** This function is called periodically during operator control. */
