@@ -43,7 +43,7 @@ public class DriveTrain extends SubsystemBase {
   private boolean highGear = false;
 
   // navX Gyro on RoboRio
-  private AHRS m_Gyro;
+  private static AHRS m_Gyro;
 
   private static final boolean kSquareInputs = true;
   private static final boolean kSkipGyro = true;
@@ -190,7 +190,7 @@ public class DriveTrain extends SubsystemBase {
     //return 0.0;
   }
 
-  public void resetGyro() {
+  public static void resetGyro() {
     m_Gyro.reset();
     // "Zero" yaw (whatever direction sensor is pointing now becomes new "Zero"
     // degrees
@@ -255,7 +255,7 @@ public void doHighGear(final boolean fast) {
   //  return Math.max(min, Math.min(value, max)); // make sure within range
   //}
 
-  public void stop() {
+  public static void stop() {
     System.out.println("in drivetrain stop");
     doTankDrive(0.0, 0.0);
   }
