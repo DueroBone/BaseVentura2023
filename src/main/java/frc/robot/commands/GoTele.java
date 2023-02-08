@@ -19,7 +19,6 @@ public class GoTele extends CommandBase {
     private boolean GoTeleEnabled = true;
     private double deadzone = -1;
     private final DriveTrain drivetrain;
-    private double deadzone = -1;
 
     public GoTele (boolean enabled, double deadzone) {
         this.drivetrain = RobotContainer.m_driveTrain;    // get driveTrain object from RobotContainer

@@ -182,7 +182,7 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
     //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent())); 
-    con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
+    //con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
     //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
     dynamicControllerXbox1.updateController();    
     dynamicControllerPlaystation1.updateController();
