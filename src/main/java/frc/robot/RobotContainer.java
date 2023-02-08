@@ -20,8 +20,6 @@ import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.StartEndCommand;
-import edu.wpi.first.wpilibj2.command.button.JoystickButton;
-import edu.wpi.first.wpilibj2.command.button.POVButton;
 
 
 public class RobotContainer {
@@ -84,7 +82,7 @@ public class RobotContainer {
 
   /** The container for the robot. Contains subsystems, OI devices, and commands. */
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(true));
+    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
     // Configure the button bindings
     configureButtonBindings();
@@ -93,16 +91,6 @@ public class RobotContainer {
   private void configureButtonBindings() {
     //con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
     //con0BumperLeft.whileActiveContinuous(() -> System.out.println(c.getCurrent())); 
-    /**
-    con0PovUp.whenPressed(() -> Piston.contract(true));
-    con0PovDown.whenPressed(() -> Piston.contract(false));
-    con0ButtonA.whenPressed(() -> Piston.pistonToggle());
-    con0PovLeft.whenPressed(() -> Hammer.contract(true));
-    con0PovRight.whenPressed(() -> Hammer.contract(false));
-    con0ButtonY.whenPressed(() -> Hammer.hammerToggle());
-    con2Pad.whenPressed(() -> Hammer.hammerToggle());
-    con2Whatever.whileActiveContinuous(new StartEndCommand(() -> Hammer.contract(true), 
-      () -> Hammer.contract(false))); */
     con2ButtonA.whileActiveContinuous(() -> System.out.println(RobotController.getBatteryVoltage() + " Hi"));
     //con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
   }

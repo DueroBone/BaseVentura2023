@@ -18,17 +18,18 @@ public class GoTele extends CommandBase {
     private double teleRight = 0;
     private boolean GoTeleEnabled = true;
     private final DriveTrain drivetrain;
+    private double deadzone = -1;
 
-    public GoTele (boolean enabled) {
+    public GoTele (boolean enabled, double deadzone) {
         this.drivetrain = RobotContainer.m_driveTrain;    // get driveTrain object from RobotContainer
         this.GoTeleEnabled = enabled;
+        this.deadzone = deadzone;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(this.drivetrain); 
       }
 
     @Override
     public void execute() {
-      double deadzone = 0.05;
       boolean usingCon0 = Math.abs(RobotContainer.controller0.getLeftY()) > deadzone || Math.abs(RobotContainer.controller0.getRightY()) > deadzone;
       boolean usingCon2 = Math.abs(RobotContainer.controller2.getLeftY()) > deadzone || Math.abs(RobotContainer.controller2.getRightY()) > deadzone;
       boolean usingCon5 = Math.abs(RobotContainer.controller5.getY()) > deadzone || Math.abs(RobotContainer.controller5.getX()) > deadzone;
@@ -49,7 +50,7 @@ public class GoTele extends CommandBase {
         } else {
           if (RobotContainer.controller5.isConnected() && usingCon5) {
             //Using single joystick
-            teleRotate = RobotContainer.controller5.getX();
+            teleRotate = RobotContainer.controller5.getX() * 1;
             teleSpeed = RobotContainer.controller5.getY() * -1;
           } else {
             teleLeft = 0;
@@ -95,6 +96,17 @@ public class GoTele extends CommandBase {
         teleSpeed = teleSpeed * speedMultiplier;
       } else {teleSpeed = 0;}
 
+      if (Math.abs(teleRotate) > deadzone) {
+        if (teleRotate>0){
+          teleRotate = teleRotate - deadzone;
+        } else {
+          teleRotate = teleRotate + deadzone;
+        }
+        teleRotate = teleRotate * a;
+        teleRotate = smartSquare(teleRotate, 1);
+        teleRotate = teleRotate * speedMultiplier;
+      } else {teleRotate = 0;}
+
 
       //System.out.println("Left Y:" + RobotContainer.controller0.getLeftY() + " Left speed:" + teleLeft + " Right Y:" + RobotContainer.controller0.getRightY() + " Right speed:" + teleRight);
       if (GoTeleEnabled){
@@ -109,9 +121,9 @@ public class GoTele extends CommandBase {
     }
     @Override
     public boolean isFinished() {
-      return false;   // this command just turns off shooter
+      return false;
     }
-    private static double smartSquare(double input, double exponent) {
+    private static double smartSquare(double input, int exponent) {
       double output = Math.pow(input, exponent);
       if (Math.signum(input) != Math.signum(output)) {
         output = output * -1;
