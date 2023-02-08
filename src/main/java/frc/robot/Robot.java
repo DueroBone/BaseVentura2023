@@ -28,12 +28,12 @@ public class Robot extends TimedRobot {
    */
   @Override
   public void robotInit() {
-    try (// Instantiate our RobotContainer.  This will perform all our button bindings, and put our
-        // autonomous chooser on the dashboard.
-    UsbCamera visionCamera = new UsbCamera("USB Camera 0", 0)) {
-      visionCamera.setResolution(1920, 1080);
-    }
-    CameraServer.startAutomaticCapture();
+  // Instantiate our RobotContainer.  This will perform all our button bindings, and put our
+            // autonomous chooser on the dashboard.
+      UsbCamera visionCamera = CameraServer.startAutomaticCapture();
+      visionCamera.setResolution(640, 480);
+      visionCamera.setBrightness(15);
+  
     m_robotContainer = new RobotContainer();
   }
 

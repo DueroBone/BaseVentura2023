@@ -186,6 +186,7 @@ public class RobotContainer {
     dynamicControllerPlaystation1.updateController();
     dynamicJoystick1.updateController();
     dynamicControllerXbox1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
+    dynamicJoystick1.Trigger.whileActiveContinuous(()-> System.out.println(dynamicJoystick1.object.getPort() + ": joystick"));
     dynamicControllerPlaystation1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
     dynamicJoystick1.Trigger.whenPressed(()-> Light.toggle());
     dynamicControllerXbox1.RightBumper.whenPressed(()-> Light.toggle());
