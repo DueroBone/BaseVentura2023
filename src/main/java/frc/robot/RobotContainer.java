@@ -14,7 +14,7 @@ import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.GoTele;
-import frc.robot.subsystems.Light;
+import frc.robot.subsystems.LightToggle;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -172,7 +172,7 @@ public class RobotContainer {
   public RobotContainer() {
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     //m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(), () -> controller0.getRightY()));
-    // Configure the button bindings
+    // Configure the button bindings for the univController
     configureButtonBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
   }
@@ -188,8 +188,8 @@ public class RobotContainer {
     dynamicControllerXbox1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
     dynamicJoystick1.Trigger.whileActiveContinuous(()-> System.out.println(dynamicJoystick1.object.getPort() + ": joystick"));
     dynamicControllerPlaystation1.A.whileActiveContinuous(()-> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
-    dynamicJoystick1.Trigger.whenPressed(()-> Light.toggle());
-    dynamicControllerXbox1.RightBumper.whenPressed(()-> Light.toggle());
+    dynamicJoystick1.Trigger.whenPressed(()-> LightToggle.toggle());
+    dynamicControllerXbox1.RightBumper.whenPressed(()-> LightToggle.toggle());
   }
 
   public Command getAutonomousCommand() {

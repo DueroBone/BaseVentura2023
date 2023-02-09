@@ -7,6 +7,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.GenericHID.HIDType;
 
+
 /**
  * The Constants class provides a convenient place for teams to hold robot-wide numerical or boolean
  * constants. This class should not be used for any other purpose. All constants should be declared
@@ -23,7 +24,7 @@ public final class Constants {
         public static final int rightDrive2Id = 4;
     }
     public static final class OIConstants {
-        // Xbox controller button mappings
+        // Xbox Controller button mappings
         public static final int kXboxButtonA = 1;
         public static final int kXboxButtonB = 2;
         public static final int kXboxButtonX = 3;
@@ -42,7 +43,7 @@ public final class Constants {
         public static final int kXboxAxisRightStickX = 4;
         public static final int kXboxAxisRightStickY = 5;
  
-        // LogiTech controller axis mappings
+        // Logitech Controller axis mappings
         public static final int kLogiAxisLeftStickX = 1;
         public static final int kLogiAxisLeftStickY = 2;
         public static final int kLogiAxisTriggers = 3; // left trigger only=-1.0, right only=1.0, both/none=0.0
@@ -61,7 +62,7 @@ public final class Constants {
         public static final int kLogiStickPressLeft = 9; 
         public static final int kLogiStickPressRight = 10;
 
-        // Playstation controller axis mappings
+        // Playstation Controller axis mappings
         public static final int kPlaystationAxisLeftStickX = 0;
         public static final int kPlaystationAxisLeftStickY = 1;
         public static final int kPlaystationAxisLeftTrigger = 3; 
@@ -86,7 +87,7 @@ public final class Constants {
         public static final int kPlaystationDuelsBigButton = 14;
 
         
-        // ATK3 controller axis mappings
+        // Logitech ATK3 Controller axis mappings
         public static final int kATK3AxisStickyLeftyRighty = 0;
         public static final int kATK3AxisStickyUpDown = 1;
         public static final int kATK3AxisBackSlidey = 2; 

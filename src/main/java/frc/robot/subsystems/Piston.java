@@ -24,6 +24,7 @@ public class Piston {
         }
         return null;
     }
+    
     public static void pistonToggle(){
       piston.toggle();
     }

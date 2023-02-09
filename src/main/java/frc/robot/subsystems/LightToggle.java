@@ -4,11 +4,11 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
 
 
-public class Light {
+public class LightToggle {
     //public static Solenoid hammer;
     static CANSparkMax sparkLight = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-    public Light() {
+    public LightToggle() {
       sparkLight.set(0.5);
       }
       public static void toggle() {

@@ -1,15 +1,12 @@
-// Copyright (c) FIRST and other WPILib contributors.
-// Open Source Software; you can modify and/or share it under the terms of
-// the WPILib BSD license file in the root directory of this project.
-
 package frc.robot.commands;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.vision.VisionPipeline;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.VisionPipeline;
+
 
 public class AutoSpinToAngleTarget extends CommandBase {
 
@@ -27,7 +24,7 @@ public class AutoSpinToAngleTarget extends CommandBase {
   private static double currentHeading;
   private double currentDiff;
   private double speed = 0.0;
-  private double slowDownReducer = 0.85;  // amount to reduce power when near target
+  private double slowDownReducer = 0.85;  // Power reduction amount when near target
   private boolean inRange = false;
   private int counter1 = 2;
   private int counter2 = 2;

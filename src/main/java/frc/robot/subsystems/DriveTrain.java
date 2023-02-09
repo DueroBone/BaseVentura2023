@@ -20,6 +20,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.DriveConstants;
 
+
 public class DriveTrain extends SubsystemBase {
 
   //// ----- Motor Controllers ----- /////
@@ -38,18 +39,18 @@ public class DriveTrain extends SubsystemBase {
   // private Solenoid solenoidHammerRaise; // The solenoids we use have two
   // channels, one for each output
   private Solenoid solenoidGearChange;
-  // private Solenoid solenoidHammerDown;
+  //private Solenoid solenoidHammerDown;
   private Solenoid solenoidGearDef;
   private boolean highGear = false;
 
-  // navX Gyro on RoboRio
+  // navX Gyro on RoboRIO 2.0
   private static AHRS m_Gyro;
 
   private static final boolean kSquareInputs = true;
   private static final boolean kSkipGyro = true;
   private static int counter = 0; // for limiting display
 
-  /**
+  /*
    * Creates a new DriveTrain.
    */
   public DriveTrain() {
@@ -61,7 +62,7 @@ public class DriveTrain extends SubsystemBase {
 
     //SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
     int ampsMax = 20;
-    motorDriveLeft1.setSmartCurrentLimit(ampsMax); //Set current limist
+    motorDriveLeft1.setSmartCurrentLimit(ampsMax); // Set the current limist
     motorDriveLeft2.setSmartCurrentLimit(ampsMax);
     motorDriveRight1.setSmartCurrentLimit(ampsMax);
     motorDriveRight2.setSmartCurrentLimit(ampsMax);
@@ -77,8 +78,8 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight2.setClosedLoopRampRate(5);
 
     // DifferentialDrive inverts right side by default, so no need to setInvert()
-    // here
-    // differentialDrive.setRightSideInverted(true);
+  
+    //differentialDrive.setRightSideInverted(true);
     motorDriveRight1.setInverted(true); // Invert 1 side of robot so will drive forward
     motorDriveRight2.setInverted(true);
 
@@ -87,7 +88,7 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight1.setIdleMode(IdleMode.kCoast);
     motorDriveRight2.setIdleMode(IdleMode.kCoast);
 
-    // driveStraightControl.setTolerance(0.02); // set tolerance around setpoint
+    //driveStraightControl.setTolerance(0.02); // set tolerance around setpoint
 
     // Initialize the solenoids
     //solenoidHammerRaise = new Solenoid(0);
@@ -142,7 +143,7 @@ public class DriveTrain extends SubsystemBase {
     // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0
     // is still 1
     // differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent,
-    // kSquareInputs); // send output to drive train
+    // kSquareInputs); // Send output to drive train
     //System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
     //motorDriveLeft1.set(leftDrivePercent);
     //motorDriveLeft2.set(leftDrivePercent);
@@ -156,10 +157,9 @@ public class DriveTrain extends SubsystemBase {
 
   public void doTankDriveDefault(double leftDrivePercent, double rightDrivePercent) {
 
-    // if (counter++ % 100 == 0) { System.out.println("**default driveTrain power: "
-    // + leftDrivePercent+"-"+rightDrivePercent); }
-    // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0
-    // is still 1
+    //if (counter++ % 100 == 0) { System.out.println("**default driveTrain power: "
+    //+ leftDrivePercent+"-"+rightDrivePercent); }
+    // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0 is still 1
     differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent, kSquareInputs); // send output to drive train
   }
 
@@ -242,17 +242,17 @@ public void doHighGear(final boolean fast) {
 
   highGear = fast;
   // Make sure the solenoids are set to opposite values!
-  //solenoidHammerRaise.set(!hammerExtended); // solenoid controls output that pulls piston in, so set it to ! hammerExtended
+  //solenoidHammerRaise.set(!hammerExtended); // The solenoid controls output that pulls piston in, so set it to ! hammerExtended
   solenoidGearChange.set(!highGear);
-  System.out.println("Gear shifter in Low Torque Mode");
-  //solenoidHammerDown.set(hammerExtended); // solenoid controls output that pushes piston out, so set it to hammerExtended
+  System.out.println("Gear shifter set to Low Torque Mode");
+  //solenoidHammerDown.set(hammerExtended); // The solenoid controls output that pushes piston out, so set it to hammerExtended
   solenoidGearDef.set(highGear);
-  System.out.println("Gear shifter in High Torque Mode");
+  System.out.println("Gear shifter set to High Torque Mode");
 }
 
 
   //public double clampValue(double value, double min, double max) {
-  //  return Math.max(min, Math.min(value, max)); // make sure within range
+  //return Math.max(min, Math.min(value, max)); // Make sure we are within range
   //}
 
   public static void stop() {
