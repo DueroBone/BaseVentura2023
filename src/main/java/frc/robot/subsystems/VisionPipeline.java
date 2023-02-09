@@ -5,6 +5,8 @@ import java.util.List;
 import org.opencv.core.*;
 import org.opencv.imgproc.*;
 
+
+
 /**
 * VisionPipeline class.
 *
@@ -13,7 +15,7 @@ import org.opencv.imgproc.*;
 * @author GRIP
 */
 public class VisionPipeline {
-
+  public static final VisionPipeline m_visionPipeline = new VisionPipeline();
 	//Outputs
 	private Mat resizeImageOutput = new Mat();
 	private Mat hslThresholdOutput = new Mat();

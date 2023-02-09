@@ -7,13 +7,14 @@ package frc.robot.commands;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.Constants.DriveConstants;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.VisionPipeline;
 
 public class AutoSpinToAngleTarget extends CommandBase {
 
   private final DriveTrain m_driveTrain;
+  private final VisionPipeline m_visionPipeline;
   private double targetAngle;
   private double turnPower;
 
@@ -25,7 +26,7 @@ public class AutoSpinToAngleTarget extends CommandBase {
 
   private static double currentHeading;
   private double currentDiff;
-  private double speed = 0.0;          // adjusted turn rate based on closeness to target 
+  private double speed = 0.0;
   private double slowDownReducer = 0.85;  // amount to reduce power when near target
   private boolean inRange = false;
   private int counter1 = 2;
@@ -39,38 +40,36 @@ public class AutoSpinToAngleTarget extends CommandBase {
 
   public AutoSpinToAngleTarget(double turnPowerIn, double targetAngleIn) {
 
-    this.m_driveTrain = RobotContainer.m_driveTrain; // get driveTrain object from RobotContainer
-    this.targetAngle = targetAngleIn;   // in degrees from current heading
+    this.m_driveTrain = RobotContainer.m_driveTrain;
+    this.m_visionPipeline = VisionPipeline.m_visionPipeline;
+    this.targetAngle = targetAngleIn;
     this.turnPower = turnPowerIn;
-
-    this.pid = new PIDController(kP, kI, kD);    // create PID object 
- 
-    // Use addRequirements() here to declare subsystem dependencies.
+    this.pid = new PIDController(kP, kI, kD);
     addRequirements(this.m_driveTrain);
   }
 
-  // Called when the command is initially scheduled.
+
   @Override
   public void initialize() {
-    DriveTrain.stop();        // make sure robot is stopped
-    DriveTrain.resetGyro();   // reset gyro so 0 is current heading
+    DriveTrain.stop();
+    //Start vision//
     pid.reset();
     pid.setSetpoint(targetAngle);
-    pid.setTolerance(tolerance);    // set tolerance around setpoint, targetAngle in this case
+    pid.setTolerance(tolerance);
     pid.enableContinuousInput(-180.0, 180.0); // Enable continuous input in range from -180 to 180
     System.out.println("**starting AutoSpinToAnglePID target angle: " +targetAngle +" heading: "+String.format("%.3f", m_driveTrain.getHeadingAngle()));
   }
 
-  // Called every time the scheduler runs while the command is scheduled.
+
   @Override
   public void execute() {
 
-    currentHeading = m_driveTrain.getHeadingAngle();      // get current heading
-    currentDiff = targetAngle - currentHeading;         // get how far off we are
+    currentHeading = m_visionPipeline.hashCode();      //0000000000000000000000000000000000000000000000000000000000000000000000000
+    currentDiff = targetAngle - currentHeading;
     inRange = (Math.abs(currentDiff)  <= tolerance);
 
     if (inRange) {
-      DriveTrain.stop();  // in range so stop 
+      DriveTrain.stop();
       System.out.println("**in range stop turn - heading: "+String.format("%.3f", currentHeading));
     } else {
     
@@ -84,7 +83,6 @@ public class AutoSpinToAngleTarget extends CommandBase {
         speed = turnPower;          // else do speed requested 
       }
       if (pidOutput <= 0) {
-
         if (counter2++ % 3 == 0) { System.out.println("**turn Left Correction pidOut: "+String.format("%.3f  ", pidOutput)+" heading: "+String.format("%.3f", currentHeading)); }
         DriveTrain.doTankDrive(-speed, speed); // turn to left ( reverse left side)
       } else {
@@ -94,15 +92,15 @@ public class AutoSpinToAngleTarget extends CommandBase {
       }
     }
   }
-
+  /*
   //public static boolean between(double i, double minValueInclusive, double maxValueInclusive) {
   //  return (i >= minValueInclusive && i <= maxValueInclusive);
   //}
+    */
 
-  // Called once the command ends or is interrupted.
   @Override
   public void end(boolean interrupted) {
-    DriveTrain.stop();  // stop driveTrain on exit
+    DriveTrain.stop();
     System.out.println("**ending AutoSpinToAnglePID command  current heading: " + String.format("%.3f", currentHeading));
   }
 
