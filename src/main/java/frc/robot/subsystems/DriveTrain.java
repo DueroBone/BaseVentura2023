@@ -20,26 +20,28 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 import static frc.robot.Constants.DriveConstants;
 
-
 public class DriveTrain extends SubsystemBase {
 
   //// ----- Motor Controllers ----- /////
   // There are 4 separate motor controllers with 1 pwm channel per controller
   private static final CANSparkMax motorDriveLeft1 = new CANSparkMax(DriveConstants.leftDrive1Id, MotorType.kBrushless);
   private static final CANSparkMax motorDriveLeft2 = new CANSparkMax(DriveConstants.leftDrive2Id, MotorType.kBrushless);
-  private static final CANSparkMax motorDriveRight1 = new CANSparkMax(DriveConstants.rightDrive1Id, MotorType.kBrushless);
-  private static final CANSparkMax motorDriveRight2 = new CANSparkMax(DriveConstants.rightDrive2Id, MotorType.kBrushless);
+  private static final CANSparkMax motorDriveRight1 = new CANSparkMax(DriveConstants.rightDrive1Id,
+      MotorType.kBrushless);
+  private static final CANSparkMax motorDriveRight2 = new CANSparkMax(DriveConstants.rightDrive2Id,
+      MotorType.kBrushless);
 
   // define Speed Controller Groups and Differential Drive for use in drive train
   private static final MotorControllerGroup driveGroupLeft = new MotorControllerGroup(motorDriveLeft1, motorDriveLeft2);
-  private static final MotorControllerGroup driveGroupRight = new MotorControllerGroup(motorDriveRight1, motorDriveRight2);
+  private static final MotorControllerGroup driveGroupRight = new MotorControllerGroup(motorDriveRight1,
+      motorDriveRight2);
   private static final DifferentialDrive differentialDrive = new DifferentialDrive(driveGroupLeft, driveGroupRight);
 
   // Pneumatic solenoids for Hammer
   // private Solenoid solenoidHammerRaise; // The solenoids we use have two
   // channels, one for each output
   private Solenoid solenoidGearChange;
-  //private Solenoid solenoidHammerDown;
+  // private Solenoid solenoidHammerDown;
   private Solenoid solenoidGearDef;
   private boolean highGear = false;
 
@@ -60,7 +62,8 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight1.restoreFactoryDefaults();
     motorDriveRight2.restoreFactoryDefaults();
 
-    //SupplyCurrentLimitConfiguration supplyLimit = new SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
+    // SupplyCurrentLimitConfiguration supplyLimit = new
+    // SupplyCurrentLimitConfiguration(true, 30, 35, 1.0);
     int ampsMax = 20;
     motorDriveLeft1.setSmartCurrentLimit(ampsMax); // Set the current limist
     motorDriveLeft2.setSmartCurrentLimit(ampsMax);
@@ -78,8 +81,8 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight2.setClosedLoopRampRate(5);
 
     // DifferentialDrive inverts right side by default, so no need to setInvert()
-  
-    //differentialDrive.setRightSideInverted(true);
+
+    // differentialDrive.setRightSideInverted(true);
     motorDriveRight1.setInverted(true); // Invert 1 side of robot so will drive forward
     motorDriveRight2.setInverted(true);
 
@@ -88,12 +91,12 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight1.setIdleMode(IdleMode.kCoast);
     motorDriveRight2.setIdleMode(IdleMode.kCoast);
 
-    //driveStraightControl.setTolerance(0.02); // set tolerance around setpoint
+    // driveStraightControl.setTolerance(0.02); // set tolerance around setpoint
 
     // Initialize the solenoids
-    //solenoidHammerRaise = new Solenoid(0);
+    // solenoidHammerRaise = new Solenoid(0);
     solenoidGearChange = new Solenoid(PneumaticsModuleType.REVPH, 0);
-    //solenoidHammerDown = new Solenoid(1);
+    // solenoidHammerDown = new Solenoid(1);
     solenoidGearDef = new Solenoid(PneumaticsModuleType.REVPH, 1);
 
     if (kSkipGyro) {
@@ -144,22 +147,26 @@ public class DriveTrain extends SubsystemBase {
     // is still 1
     // differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent,
     // kSquareInputs); // Send output to drive train
-    //System.out.println("Left: " + leftDrivePercent + " Right: " + rightDrivePercent);
-    //motorDriveLeft1.set(leftDrivePercent);
-    //motorDriveLeft2.set(leftDrivePercent);
-    //motorDriveRight1.set(rightDrivePercent);
-    //motorDriveRight2.set(rightDrivePercent);
+    // System.out.println("Left: " + leftDrivePercent + " Right: " +
+    // rightDrivePercent);
+    // motorDriveLeft1.set(leftDrivePercent);
+    // motorDriveLeft2.set(leftDrivePercent);
+    // motorDriveRight1.set(rightDrivePercent);
+    // motorDriveRight2.set(rightDrivePercent);
     if (Math.abs(leftDrivePercent) > 0.01) {
-      driveGroupLeft.set(leftDrivePercent); }
-    if (Math.abs(rightDrivePercent) > 0.01){
-      driveGroupRight.set(rightDrivePercent); }
+      driveGroupLeft.set(leftDrivePercent);
+    }
+    if (Math.abs(rightDrivePercent) > 0.01) {
+      driveGroupRight.set(rightDrivePercent);
+    }
   }
 
   public void doTankDriveDefault(double leftDrivePercent, double rightDrivePercent) {
 
-    //if (counter++ % 100 == 0) { System.out.println("**default driveTrain power: "
-    //+ leftDrivePercent+"-"+rightDrivePercent); }
-    // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0 is still 1
+    // if (counter++ % 100 == 0) { System.out.println("**default driveTrain power: "
+    // + leftDrivePercent+"-"+rightDrivePercent); }
+    // SquareInputs adjust inputs at low speeds so better control - note 1.0 * 1.0
+    // is still 1
     differentialDrive.tankDrive(leftDrivePercent, rightDrivePercent, kSquareInputs); // send output to drive train
   }
 
@@ -182,12 +189,12 @@ public class DriveTrain extends SubsystemBase {
   public double getHeadingAngle() {
     return m_Gyro.getAngle(); // get current heading
     // return Math.IEEEremainder(m_Gyro.getAngle(), 360.0);
-    //return 0.0;
+    // return 0.0;
   }
 
   public double getYaw() {
     return m_Gyro.getYaw(); // get rotation around Z axis for current heading
-    //return 0.0;
+    // return 0.0;
   }
 
   public static void resetGyro() {
@@ -199,61 +206,61 @@ public class DriveTrain extends SubsystemBase {
 
   // public void resetEncoder() {
   public void resetEncoders() {
-    //m_leftEncoder.reset();
-    //m_rightEncoder.reset();
+    // m_leftEncoder.reset();
+    // m_rightEncoder.reset();
   }
 
   public int getLeftEncoderCount() {
-    //return m_leftEncoder.get();
+    // return m_leftEncoder.get();
     return 0;
   }
 
   public int getRightEncoderCount() {
-    //return m_rightEncoder.get();
+    // return m_rightEncoder.get();
     return 0;
   }
 
   // get current distance since last encoder reset
   public double getLeftDistance() {
-    //return m_leftEncoder.getDistance();
+    // return m_leftEncoder.getDistance();
     return 0.0;
   }
 
   public double getLeftDistanceInch() {
-  //  return Math.PI * DriveConstants.WHEEL_DIAMETER * (getLeftEncoderCount() /
-  //   DriveConstants.PULSES_PER_REVOLUTION);
+    // return Math.PI * DriveConstants.WHEEL_DIAMETER * (getLeftEncoderCount() /
+    // DriveConstants.PULSES_PER_REVOLUTION);
     return 0.0;
   }
 
   public double getRightDistanceInch() {
-  //  return Math.PI * DriveConstants.WHEEL_DIAMETER * (getRightEncoderCount() /
-  //   DriveConstants.PULSES_PER_REVOLUTION);
+    // return Math.PI * DriveConstants.WHEEL_DIAMETER * (getRightEncoderCount() /
+    // DriveConstants.PULSES_PER_REVOLUTION);
     return 0.0;
   }
 
   public double getAveDistanceInch() {
-    //return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
+    // return (getLeftDistanceInch() + getRightDistanceInch()) / 2.0;
     return 0.0;
   }
 
-  
   // Function to set the solenoids
-public void doHighGear(final boolean fast) {
+  public void doHighGear(final boolean fast) {
 
-  highGear = fast;
-  // Make sure the solenoids are set to opposite values!
-  //solenoidHammerRaise.set(!hammerExtended); // The solenoid controls output that pulls piston in, so set it to ! hammerExtended
-  solenoidGearChange.set(!highGear);
-  System.out.println("Gear shifter set to Low Torque Mode");
-  //solenoidHammerDown.set(hammerExtended); // The solenoid controls output that pushes piston out, so set it to hammerExtended
-  solenoidGearDef.set(highGear);
-  System.out.println("Gear shifter set to High Torque Mode");
-}
+    highGear = fast;
+    // Make sure the solenoids are set to opposite values!
+    // solenoidHammerRaise.set(!hammerExtended); // The solenoid controls output
+    // that pulls piston in, so set it to ! hammerExtended
+    solenoidGearChange.set(!highGear);
+    System.out.println("Gear shifter set to Low Torque Mode");
+    // solenoidHammerDown.set(hammerExtended); // The solenoid controls output that
+    // pushes piston out, so set it to hammerExtended
+    solenoidGearDef.set(highGear);
+    System.out.println("Gear shifter set to High Torque Mode");
+  }
 
-
-  //public double clampValue(double value, double min, double max) {
-  //return Math.max(min, Math.min(value, max)); // Make sure we are within range
-  //}
+  // public double clampValue(double value, double min, double max) {
+  // return Math.max(min, Math.min(value, max)); // Make sure we are within range
+  // }
 
   public static void stop() {
     System.out.println("in drivetrain stop");
