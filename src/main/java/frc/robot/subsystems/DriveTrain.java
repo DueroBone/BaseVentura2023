@@ -83,10 +83,10 @@ public class DriveTrain extends SubsystemBase {
     motorDriveRight1.setInverted(true); // Invert 1 side of robot so will drive forward
     motorDriveRight2.setInverted(true);
 
-    motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set neutral mode
-    motorDriveLeft2.setIdleMode(IdleMode.kCoast);
-    motorDriveRight1.setIdleMode(IdleMode.kCoast);
-    motorDriveRight2.setIdleMode(IdleMode.kCoast);
+    motorDriveLeft1.setIdleMode(IdleMode.kBrake); // set brake mode
+    motorDriveLeft2.setIdleMode(IdleMode.kBrake);
+    motorDriveRight1.setIdleMode(IdleMode.kBrake);
+    motorDriveRight2.setIdleMode(IdleMode.kBrake);
 
     // driveStraightControl.setTolerance(0.02); // set tolerance around setpoint
 
