@@ -12,17 +12,18 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoSpinToAngleTarget;
 import frc.robot.commands.GoTele;
 import frc.robot.subsystems.LightToggle;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.*;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   // private final Piston m_piston = new Piston();
   public static final DriveTrain m_driveTrain = new DriveTrain();
+
 
   Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
 
@@ -210,11 +211,8 @@ public class RobotContainer {
         () -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
     dynamicJoystick1.Trigger.whenPressed(() -> LightToggle.toggle());
     dynamicControllerXbox1.RightBumper.whenPressed(() -> LightToggle.toggle());
-    if (dynamicControllerXbox1.object.getRightTriggerAxis() > 0.5) {
-      System.out.println("Brake");
-    } 
+    dynamicControllerXbox1.LeftBumper.whenPressed(() -> new AutoSpinToAngleTarget(0.5));
   }
-
 
   public Command getAutonomousCommand() {
     return null;

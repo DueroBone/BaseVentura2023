@@ -113,7 +113,7 @@ public final class Constants {
             // RobotContainer.controller0.getType() Ps4 = kHIDGamepad Xbox = kXInputGamepad
             // ATK3 = kHIDJoystick
             public static int SmartMap(GenericHID controller, String ButtonName) {
-                  int ButtonID = 0;
+                  int ButtonID = 1;
                   HIDType hidType = null;
                   try {
                         hidType = controller.getType();

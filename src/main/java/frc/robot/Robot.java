@@ -14,8 +14,8 @@ public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
 
   private RobotContainer m_robotContainer;
-  public int CamWidth = 640;
-  public int CamHeight = 480;
+  public static int CamWidth = 640;
+  public static int CamHeight = 480;
   boolean isBraked = true;
 
   /*

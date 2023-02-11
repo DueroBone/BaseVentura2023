@@ -8,6 +8,7 @@ import org.opencv.imgproc.Imgproc;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
 import edu.wpi.first.wpilibj2.command.CommandBase;
+import frc.robot.Robot;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.VisionPipeline;
@@ -34,11 +35,9 @@ public class AutoSpinToAngleTarget extends CommandBase {
   private int counter2 = 2;
   private int counter3 = 2;
 
-  public static int videoWidth = 640;
-  public static int videoHeight = 480;
   private static double tolerance = 3;
 
-  private double FilterHeadings() {
+  private double FindObject() {
     ArrayList<MatOfPoint> startingArray = m_visionPipeline.filterContoursOutput();
 
     Point target = new Point(120.0, 120.0);
@@ -57,14 +56,15 @@ public class AutoSpinToAngleTarget extends CommandBase {
 
     Rect rect = Imgproc.boundingRect(closestContour);
     double centerX = rect.x + rect.width / 2.0;
+    centerX = centerX-(Robot.CamWidth/2);
+    centerX = centerX/(Robot.CamWidth/2);
     return centerX;
   }
 
-  public AutoSpinToAngleTarget(double turnPowerIn, double targetAngleIn) {
+  public AutoSpinToAngleTarget(double turnPowerIn) {
 
     this.m_driveTrain = RobotContainer.m_driveTrain;
     this.m_visionPipeline = VisionPipeline.m_visionPipeline;
-    this.targetAngle = targetAngleIn;
     this.turnPower = turnPowerIn;
     this.pid = new PIDController(kP, kI, kD);
     addRequirements(this.m_driveTrain);
@@ -84,8 +84,8 @@ public class AutoSpinToAngleTarget extends CommandBase {
 
   @Override
   public void execute() {
-
-    currentHeading = FilterHeadings();
+    targetAngle = FindObject();
+    currentHeading = 0;
     currentDiff = targetAngle - currentHeading;
     inRange = (Math.abs(currentDiff) <= tolerance);
 
