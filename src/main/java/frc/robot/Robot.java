@@ -1,11 +1,14 @@
 package frc.robot;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer.dynamicControllerXbox1;
+import frc.robot.subsystems.DriveTrain;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -102,7 +105,17 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    
+    if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {
+      DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set brake mode
+      DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
+      DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
+      DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kCoast);
+    } else {
+      DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kBrake); // set brake mode
+      DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kBrake);
+      DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kBrake);
+      DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kBrake);        
+      } 
   }
 
   @Override
