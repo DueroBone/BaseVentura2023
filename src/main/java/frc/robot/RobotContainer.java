@@ -4,10 +4,10 @@
 
 package frc.robot;
 
-import edu.wpi.first.wpilibj.Compressor;
+//import edu.wpi.first.wpilibj.PneumaticsModuleType;
+//import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
@@ -21,11 +21,10 @@ import edu.wpi.first.wpilibj2.command.Command;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
-  // private final Piston m_piston = new Piston();
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
 
-  Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
+  //Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
 
   public static class legacyControllers {
     public static final XboxController controller0 = new XboxController(0);
@@ -188,7 +187,6 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     // m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(),
     // () -> controller0.getRightY()));
-    // Configure the button bindings for the univController
     configureButtonBindings();
     DriverStation.silenceJoystickConnectionWarning(true);
   }

@@ -58,14 +58,15 @@ public class AutoSpinToAngleTarget extends CommandBase {
     double centerX = rect.x + rect.width / 2.0;
     centerX = centerX-(Robot.CamWidth/2);
     centerX = centerX/(Robot.CamWidth/2);
+    centerX = centerX*180;
     return centerX;
   }
 
-  public AutoSpinToAngleTarget(double turnPowerIn) {
+  public AutoSpinToAngleTarget(double turnPower) {
 
     this.m_driveTrain = RobotContainer.m_driveTrain;
     this.m_visionPipeline = VisionPipeline.m_visionPipeline;
-    this.turnPower = turnPowerIn;
+    this.turnPower = turnPower;
     this.pid = new PIDController(kP, kI, kD);
     addRequirements(this.m_driveTrain);
   }
@@ -79,7 +80,7 @@ public class AutoSpinToAngleTarget extends CommandBase {
     pid.setTolerance(tolerance);
     pid.enableContinuousInput(-180.0, 180.0); // Enable continuous input in range from -180 to 180
     System.out.println("**starting AutoSpinToAnglePID target angle: " + targetAngle + " heading: "
-        + String.format("%.3f", m_driveTrain.getHeadingAngle()));
+        + 0);
   }
 
   @Override
@@ -97,8 +98,8 @@ public class AutoSpinToAngleTarget extends CommandBase {
       // clamp pid output to between -turnPower and +turnPower
       double pidOutput = MathUtil.clamp(pid.calculate(currentHeading, targetAngle), -turnPower, turnPower);
       if (counter1++ % 3 == 0) {
-        System.out.println("**diff: " + String.format("%.3f", currentDiff) + " heading: "
-            + String.format("%.3f", currentHeading) + " target: " + targetAngle + " inRange: " + inRange);
+        System.out.println("**diff: " + currentDiff + " heading: "
+            + currentHeading + " target: " + targetAngle + " inRange: " + inRange);
       }
 
       if (pidOutput >= -0.5 && pidOutput <= 0.5) {
@@ -109,14 +110,14 @@ public class AutoSpinToAngleTarget extends CommandBase {
       if (pidOutput <= 0) {
         if (counter2++ % 3 == 0) {
           System.out.println("**turn Left Correction pidOut: " + String.format("%.3f  ", pidOutput) + " heading: "
-              + String.format("%.3f", currentHeading));
+              + currentHeading);
         }
         DriveTrain.doTankDrive(-speed, speed); // Turn to left ( reverse left side)
       } else {
 
         if (counter3++ % 3 == 0) {
           System.out.println("**turn Right Correction pidOut: " + String.format("%.3f  ", pidOutput) + " heading: "
-              + String.format("%.3f", currentHeading));
+              + currentHeading);
         }
         DriveTrain.doTankDrive(speed, -speed); // turn to right ( reverse right side)
       }
