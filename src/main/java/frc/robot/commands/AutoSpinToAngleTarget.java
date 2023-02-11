@@ -12,7 +12,6 @@ import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
 import frc.robot.subsystems.VisionPipeline;
 
-
 public class AutoSpinToAngleTarget extends CommandBase {
 
   private final DriveTrain m_driveTrain;
@@ -41,11 +40,11 @@ public class AutoSpinToAngleTarget extends CommandBase {
 
   private double FilterHeadings() {
     ArrayList<MatOfPoint> startingArray = m_visionPipeline.filterContoursOutput();
-    
+
     Point target = new Point(120.0, 120.0);
     MatOfPoint closestContour = startingArray.get(0);
     double closestDistance = Double.MAX_VALUE;
-    
+
     for (MatOfPoint contour : startingArray) {
       Rect rect = Imgproc.boundingRect(contour);
       Point center = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
@@ -60,7 +59,6 @@ public class AutoSpinToAngleTarget extends CommandBase {
     double centerX = rect.x + rect.width / 2.0;
     return centerX;
   }
-
 
   public AutoSpinToAngleTarget(double turnPowerIn, double targetAngleIn) {
 
