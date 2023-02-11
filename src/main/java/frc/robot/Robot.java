@@ -16,6 +16,7 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public int CamWidth = 640;
   public int CamHeight = 480;
+  boolean isBraked = true;
 
   /*
    * This function is run when the robot is first started up and should be used
@@ -105,7 +106,7 @@ public class Robot extends TimedRobot {
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {
+    if ((dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) != isBraked) {
       DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set brake mode
       DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
       DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
@@ -115,7 +116,9 @@ public class Robot extends TimedRobot {
       DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kBrake);
       DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kBrake);
       DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kBrake);        
-      } 
+    } 
+    if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {isBraked = true;} else {isBraked = false;}
+
   }
 
   @Override
