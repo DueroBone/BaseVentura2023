@@ -107,16 +107,19 @@ public class Robot extends TimedRobot {
   @Override
   public void teleopPeriodic() {
     if ((dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) != isBraked) {
-      DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set brake mode
-      DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
-      DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
-      DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kCoast);
-    } else {
-      DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kBrake); // set brake mode
-      DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kBrake);
-      DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kBrake);
-      DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kBrake);        
-    } 
+      System.out.println("Switched DriveTrain brake mode to " + isBraked);
+      if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {
+        DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set brake mode
+        DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
+        DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
+        DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kCoast);
+      } else {
+        DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kBrake); // set brake mode
+        DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kBrake);
+        DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kBrake);
+        DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kBrake);        
+      } 
+    }
     if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {isBraked = true;} else {isBraked = false;}
 
   }
