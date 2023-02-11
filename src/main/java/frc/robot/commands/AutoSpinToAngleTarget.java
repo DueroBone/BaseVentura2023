@@ -1,11 +1,17 @@
 package frc.robot.commands;
 
+import java.util.ArrayList;
+
+import org.opencv.core.*;
+import org.opencv.imgproc.Imgproc;
+
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
-import edu.wpi.first.vision.VisionPipeline;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.VisionPipeline;
+
 
 public class AutoSpinToAngleTarget extends CommandBase {
 
@@ -33,6 +39,29 @@ public class AutoSpinToAngleTarget extends CommandBase {
   public static int videoHeight = 480;
   private static double tolerance = 3;
 
+  private double FilterHeadings() {
+    ArrayList<MatOfPoint> startingArray = m_visionPipeline.filterContoursOutput();
+    
+    Point target = new Point(120.0, 120.0);
+    MatOfPoint closestContour = startingArray.get(0);
+    double closestDistance = Double.MAX_VALUE;
+    
+    for (MatOfPoint contour : startingArray) {
+      Rect rect = Imgproc.boundingRect(contour);
+      Point center = new Point(rect.x + rect.width / 2, rect.y + rect.height / 2);
+      double distance = Math.sqrt(Math.pow(center.x - target.x, 2) + Math.pow(center.y - target.y, 2));
+      if (distance < closestDistance) {
+        closestContour = contour;
+        closestDistance = distance;
+      }
+    }
+
+    Rect rect = Imgproc.boundingRect(closestContour);
+    double centerX = rect.x + rect.width / 2.0;
+    return centerX;
+  }
+
+
   public AutoSpinToAngleTarget(double turnPowerIn, double targetAngleIn) {
 
     this.m_driveTrain = RobotContainer.m_driveTrain;
@@ -58,7 +87,7 @@ public class AutoSpinToAngleTarget extends CommandBase {
   @Override
   public void execute() {
 
-    currentHeading = m_visionPipeline.hashCode(); // 0000000000000000000000000000000000000000000000000000000000000000000000000
+    currentHeading = FilterHeadings();
     currentDiff = targetAngle - currentHeading;
     inRange = (Math.abs(currentDiff) <= tolerance);
 
