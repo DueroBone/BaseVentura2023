@@ -1,6 +1,5 @@
 package frc.robot.subsystems;
 
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
@@ -13,17 +12,14 @@ public class ControllerTracking {
   static HIDType isJoystick = HIDType.kHIDJoystick;
 
   private static HIDType JoystickTypes[] = new HIDType[5];
-  private static String JoystickNames[] = new String[5];
 
   public static void updatePortNumbers() {
     JoystickTypes = new HIDType[5];
-    JoystickNames = new String[5];
     GenericHID testHID;
     for (int i = 0; i < JoystickTypes.length; i++) {
       testHID = new GenericHID(i);
       if (testHID.isConnected()) {
         JoystickTypes[i] = testHID.getType();
-        JoystickNames[i] = DriverStation.getJoystickName(i);
       }
     }
     dynamicControllerXbox1.object = new XboxController(indexOfType(JoystickTypes, isXbox));

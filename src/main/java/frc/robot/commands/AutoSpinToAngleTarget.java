@@ -29,11 +29,12 @@ public class AutoSpinToAngleTarget extends CommandBase {
   private static double currentHeading;
   private double currentDiff;
   private double speed = 0.0;
-  private double slowDownReducer = 0.85; // Power reduction amount when near target
+  private double slowDownReducer = 0.5; // Power reduction amount when near target || Was 85
   private boolean inRange = false;
   private int counter1 = 2;
   private int counter2 = 2;
   private int counter3 = 2;
+  private double startingHeading;
 
   private static double tolerance = 3;
 
@@ -63,7 +64,6 @@ public class AutoSpinToAngleTarget extends CommandBase {
   }
 
   public AutoSpinToAngleTarget(double turnPower) {
-
     this.m_driveTrain = RobotContainer.m_driveTrain;
     this.m_visionPipeline = VisionPipeline.m_visionPipeline;
     this.turnPower = turnPower;
@@ -75,18 +75,18 @@ public class AutoSpinToAngleTarget extends CommandBase {
   public void initialize() {
     DriveTrain.stop();
     // Start Vision
+    startingHeading = FindObject();
     pid.reset();
     pid.setSetpoint(targetAngle);
     pid.setTolerance(tolerance);
     pid.enableContinuousInput(-180.0, 180.0); // Enable continuous input in range from -180 to 180
-    System.out.println("**starting AutoSpinToAnglePID target angle: " + targetAngle + " heading: "
-        + 0);
+    System.out.println("**starting AutoSpinToAnglePID target angle: " + targetAngle + " heading: " + 0);
   }
 
   @Override
   public void execute() {
     targetAngle = FindObject();
-    currentHeading = 0;
+    currentHeading = startingHeading - targetAngle;
     currentDiff = targetAngle - currentHeading;
     inRange = (Math.abs(currentDiff) <= tolerance);
 
@@ -109,26 +109,18 @@ public class AutoSpinToAngleTarget extends CommandBase {
       }
       if (pidOutput <= 0) {
         if (counter2++ % 3 == 0) {
-          System.out.println("**turn Left Correction pidOut: " + String.format("%.3f  ", pidOutput) + " heading: "
-              + currentHeading);
+          System.out.println("**turn Left Correction pidOut: " + String.format("%.3f  ", pidOutput) + " heading: " + currentHeading);
         }
         DriveTrain.doTankDrive(-speed, speed); // Turn to left ( reverse left side)
       } else {
 
         if (counter3++ % 3 == 0) {
-          System.out.println("**turn Right Correction pidOut: " + String.format("%.3f  ", pidOutput) + " heading: "
-              + currentHeading);
+          System.out.println("**turn Right Correction pidOut: " + String.format("%.3f  ", pidOutput) + " heading: " + currentHeading);
         }
         DriveTrain.doTankDrive(speed, -speed); // turn to right ( reverse right side)
       }
     }
   }
-  /*
-   * //public static boolean between(double i, double minValueInclusive, double
-   * maxValueInclusive) {
-   * // return (i >= minValueInclusive && i <= maxValueInclusive);
-   * //}
-   */
 
   @Override
   public void end(boolean interrupted) {

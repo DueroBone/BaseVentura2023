@@ -9,6 +9,7 @@ package frc.robot;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
+import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
@@ -92,7 +93,8 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
-    public static String Name = null;
+    public static Button LeftTrigger;
+    public static Button RightTrigger;
 
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
@@ -122,7 +124,6 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
-    public static String Name = null;
 
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
@@ -157,7 +158,6 @@ public class RobotContainer {
     public static JoystickButton Nine;
     public static JoystickButton Ten;
     public static JoystickButton Eleven;
-    public static String Name = null;
 
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
@@ -192,21 +192,14 @@ public class RobotContainer {
   }
 
   private void configureButtonBindings() {
-    // con0ButtonA.whenPressed(() -> c.enableAnalog(30, 60));
-    // con0BumperLeft.whileActiveContinuous(() ->
-    // System.out.println(c.getCurrent()));
-    // con2ButtonA.whileActiveContinuous(() ->
-    // System.out.println(RobotController.getBatteryVoltage() + " Hi"));
-    // con0ButtonX.whileActiveContinuous(() -> System.out.println(c.getPressure()));
     dynamicControllerXbox1.updateController();
     dynamicControllerPlaystation1.updateController();
     dynamicJoystick1.updateController();
-    dynamicControllerXbox1.A
-        .whileActiveContinuous(() -> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
-    dynamicJoystick1.Trigger
-        .whileActiveContinuous(() -> System.out.println(dynamicJoystick1.object.getPort() + ": joystick"));
-    dynamicControllerPlaystation1.A.whileActiveContinuous(
-        () -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
+
+    dynamicControllerXbox1.A.whileActiveContinuous(() -> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
+    dynamicJoystick1.Trigger.whileActiveContinuous(() -> System.out.println(dynamicJoystick1.object.getPort() + ": joystick"));
+    dynamicControllerPlaystation1.A.whileActiveContinuous(() -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
+
     dynamicJoystick1.Trigger.whenPressed(() -> LightToggle.toggle());
     dynamicControllerXbox1.RightBumper.whenPressed(() -> LightToggle.toggle());
     dynamicControllerXbox1.LeftBumper.whenPressed(() -> new AutoSpinToAngleTarget(0.5));
