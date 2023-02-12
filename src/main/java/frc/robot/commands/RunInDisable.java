@@ -1,23 +1,26 @@
-package frc.robot.subsystems;
+package frc.robot.commands;
 
+import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 
-public class ButtonUpdating extends CommandBase {
+public class RunInDisable extends CommandBase {
   //Variables init
 
-  public ButtonUpdating() {} //Declare major variables
+  public RunInDisable() {} //Declare major variables
 
   @Override
   public void initialize() {} //Declare rest of variables
 
   @Override
-  public void execute() {}
+  public void execute() {
+    
+  }
 
   @Override
   public void end(boolean interrupted) {} //Reset everything
 
   @Override
   public boolean isFinished() {
-    return false; 
+    return !RobotState.isDisabled(); 
   }
 }

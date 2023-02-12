@@ -4,9 +4,10 @@
 
 package frc.robot;
 
+import java.util.function.BooleanSupplier;
+
 //import edu.wpi.first.wpilibj.PneumaticsModuleType;
 //import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -19,11 +20,11 @@ import frc.robot.subsystems.LightToggle;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final DriveTrain m_driveTrain = new DriveTrain();
-
 
   //Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
 
@@ -93,8 +94,9 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
-    public static Button LeftTrigger;
-    public static Button RightTrigger;
+    static BooleanSupplier bSupplier = () -> false;
+    public static Button LeftTrigger = new Button(bSupplier);
+    public static Button RightTrigger = new Button(bSupplier);
 
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
@@ -187,22 +189,21 @@ public class RobotContainer {
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     // m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(),
     // () -> controller0.getRightY()));
-    configureButtonBindings();
-    DriverStation.silenceJoystickConnectionWarning(true);
+    //configureButtonBindings();
   }
 
-  private void configureButtonBindings() {
-    dynamicControllerXbox1.updateController();
-    dynamicControllerPlaystation1.updateController();
-    dynamicJoystick1.updateController();
+  public static void configureButtonBindings() {
+    System.out.println("Assigning Buttons");
 
     dynamicControllerXbox1.A.whileActiveContinuous(() -> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
-    dynamicJoystick1.Trigger.whileActiveContinuous(() -> System.out.println(dynamicJoystick1.object.getPort() + ": joystick"));
+    dynamicJoystick1.Trigger.whileActiveContinuous(() -> System.out.println(dynamicJoystick1.object.getPort() + ": dynamic JOYSTICK"));
     dynamicControllerPlaystation1.A.whileActiveContinuous(() -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
 
     dynamicJoystick1.Trigger.whenPressed(() -> LightToggle.toggle());
     dynamicControllerXbox1.RightBumper.whenPressed(() -> LightToggle.toggle());
-    dynamicControllerXbox1.LeftBumper.whenPressed(() -> new AutoSpinToAngleTarget(0.5));
+    dynamicControllerXbox1.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+
+    dynamicControllerXbox1.LeftTrigger.whenPressed(() -> System.out.println(dynamicControllerXbox1.object.getLeftTriggerAxis() + " Test"));
   }
 
   public Command getAutonomousCommand() {

@@ -1,14 +1,13 @@
 package frc.robot;
 
-import com.revrobotics.CANSparkMax.IdleMode;
-
 import edu.wpi.first.cameraserver.CameraServer;
 import edu.wpi.first.cscore.UsbCamera;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.TimedRobot;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 import frc.robot.RobotContainer.dynamicControllerXbox1;
-import frc.robot.subsystems.DriveTrain;
+import frc.robot.commands.RunInTeleop;
 
 public class Robot extends TimedRobot {
   private Command m_autonomousCommand;
@@ -16,7 +15,6 @@ public class Robot extends TimedRobot {
   private RobotContainer m_robotContainer;
   public static int CamWidth = 640;
   public static int CamHeight = 480;
-  boolean isBraked = true;
 
   /*
    * This function is run when the robot is first started up and should be used
@@ -33,6 +31,7 @@ public class Robot extends TimedRobot {
       visionCamera.setResolution(CamWidth, CamHeight);
       visionCamera.setBrightness(15);
     }
+    DriverStation.silenceJoystickConnectionWarning(true);
 
     m_robotContainer = new RobotContainer();
   }
@@ -64,7 +63,7 @@ public class Robot extends TimedRobot {
   @Override
   public void disabledInit() {
     // Hammer.hammer.set(DoubleSolenoid.Value.kReverse);
-    // System.out.println("Disabled Init");
+     System.out.println("Disabled");
   }
 
   @Override
@@ -76,6 +75,7 @@ public class Robot extends TimedRobot {
   // RobotContainer} class
   @Override
   public void autonomousInit() {
+    System.out.println("Autonomous enabled");
     m_autonomousCommand = m_robotContainer.getAutonomousCommand();
 
     // Schedule the autonomous command (example)
@@ -91,6 +91,7 @@ public class Robot extends TimedRobot {
 
   @Override
   public void teleopInit() {
+    System.out.println("Teleop Enabled");
     // This makes sure that the autonomous stops running when
     // teleop starts running. If you want the autonomous to
     // continue until interrupted by another command, remove
@@ -98,29 +99,19 @@ public class Robot extends TimedRobot {
     if (m_autonomousCommand != null) {
       m_autonomousCommand.cancel();
     }
-    // m_robotContainer = new RobotContainer();
-    dynamicControllerXbox1.updateController();
-    // System.out.println("Teleop Init");
+
+    CommandScheduler.getInstance().clearButtons();
+    if (!CommandScheduler.getInstance().isScheduled(new RunInTeleop())) {
+      System.out.println("calling ruit");
+      CommandScheduler.getInstance().schedule(new RunInTeleop());
+    }
+
+    RobotContainer.configureButtonBindings();
   }
 
   /** This function is called periodically during operator control. */
   @Override
   public void teleopPeriodic() {
-    if ((dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) != isBraked) {
-      System.out.println("Switched DriveTrain brake mode to " + isBraked);
-      if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {
-        DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // set brake mode
-        DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
-        DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
-        DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kCoast);
-      } else {
-        DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kBrake); // set brake mode
-        DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kBrake);
-        DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kBrake);
-        DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kBrake);        
-      } 
-    }
-    if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {isBraked = true;} else {isBraked = false;}
 
   }
 
