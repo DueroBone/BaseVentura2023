@@ -48,8 +48,8 @@ public class GoTele extends CommandBase {
     } else {
       if (RobotContainer.dynamicControllerPlaystation1.object.isConnected() && usingConDynP1) {
         // Using two controllers
-        teleLeft = RobotContainer.dynamicControllerPlaystation1.object.getLeftY() * -1;
-        teleRight = RobotContainer.dynamicControllerPlaystation1.object.getRightY() * -1;
+        teleLeft = RobotContainer.dynamicControllerPlaystation1.object.getLeftY() * -0.5;
+        teleRight = RobotContainer.dynamicControllerPlaystation1.object.getRightY() * -0.5;
       } else {
         if (RobotContainer.dynamicJoystick1.object.isConnected() && usingConDynJ1) {
           // Using single joystick
