@@ -17,7 +17,6 @@ import frc.robot.subsystems.LightToggle;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
-import frc.robot.subsystems.*;
 
 public class RobotContainer {
   // The robot's subsystems and commands are defined here...
@@ -212,9 +211,8 @@ public class RobotContainer {
     dynamicControllerXbox1.RightBumper.whenPressed(() -> LightToggle.toggle());
     if (dynamicControllerXbox1.object.getRightTriggerAxis() > 0.5) {
       System.out.println("Brake");
-    } 
+    }
   }
-
 
   public Command getAutonomousCommand() {
     return null;
