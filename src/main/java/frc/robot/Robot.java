@@ -101,7 +101,7 @@ public class Robot extends TimedRobot {
 
     CommandScheduler.getInstance().clearButtons();
     if (!CommandScheduler.getInstance().isScheduled(new RunInTeleop())) {
-      System.out.println("calling ruit");
+      System.out.println("Calling RunInTeleOp");
       CommandScheduler.getInstance().schedule(new RunInTeleop());
     }
 
