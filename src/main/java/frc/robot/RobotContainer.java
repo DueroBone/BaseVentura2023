@@ -195,12 +195,12 @@ public class RobotContainer {
   public static void configureButtonBindings() {
     System.out.println("Assigning Buttons");
 
-    dynamicControllerXbox1.A.whileActiveContinuous(() -> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
-    dynamicJoystick1.Trigger.whileActiveContinuous(() -> System.out.println(dynamicJoystick1.object.getPort() + ": dynamic JOYSTICK"));
-    dynamicControllerPlaystation1.A.whileActiveContinuous(() -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
+    dynamicControllerXbox1.A.whileHeld(() -> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
+    dynamicJoystick1.Trigger.whileHeld(() -> System.out.println(dynamicJoystick1.object.getPort() + ": dynamic JOYSTICK"));
+    dynamicControllerPlaystation1.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
 
     dynamicJoystick1.Trigger.whenPressed(() -> LightToggle.toggle());
-    dynamicControllerXbox1.RightBumper.whenPressed(() -> LightToggle.toggle());
+    dynamicControllerXbox1.RightTrigger.whileHeld(() -> LightToggle.toggle());
     dynamicControllerXbox1.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
     dynamicControllerXbox1.LeftTrigger.whenPressed(() -> System.out.println(dynamicControllerXbox1.object.getLeftTriggerAxis() + " Test"));

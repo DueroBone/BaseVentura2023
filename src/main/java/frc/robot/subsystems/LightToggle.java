@@ -1,16 +1,20 @@
+package frc.robot.subsystems;
+
 import edu.wpi.first.wpilibj.PWM;
-import edu.wpi.first.wpilibj.TimedRobot;
+import edu.wpi.first.wpilibj.PWM.PeriodMultiplier;
 
 public class LightToggle {
 
 
-    PWM pwm = new PWM(0);
+    static PWM pwm = new PWM(0);
+    public static void toggle() {
     // Set the PWM pulse width in milliseconds
-    pwm.setSpeed(1.5);
-
-    // Set the period of the PWM signal in milliseconds
-    pwm.setPeriodMs(10);
-
-    // Disable the PWM output
-    pwm.disable();
+    pwm.setPeriodMultiplier(PeriodMultiplier.k1X);
+    if (pwm.getSpeed() > 0.1) {
+        pwm.setDisabled();
+    } else {
+        pwm.setSpeed(1);
+    }
+    System.out.println("**LET THERE BE LIGHT** | " + pwm.getSpeed());
+    }
 }
