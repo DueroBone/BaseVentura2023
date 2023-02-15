@@ -1,22 +1,16 @@
-package frc.robot.subsystems;
-
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import edu.wpi.first.wpilibj.PWM;
+import edu.wpi.first.wpilibj.TimedRobot;
 
 public class LightToggle {
-  static CANSparkMax sparkLight = new CANSparkMax(10, CANSparkMaxLowLevel.MotorType.kBrushless);
 
-  public LightToggle() {
-    sparkLight.set(0.5);
-  }
 
-  public static void toggle() {
-    if (sparkLight.get() > 0.25) {
-      sparkLight.set(0);
-    } else {
-      sparkLight.set(0.5);
-    }
-    System.out.println("Light Toggle: " + sparkLight.get());
-    // DriverStation.reportError("Light toggle: " + sparkLight.get(), null);
-  }
+    PWM pwm = new PWM(0);
+    // Set the PWM pulse width in milliseconds
+    pwm.setSpeed(1.5);
+
+    // Set the period of the PWM signal in milliseconds
+    pwm.setPeriodMs(10);
+
+    // Disable the PWM output
+    pwm.disable();
 }
