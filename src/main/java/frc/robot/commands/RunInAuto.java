@@ -21,6 +21,6 @@ public class RunInAuto extends CommandBase {
 
   @Override
   public boolean isFinished() {
-    return !RobotState.isAutonomous(); 
+    return !RobotState.isAutonomous();
   }
 }
