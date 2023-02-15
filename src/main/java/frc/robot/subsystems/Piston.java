@@ -2,7 +2,6 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.DoubleSolenoid;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj.PneumaticsModuleType;
 
 public class Piston {
   private static DoubleSolenoid piston;
