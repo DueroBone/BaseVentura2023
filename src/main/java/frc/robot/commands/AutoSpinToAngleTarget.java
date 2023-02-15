@@ -7,6 +7,7 @@ import org.opencv.imgproc.Imgproc;
 
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.math.controller.PIDController;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.Robot;
 import frc.robot.RobotContainer;
@@ -69,6 +70,7 @@ public class AutoSpinToAngleTarget extends CommandBase {
     this.turnPower = turnPower;
     this.pid = new PIDController(kP, kI, kD);
     addRequirements(this.m_driveTrain);
+    DriverStation.reportError("Crashing Robot on command", false);
   }
 
   @Override

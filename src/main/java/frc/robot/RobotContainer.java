@@ -8,6 +8,7 @@ import java.util.function.BooleanSupplier;
 
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -186,7 +187,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(false, 0.1));
+    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
     // m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(),
     // () -> controller0.getRightY()));
     //configureButtonBindings();
@@ -200,10 +201,11 @@ public class RobotContainer {
     dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
-    dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
-    dynamicControllerXbox.LeftTrigger.whenPressed(() -> System.out.println(dynamicControllerXbox.object.getLeftTriggerAxis() + " Test"));
+    dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
+    dynamicControllerXbox.RightBumper.whileHeld(() -> VisionLight.toggle());
+    dynamicControllerXbox.B.whenPressed(() -> DriverStation.reportError("null", false));
   }
 
   public Command getAutonomousCommand() {
