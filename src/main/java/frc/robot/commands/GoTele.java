@@ -45,6 +45,11 @@ public class GoTele extends CommandBase {
       // Using two controllers
       teleLeft = RobotContainer.dynamicControllerXbox1.object.getLeftY() * -1;
       teleRight = RobotContainer.dynamicControllerXbox1.object.getRightY() * -1;
+      if (RobotContainer.dynamicControllerXbox1.LeftTrigger.get() == true) {
+        teleLeft = (RobotContainer.dynamicControllerXbox1.object.getLeftY() + 
+            RobotContainer.dynamicControllerXbox1.object.getRightY())/(-2);
+        teleRight = teleLeft;
+      }
     } else {
       if (RobotContainer.dynamicControllerPlaystation1.object.isConnected() && usingConDynP1) {
         // Using two controllers

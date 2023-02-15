@@ -6,8 +6,8 @@ package frc.robot;
 
 import java.util.function.BooleanSupplier;
 
-//import edu.wpi.first.wpilibj.PneumaticsModuleType;
-//import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.PneumaticsModuleType;
+import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj2.command.button.Button;
@@ -26,7 +26,7 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
-  //Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
+  Compressor c = new Compressor(6, PneumaticsModuleType.REVPH);
 
   public static class legacyControllers {
     public static final XboxController controller0 = new XboxController(0);

@@ -8,7 +8,7 @@ public class Piston {
   private static DoubleSolenoid piston;
 
   public Piston() {
-    piston = new DoubleSolenoid(PneumaticsModuleType.REVPH, 6, 7);
+    //piston = new DoubleSolenoid(PneumaticsModuleType.REVPH, 6, 7);
     piston.set(DoubleSolenoid.Value.kForward);
   }
 
