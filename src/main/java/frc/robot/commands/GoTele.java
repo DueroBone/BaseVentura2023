@@ -31,35 +31,35 @@ public class GoTele extends CommandBase {
   @Override
   public void execute() {
     // double deadzone = 0.0;
-    boolean usingConDynX1 = Math.abs(RobotContainer.dynamicControllerXbox1.object.getLeftY()) > deadzone
-        || Math.abs(RobotContainer.dynamicControllerXbox1.object.getRightY()) > deadzone;
-    boolean usingConDynP1 = Math.abs(RobotContainer.dynamicControllerPlaystation1.object.getLeftY()) > deadzone
-        || Math.abs(RobotContainer.dynamicControllerPlaystation1.object.getRightY()) > deadzone;
-    boolean usingConDynJ1 = Math.abs(RobotContainer.dynamicJoystick1.object.getY()) > deadzone
-        || Math.abs(RobotContainer.dynamicJoystick1.object.getX()) > deadzone;
+    boolean usingConDynX1 = Math.abs(RobotContainer.dynamicControllerXbox.object.getLeftY()) > deadzone
+        || Math.abs(RobotContainer.dynamicControllerXbox.object.getRightY()) > deadzone;
+    boolean usingConDynP1 = Math.abs(RobotContainer.dynamicControllerPlaystation.object.getLeftY()) > deadzone
+        || Math.abs(RobotContainer.dynamicControllerPlaystation.object.getRightY()) > deadzone;
+    boolean usingConDynJ1 = Math.abs(RobotContainer.dynamicJoystick.object.getY()) > deadzone
+        || Math.abs(RobotContainer.dynamicJoystick.object.getX()) > deadzone;
     double teleLeft = 0;
     double teleRight = 0;
     double teleRotate = 0;
     double teleSpeed = 0;
-    if (RobotContainer.dynamicControllerXbox1.object.isConnected() && usingConDynX1) {
+    if (RobotContainer.dynamicControllerXbox.object.isConnected() && usingConDynX1) {
       // Using two controllers
-      teleLeft = RobotContainer.dynamicControllerXbox1.object.getLeftY() * -1;
-      teleRight = RobotContainer.dynamicControllerXbox1.object.getRightY() * -1;
-      if (RobotContainer.dynamicControllerXbox1.LeftTrigger.get() == true) {
-        teleLeft = (RobotContainer.dynamicControllerXbox1.object.getLeftY() + 
-            RobotContainer.dynamicControllerXbox1.object.getRightY())/(-2);
+      teleLeft = RobotContainer.dynamicControllerXbox.object.getLeftY() * -1;
+      teleRight = RobotContainer.dynamicControllerXbox.object.getRightY() * -1;
+      if (RobotContainer.dynamicControllerXbox.LeftTrigger.get() == true) {
+        teleLeft = (RobotContainer.dynamicControllerXbox.object.getLeftY() + 
+            RobotContainer.dynamicControllerXbox.object.getRightY())/(-2);
         teleRight = teleLeft;
       }
     } else {
-      if (RobotContainer.dynamicControllerPlaystation1.object.isConnected() && usingConDynP1) {
+      if (RobotContainer.dynamicControllerPlaystation.object.isConnected() && usingConDynP1) {
         // Using two controllers
-        teleLeft = RobotContainer.dynamicControllerPlaystation1.object.getLeftY() * -0.5;
-        teleRight = RobotContainer.dynamicControllerPlaystation1.object.getRightY() * -0.5;
+        teleLeft = RobotContainer.dynamicControllerPlaystation.object.getLeftY() * -0.5;
+        teleRight = RobotContainer.dynamicControllerPlaystation.object.getRightY() * -0.5;
       } else {
-        if (RobotContainer.dynamicJoystick1.object.isConnected() && usingConDynJ1) {
+        if (RobotContainer.dynamicJoystick.object.isConnected() && usingConDynJ1) {
           // Using single joystick
-          teleRotate = RobotContainer.dynamicJoystick1.object.getX() * 1;
-          teleSpeed = RobotContainer.dynamicJoystick1.object.getY() * -1;
+          teleRotate = RobotContainer.dynamicJoystick.object.getX() * 1;
+          teleSpeed = RobotContainer.dynamicJoystick.object.getY() * -1;
         } else {
           teleLeft = 0;
           teleRight = 0;
