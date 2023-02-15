@@ -33,7 +33,7 @@ public class RunInTeleop extends CommandBase {
     dynamicControllerXbox.LeftTrigger = new Button(LT);
     dynamicControllerXbox.RightTrigger = new Button(RT);
     counter1++;
-    if (counter1%5 == 0) {
+    if (counter1%3 == 0) {
       if ((dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) != isBraked) {
         System.out.println("Switched DriveTrain brake mode to " + isBraked);
         if (dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) {
@@ -50,7 +50,6 @@ public class RunInTeleop extends CommandBase {
       }
 
       if (dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) {isBraked = true;}
-      else if (dynamicControllerPlaystation.object.getRightTriggerAxis() < 0.5) {isBraked = true;} 
       else {isBraked = false;}
     }
     //Update trigger buttons
