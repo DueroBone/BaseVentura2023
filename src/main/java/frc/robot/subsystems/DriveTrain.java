@@ -43,10 +43,10 @@ public class DriveTrain extends SubsystemBase {
   private boolean highGear = false;
 
   // navX Gyro on RoboRIO 2.0
-  private static AHRS m_Gyro;
+  public static AHRS m_Gyro;
 
   private static final boolean kSquareInputs = true;
-  private static final boolean kSkipGyro = true;
+  private static final boolean kSkipGyro = false;
   private static int counter = 0; // for limiting display
 
   /*

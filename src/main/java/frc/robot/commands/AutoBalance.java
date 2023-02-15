@@ -9,29 +9,42 @@ import frc.robot.subsystems.DriveTrain;
 
 public class AutoBalance extends CommandBase {
   /** Creates a new AutoBalance. */
+  DriveTrain m_driveTrain;
+  int balancingStage;
+
   public AutoBalance() {
     // Use addRequirements() here to declare subsystem dependencies.
-    addRequirements(new DriveTrain());
+    m_driveTrain = new DriveTrain();
+    //addRequirements(m_driveTrain);
   }
 
   // Called when the command is initially scheduled.
   @Override
   public void initialize() {
     DriveTrain.resetGyro();
+    balancingStage = 0;
   }
-https://prod.liveshare.vsengsaas.visualstudio.com/join?FD3834A011DEBB602717EFD62098F8A92E4B
+
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
-    //Move Forward until gyro gets past a threshold
-    while (/*gyrodegrees < degrees*/){
-      //goforward
+    // Move Forward until gyro gets past a threshold
+    if (balancingStage == 0) {
+      while (DriveTrain.m_Gyro.getYaw() > 0) {
+        System.out.println("FORWARDS");
+      }
+      balancingStage = 1;
+    } else if (balancingStage == 1) {
+      while (DriveTrain.m_Gyro.getYaw() != 0) {
+        System.out.println("BACKWARDS");
+      }
     }
   }
 
   // Go Forward
   @Override
-  public void end(boolean interrupted) {}
+  public void end(boolean interrupted) {
+  }
 
   // Returns true when the command should end.
   @Override

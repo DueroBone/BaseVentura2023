@@ -15,6 +15,7 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.commands.AutoBalance;
 import frc.robot.commands.AutoSpinToAngleTarget;
 import frc.robot.commands.GoTele;
 import frc.robot.subsystems.VisionLight;
@@ -205,7 +206,9 @@ public class RobotContainer {
 
     dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.RightBumper.whileHeld(() -> VisionLight.toggle());
-    dynamicControllerXbox.B.whenPressed(() -> DriverStation.reportError("null", false));
+    dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getRoll()));
+
+    dynamicControllerXbox.Y.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance()));
   }
 
   public Command getAutonomousCommand() {
