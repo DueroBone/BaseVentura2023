@@ -3,7 +3,7 @@ package frc.robot.subsystems;
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.PWM.PeriodMultiplier;
 
-public class LightToggle {
+public class VisionLight {
 
 
     static PWM pwm = new PWM(0);

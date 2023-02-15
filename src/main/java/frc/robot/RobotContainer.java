@@ -16,7 +16,7 @@ import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
 import frc.robot.commands.AutoSpinToAngleTarget;
 import frc.robot.commands.GoTele;
-import frc.robot.subsystems.LightToggle;
+import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
 import edu.wpi.first.wpilibj2.command.Command;
@@ -199,8 +199,8 @@ public class RobotContainer {
     dynamicJoystick.Trigger.whileHeld(() -> System.out.println(dynamicJoystick.object.getPort() + ": dynamic JOYSTICK"));
     dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
-    dynamicJoystick.Trigger.whenPressed(() -> LightToggle.toggle());
-    dynamicControllerXbox.RightTrigger.whenPressed(() -> LightToggle.toggle());
+    dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
+    dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
     dynamicControllerXbox.LeftTrigger.whenPressed(() -> System.out.println(dynamicControllerXbox.object.getLeftTriggerAxis() + " Test"));
