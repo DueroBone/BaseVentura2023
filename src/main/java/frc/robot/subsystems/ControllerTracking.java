@@ -22,9 +22,9 @@ public class ControllerTracking {
         JoystickTypes[i] = testHID.getType();
       }
     }
-    dynamicControllerXbox1.object = new XboxController(indexOfType(JoystickTypes, isXbox));
-    dynamicControllerPlaystation1.object = new XboxController(indexOfType(JoystickTypes, HIDType.kHIDGamepad));
-    dynamicJoystick1.object = new Joystick(indexOfType(JoystickTypes, HIDType.kHIDJoystick));
+    dynamicControllerXbox.object = new XboxController(indexOfType(JoystickTypes, isXbox));
+    dynamicControllerPlaystation.object = new XboxController(indexOfType(JoystickTypes, HIDType.kHIDGamepad));
+    dynamicJoystick.object = new Joystick(indexOfType(JoystickTypes, HIDType.kHIDJoystick));
   }
 
   private static int indexOfType(HIDType[] HIDarray, HIDType type) {

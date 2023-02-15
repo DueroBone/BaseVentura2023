@@ -82,7 +82,7 @@ public class RobotContainer {
     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
   }
 
-  public static class dynamicControllerXbox1 {
+  public static class dynamicControllerXbox {
     public static XboxController object = new XboxController(5);
     public static JoystickButton A;
     public static JoystickButton B;
@@ -114,7 +114,7 @@ public class RobotContainer {
     }
   }
 
-  public static class dynamicControllerPlaystation1 {
+  public static class dynamicControllerPlaystation {
     public static XboxController object = new XboxController(5);
     public static JoystickButton A;
     public static JoystickButton B;
@@ -147,7 +147,7 @@ public class RobotContainer {
     }
   }
 
-  public static class dynamicJoystick1 {
+  public static class dynamicJoystick {
     public static Joystick object = new Joystick(5);
     public static JoystickButton Trigger;
     public static JoystickButton Two;
@@ -195,15 +195,15 @@ public class RobotContainer {
   public static void configureButtonBindings() {
     System.out.println("Assigning Buttons");
 
-    dynamicControllerXbox1.A.whileHeld(() -> System.out.println(dynamicControllerXbox1.object.getPort() + ": dynamic XBOX"));
-    dynamicJoystick1.Trigger.whileHeld(() -> System.out.println(dynamicJoystick1.object.getPort() + ": dynamic JOYSTICK"));
-    dynamicControllerPlaystation1.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation1.object.getPort() + ": dynamic Playstation"));
+    dynamicControllerXbox.A.whileHeld(() -> System.out.println(dynamicControllerXbox.object.getPort() + ": dynamic XBOX"));
+    dynamicJoystick.Trigger.whileHeld(() -> System.out.println(dynamicJoystick.object.getPort() + ": dynamic JOYSTICK"));
+    dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
-    dynamicJoystick1.Trigger.whenPressed(() -> LightToggle.toggle());
-    dynamicControllerXbox1.RightTrigger.whileHeld(() -> LightToggle.toggle());
-    dynamicControllerXbox1.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicJoystick.Trigger.whenPressed(() -> LightToggle.toggle());
+    dynamicControllerXbox.RightTrigger.whenPressed(() -> LightToggle.toggle());
+    dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
-    dynamicControllerXbox1.LeftTrigger.whenPressed(() -> System.out.println(dynamicControllerXbox1.object.getLeftTriggerAxis() + " Test"));
+    dynamicControllerXbox.LeftTrigger.whenPressed(() -> System.out.println(dynamicControllerXbox.object.getLeftTriggerAxis() + " Test"));
   }
 
   public Command getAutonomousCommand() {

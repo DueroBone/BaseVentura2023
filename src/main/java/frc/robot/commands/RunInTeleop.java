@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
 import frc.robot.RobotContainer.*;
 import frc.robot.subsystems.DriveTrain;
-import frc.robot.subsystems.LightToggle;
 
 public class RunInTeleop extends CommandBase {
   //Variables init
@@ -21,23 +20,23 @@ public class RunInTeleop extends CommandBase {
 
   @Override
   public void initialize() { //Declare rest of variables
-    dynamicControllerXbox1.updateController();
-    dynamicControllerPlaystation1.updateController();
-    dynamicJoystick1.updateController();
+    dynamicControllerXbox.updateController();
+    dynamicControllerPlaystation.updateController();
+    dynamicJoystick.updateController();
     counter1 = 0;
   }
 
   @Override
   public void execute() {
-    BooleanSupplier LT = () -> (dynamicControllerXbox1.object.getLeftTriggerAxis() > 0.5);
-    BooleanSupplier RT = () -> (dynamicControllerXbox1.object.getRightTriggerAxis() > 0.5);
-    dynamicControllerXbox1.LeftTrigger = new Button(LT);
-    dynamicControllerXbox1.RightTrigger = new Button(RT);
+    BooleanSupplier LT = () -> (dynamicControllerXbox.object.getLeftTriggerAxis() > 0.5);
+    BooleanSupplier RT = () -> (dynamicControllerXbox.object.getRightTriggerAxis() > 0.5);
+    dynamicControllerXbox.LeftTrigger = new Button(LT);
+    dynamicControllerXbox.RightTrigger = new Button(RT);
     counter1++;
     if (counter1%5 == 0) {
-      if ((dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) != isBraked) {
+      if ((dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) != isBraked) {
         System.out.println("Switched DriveTrain brake mode to " + isBraked);
-        if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {
+        if (dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) {
           DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // Set coast mode
           DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
           DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
@@ -50,8 +49,8 @@ public class RunInTeleop extends CommandBase {
         } 
       }
 
-      if (dynamicControllerXbox1.object.getRightTriggerAxis() < 0.5) {isBraked = true;}
-      else if (dynamicControllerPlaystation1.object.getRightTriggerAxis() < 0.5) {isBraked = true;} 
+      if (dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) {isBraked = true;}
+      else if (dynamicControllerPlaystation.object.getRightTriggerAxis() < 0.5) {isBraked = true;} 
       else {isBraked = false;}
     }
     //Update trigger buttons
