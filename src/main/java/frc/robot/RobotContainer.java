@@ -186,7 +186,7 @@ public class RobotContainer {
    * The container for the robot. Contains subsystems, OI devices, and commands.
    */
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
+    m_driveTrain.setDefaultCommand(new GoTele(false, 0.1));
     // m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(),
     // () -> controller0.getRightY()));
     //configureButtonBindings();
