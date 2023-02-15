@@ -24,6 +24,9 @@ public class AutoBalance extends CommandBase {
   @Override
   public void execute() {
     //Move Forward until gyro gets past a threshold
+    while (//gyrodegrees < degrees){
+      //goforward
+    }
   }
 
   // Go Forward
