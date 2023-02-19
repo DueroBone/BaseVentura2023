@@ -239,6 +239,22 @@ public final class Constants {
                               } else {
                               }
                               break;
+                        case "RTrigger":
+                              if (hidType == isXBox) {
+                              } else if (hidType == isPS4) {
+                                    ButtonID = 8;
+                              } else if (hidType == isJoystick) {
+                              } else {
+                              }
+                              break;
+                        case "LTrigger":
+                              if (hidType == isXBox) {
+                              } else if (hidType == isPS4) {
+                                    ButtonID = 7;
+                              } else if (hidType == isJoystick) {
+                              } else {
+                              }
+                              break;
                         case "":
                               if (hidType == isXBox) {
                                     ButtonID = 1;

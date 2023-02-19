@@ -31,33 +31,35 @@ public class GoTele extends CommandBase {
   @Override
   public void execute() {
     // double deadzone = 0.0;
-    boolean usingConDynX1 = Math.abs(RobotContainer.dynamicControllerXbox.object.getLeftY()) > deadzone
-        || Math.abs(RobotContainer.dynamicControllerXbox.object.getRightY()) > deadzone;
-    boolean usingConDynP1 = Math.abs(RobotContainer.dynamicControllerPlaystation.object.getLeftY()) > deadzone
-        || Math.abs(RobotContainer.dynamicControllerPlaystation.object.getRightY()) > deadzone;
-    boolean usingConDynJ1 = Math.abs(RobotContainer.dynamicJoystick.object.getY()) > deadzone
-        || Math.abs(RobotContainer.dynamicJoystick.object.getX()) > deadzone;
+    boolean usingConDynX = Math.abs(RobotContainer.dynamicControllerXbox.object.getLeftY()) > deadzone || Math.abs(RobotContainer.dynamicControllerXbox.object.getRightY()) > deadzone;
+    boolean usingConDynP = Math.abs(RobotContainer.dynamicControllerPlaystation.object.getLeftY()) > deadzone || Math.abs(RobotContainer.dynamicControllerPlaystation.object.getRightY()) > deadzone;
+    boolean usingConDynJ1 = Math.abs(RobotContainer.dynamicJoystick.object.getY()) > deadzone || Math.abs(RobotContainer.dynamicJoystick.object.getX()) > deadzone;
     double teleLeft = 0;
     double teleRight = 0;
     double teleRotate = 0;
     double teleSpeed = 0;
-    if (RobotContainer.dynamicControllerXbox.object.isConnected() && usingConDynX1) {
-      // Using two controllers
-      teleLeft = RobotContainer.dynamicControllerXbox.object.getLeftY() * -1;
-      teleRight = RobotContainer.dynamicControllerXbox.object.getRightY() * -1;
-      if (RobotContainer.dynamicControllerXbox.LeftTrigger.get() == true) {
-        teleLeft = (RobotContainer.dynamicControllerXbox.object.getLeftY() + 
-            RobotContainer.dynamicControllerXbox.object.getRightY())/(-2);
+
+    if (RobotContainer.dynamicControllerPlaystation.object.isConnected() && usingConDynP) {
+      teleLeft = RobotContainer.dynamicControllerPlaystation.object.getLeftY() * -1;
+      teleRight = RobotContainer.dynamicControllerPlaystation.object.getRightY() * -1;
+
+      if (RobotContainer.dynamicControllerPlaystation.LeftTrigger.get() == true) {
+        teleLeft = (RobotContainer.dynamicControllerPlaystation.object.getLeftY() +
+            RobotContainer.dynamicControllerPlaystation.object.getRightY()) / (-2);
         teleRight = teleLeft;
       }
     } else {
-      if (RobotContainer.dynamicControllerPlaystation.object.isConnected() && usingConDynP1) {
-        // Using two controllers
-        teleLeft = RobotContainer.dynamicControllerPlaystation.object.getLeftY() * -0.5;
-        teleRight = RobotContainer.dynamicControllerPlaystation.object.getRightY() * -0.5;
+      if (RobotContainer.dynamicControllerXbox.object.isConnected() && usingConDynX) {
+        teleLeft = RobotContainer.dynamicControllerXbox.object.getLeftY() * -1;
+        teleRight = RobotContainer.dynamicControllerXbox.object.getRightY() * -1;
+
+        if (RobotContainer.dynamicControllerXbox.LeftTrigger.get() == true) {
+          teleLeft = (RobotContainer.dynamicControllerXbox.object.getLeftY() +
+              RobotContainer.dynamicControllerXbox.object.getRightY()) / (-2);
+          teleRight = teleLeft;
+        }
       } else {
         if (RobotContainer.dynamicJoystick.object.isConnected() && usingConDynJ1) {
-          // Using single joystick
           teleRotate = RobotContainer.dynamicJoystick.object.getX() * 1;
           teleSpeed = RobotContainer.dynamicJoystick.object.getY() * -1;
         } else {
@@ -73,7 +75,7 @@ public class GoTele extends CommandBase {
     double speedMultiplier = 1;
     double a = 1 - deadzone;
     a = 1 / a;
-
+    
     if (Math.abs(teleLeft) > deadzone) {
       if (teleLeft > 0) {
         teleLeft = teleLeft - deadzone;
@@ -126,9 +128,6 @@ public class GoTele extends CommandBase {
       teleRotate = 0;
     }
 
-    // System.out.println("Left Y:" + RobotContainer.controller0.getLeftY() + " Left
-    // speed:" + teleLeft + " Right Y:" + RobotContainer.controller0.getRightY() + "
-    // Right speed:" + teleRight);
     if (GoTeleEnabled) {
       if (usingConDynJ1) {
         DriveTrain.doArcadeDrive(teleSpeed, teleRotate);
