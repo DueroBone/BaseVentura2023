@@ -5,7 +5,6 @@
 package frc.robot;
 
 import java.util.function.BooleanSupplier;
-
 import edu.wpi.first.wpilibj.PneumaticsModuleType;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DriverStation;
@@ -15,8 +14,8 @@ import edu.wpi.first.wpilibj2.command.button.Button;
 import edu.wpi.first.wpilibj2.command.button.JoystickButton;
 import edu.wpi.first.wpilibj2.command.button.POVButton;
 import frc.robot.Constants.OIConstants;
+import frc.robot.autonomous.AutoSpinToAngleTarget;
 import frc.robot.commands.AutoBalance;
-import frc.robot.commands.AutoSpinToAngleTarget;
 import frc.robot.commands.GoTele;
 import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.ControllerTracking;
@@ -29,7 +28,454 @@ public class RobotContainer {
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
   Compressor c = new Compressor(6, PneumaticsModuleType.REVPH);
-
+  public static class PortBoundControllers {
+    public static class PortZero {
+      public static class Xbox {
+        public static XboxController object = new XboxController(1);
+        public static JoystickButton A;
+        public static JoystickButton B;
+        public static JoystickButton X;
+        public static JoystickButton Y;
+        public static JoystickButton LeftBumper;
+        public static JoystickButton RightBumper;
+        public static JoystickButton LeftStickPress;
+        public static JoystickButton RightStickPress;
+        public static JoystickButton Share;
+        public static JoystickButton Options;
+        static BooleanSupplier bSupplier = () -> false;
+        public static Button LeftTrigger = new Button(bSupplier);
+        public static Button RightTrigger = new Button(bSupplier);
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          System.out.println("Assigning Xbox: " + object.getPort());
+          A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+          B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+          X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+          Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+          LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+          RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+          LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+          RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+          Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+          Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+        }
+      }
+      public static class FlightStick {
+        public static Joystick object = new Joystick(1);
+        public static JoystickButton Trigger;
+        public static JoystickButton Two;
+        public static JoystickButton Three;
+        public static JoystickButton Four;
+        public static JoystickButton Five;
+        public static JoystickButton Six;
+        public static JoystickButton Seven;
+        public static JoystickButton Eight;
+        public static JoystickButton Nine;
+        public static JoystickButton Ten;
+        public static JoystickButton Eleven;
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          assignButtons();
+        }
+    
+        public static void assignButtons() {
+          System.out.println("Assigning Joystick: " + object.getPort());
+          Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+          Two = new JoystickButton(object, 2);
+          Three = new JoystickButton(object, 3);
+          Four = new JoystickButton(object, 4);
+          Five = new JoystickButton(object, 5);
+          Six = new JoystickButton(object, 6);
+          Seven = new JoystickButton(object, 7);
+          Eight = new JoystickButton(object, 8);
+          Nine = new JoystickButton(object, 9);
+          Ten = new JoystickButton(object, 10);
+          Eleven = new JoystickButton(object, 11);
+        }
+      }
+    }
+    public static class PortOne {
+      public static class Xbox {
+        public static XboxController object = new XboxController(1);
+        public static JoystickButton A;
+        public static JoystickButton B;
+        public static JoystickButton X;
+        public static JoystickButton Y;
+        public static JoystickButton LeftBumper;
+        public static JoystickButton RightBumper;
+        public static JoystickButton LeftStickPress;
+        public static JoystickButton RightStickPress;
+        public static JoystickButton Share;
+        public static JoystickButton Options;
+        static BooleanSupplier bSupplier = () -> false;
+        public static Button LeftTrigger = new Button(bSupplier);
+        public static Button RightTrigger = new Button(bSupplier);
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          System.out.println("Assigning Xbox: " + object.getPort());
+          A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+          B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+          X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+          Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+          LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+          RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+          LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+          RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+          Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+          Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+        }
+      }
+      public static class FlightStick {
+        public static Joystick object = new Joystick(1);
+        public static JoystickButton Trigger;
+        public static JoystickButton Two;
+        public static JoystickButton Three;
+        public static JoystickButton Four;
+        public static JoystickButton Five;
+        public static JoystickButton Six;
+        public static JoystickButton Seven;
+        public static JoystickButton Eight;
+        public static JoystickButton Nine;
+        public static JoystickButton Ten;
+        public static JoystickButton Eleven;
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          assignButtons();
+        }
+    
+        public static void assignButtons() {
+          System.out.println("Assigning Joystick: " + object.getPort());
+          Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+          Two = new JoystickButton(object, 2);
+          Three = new JoystickButton(object, 3);
+          Four = new JoystickButton(object, 4);
+          Five = new JoystickButton(object, 5);
+          Six = new JoystickButton(object, 6);
+          Seven = new JoystickButton(object, 7);
+          Eight = new JoystickButton(object, 8);
+          Nine = new JoystickButton(object, 9);
+          Ten = new JoystickButton(object, 10);
+          Eleven = new JoystickButton(object, 11);
+        }
+      }
+    }
+    public static class PortTwo {
+      public static class Xbox {
+        public static XboxController object = new XboxController(2);
+        public static JoystickButton A;
+        public static JoystickButton B;
+        public static JoystickButton X;
+        public static JoystickButton Y;
+        public static JoystickButton LeftBumper;
+        public static JoystickButton RightBumper;
+        public static JoystickButton LeftStickPress;
+        public static JoystickButton RightStickPress;
+        public static JoystickButton Share;
+        public static JoystickButton Options;
+        static BooleanSupplier bSupplier = () -> false;
+        public static Button LeftTrigger = new Button(bSupplier);
+        public static Button RightTrigger = new Button(bSupplier);
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          System.out.println("Assigning Xbox: " + object.getPort());
+          A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+          B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+          X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+          Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+          LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+          RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+          LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+          RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+          Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+          Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+        }
+      }
+      public static class FlightStick {
+        public static Joystick object = new Joystick(2);
+        public static JoystickButton Trigger;
+        public static JoystickButton Two;
+        public static JoystickButton Three;
+        public static JoystickButton Four;
+        public static JoystickButton Five;
+        public static JoystickButton Six;
+        public static JoystickButton Seven;
+        public static JoystickButton Eight;
+        public static JoystickButton Nine;
+        public static JoystickButton Ten;
+        public static JoystickButton Eleven;
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          assignButtons();
+        }
+    
+        public static void assignButtons() {
+          System.out.println("Assigning Joystick: " + object.getPort());
+          Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+          Two = new JoystickButton(object, 2);
+          Three = new JoystickButton(object, 3);
+          Four = new JoystickButton(object, 4);
+          Five = new JoystickButton(object, 5);
+          Six = new JoystickButton(object, 6);
+          Seven = new JoystickButton(object, 7);
+          Eight = new JoystickButton(object, 8);
+          Nine = new JoystickButton(object, 9);
+          Ten = new JoystickButton(object, 10);
+          Eleven = new JoystickButton(object, 11);
+        }
+      }
+    }
+    public static class PortThree {
+      public static class Xbox {
+        public static XboxController object = new XboxController(3);
+        public static JoystickButton A;
+        public static JoystickButton B;
+        public static JoystickButton X;
+        public static JoystickButton Y;
+        public static JoystickButton LeftBumper;
+        public static JoystickButton RightBumper;
+        public static JoystickButton LeftStickPress;
+        public static JoystickButton RightStickPress;
+        public static JoystickButton Share;
+        public static JoystickButton Options;
+        static BooleanSupplier bSupplier = () -> false;
+        public static Button LeftTrigger = new Button(bSupplier);
+        public static Button RightTrigger = new Button(bSupplier);
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          System.out.println("Assigning Xbox: " + object.getPort());
+          A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+          B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+          X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+          Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+          LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+          RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+          LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+          RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+          Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+          Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+        }
+      }
+      public static class FlightStick {
+        public static Joystick object = new Joystick(3);
+        public static JoystickButton Trigger;
+        public static JoystickButton Two;
+        public static JoystickButton Three;
+        public static JoystickButton Four;
+        public static JoystickButton Five;
+        public static JoystickButton Six;
+        public static JoystickButton Seven;
+        public static JoystickButton Eight;
+        public static JoystickButton Nine;
+        public static JoystickButton Ten;
+        public static JoystickButton Eleven;
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          assignButtons();
+        }
+    
+        public static void assignButtons() {
+          System.out.println("Assigning Joystick: " + object.getPort());
+          Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+          Two = new JoystickButton(object, 2);
+          Three = new JoystickButton(object, 3);
+          Four = new JoystickButton(object, 4);
+          Five = new JoystickButton(object, 5);
+          Six = new JoystickButton(object, 6);
+          Seven = new JoystickButton(object, 7);
+          Eight = new JoystickButton(object, 8);
+          Nine = new JoystickButton(object, 9);
+          Ten = new JoystickButton(object, 10);
+          Eleven = new JoystickButton(object, 11);
+        }
+      }
+    }
+    public static class PortFour {
+      public static class Xbox {
+        public static XboxController object = new XboxController(4);
+        public static JoystickButton A;
+        public static JoystickButton B;
+        public static JoystickButton X;
+        public static JoystickButton Y;
+        public static JoystickButton LeftBumper;
+        public static JoystickButton RightBumper;
+        public static JoystickButton LeftStickPress;
+        public static JoystickButton RightStickPress;
+        public static JoystickButton Share;
+        public static JoystickButton Options;
+        static BooleanSupplier bSupplier = () -> false;
+        public static Button LeftTrigger = new Button(bSupplier);
+        public static Button RightTrigger = new Button(bSupplier);
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          System.out.println("Assigning Xbox: " + object.getPort());
+          A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+          B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+          X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+          Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+          LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+          RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+          LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+          RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+          Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+          Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+        }
+      }
+      public static class FlightStick {
+        public static Joystick object = new Joystick(4);
+        public static JoystickButton Trigger;
+        public static JoystickButton Two;
+        public static JoystickButton Three;
+        public static JoystickButton Four;
+        public static JoystickButton Five;
+        public static JoystickButton Six;
+        public static JoystickButton Seven;
+        public static JoystickButton Eight;
+        public static JoystickButton Nine;
+        public static JoystickButton Ten;
+        public static JoystickButton Eleven;
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          assignButtons();
+        }
+    
+        public static void assignButtons() {
+          System.out.println("Assigning Joystick: " + object.getPort());
+          Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+          Two = new JoystickButton(object, 2);
+          Three = new JoystickButton(object, 3);
+          Four = new JoystickButton(object, 4);
+          Five = new JoystickButton(object, 5);
+          Six = new JoystickButton(object, 6);
+          Seven = new JoystickButton(object, 7);
+          Eight = new JoystickButton(object, 8);
+          Nine = new JoystickButton(object, 9);
+          Ten = new JoystickButton(object, 10);
+          Eleven = new JoystickButton(object, 11);
+        }
+      }
+    }
+    public static class PortFive {
+      public static class Xbox {
+        public static XboxController object = new XboxController(5);
+        public static JoystickButton A;
+        public static JoystickButton B;
+        public static JoystickButton X;
+        public static JoystickButton Y;
+        public static JoystickButton LeftBumper;
+        public static JoystickButton RightBumper;
+        public static JoystickButton LeftStickPress;
+        public static JoystickButton RightStickPress;
+        public static JoystickButton Share;
+        public static JoystickButton Options;
+        static BooleanSupplier bSupplier = () -> false;
+        public static Button LeftTrigger = new Button(bSupplier);
+        public static Button RightTrigger = new Button(bSupplier);
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          System.out.println("Assigning Xbox: " + object.getPort());
+          A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
+          B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
+          X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
+          Y = new JoystickButton(object, OIConstants.SmartMap(object, "Y"));
+          LeftBumper = new JoystickButton(object, OIConstants.SmartMap(object, "LBump"));
+          RightBumper = new JoystickButton(object, OIConstants.SmartMap(object, "RBump"));
+          LeftStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "LStick"));
+          RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
+          Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
+          Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+        }
+      }
+      public static class FlightStick {
+        public static Joystick object = new Joystick(5);
+        public static JoystickButton Trigger;
+        public static JoystickButton Two;
+        public static JoystickButton Three;
+        public static JoystickButton Four;
+        public static JoystickButton Five;
+        public static JoystickButton Six;
+        public static JoystickButton Seven;
+        public static JoystickButton Eight;
+        public static JoystickButton Nine;
+        public static JoystickButton Ten;
+        public static JoystickButton Eleven;
+    
+        public static void updateController() {
+          ControllerTracking.updatePortNumbers();
+          assignButtons();
+        }
+    
+        public static void assignButtons() {
+          System.out.println("Assigning Joystick: " + object.getPort());
+          Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
+          Two = new JoystickButton(object, 2);
+          Three = new JoystickButton(object, 3);
+          Four = new JoystickButton(object, 4);
+          Five = new JoystickButton(object, 5);
+          Six = new JoystickButton(object, 6);
+          Seven = new JoystickButton(object, 7);
+          Eight = new JoystickButton(object, 8);
+          Nine = new JoystickButton(object, 9);
+          Ten = new JoystickButton(object, 10);
+          Eleven = new JoystickButton(object, 11);
+        }
+      }
+    }
+    public static void updateAllControllers() {
+      if (DriverStation.isJoystickConnected(0)) {
+        if (DriverStation.getJoystickType(0) != 20) {
+          PortZero.Xbox.updateController();
+        } else {
+          PortZero.FlightStick.updateController();
+        }
+      }
+      if (DriverStation.isJoystickConnected(1)) {
+        if (DriverStation.getJoystickType(1) != 20) {
+          PortOne.Xbox.updateController();
+        } else {
+          PortOne.FlightStick.updateController();
+        }
+      }
+      if (DriverStation.isJoystickConnected(2)) {
+        if (DriverStation.getJoystickType(2) != 20) {
+          PortTwo.Xbox.updateController();
+        } else {
+          PortTwo.FlightStick.updateController();
+        }
+      }
+      if (DriverStation.isJoystickConnected(3)) {
+        if (DriverStation.getJoystickType(3) != 20) {
+          PortThree.Xbox.updateController();
+        } else {
+          PortThree.FlightStick.updateController();
+        }
+      }
+      if (DriverStation.isJoystickConnected(4)) {
+        if (DriverStation.getJoystickType(4) != 20) {
+          PortFour.Xbox.updateController();
+        } else {
+          PortFour.FlightStick.updateController();
+        }
+      }
+      if (DriverStation.isJoystickConnected(5)) {
+        if (DriverStation.getJoystickType(5) != 20) {
+          PortFive.Xbox.updateController();
+        } else {
+          PortFive.FlightStick.updateController();
+        }
+      }
+    }
+  }
   public static class legacyControllers {
     public static final XboxController controller0 = new XboxController(0);
     public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
@@ -115,7 +561,6 @@ public class RobotContainer {
       Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
     }
   }
-
   public static class dynamicControllerPlaystation {
     public static XboxController object = new XboxController(5);
     public static JoystickButton A;
@@ -128,6 +573,8 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static JoystickButton LeftTrigger;
+    public static JoystickButton RightTrigger;
 
     public static void updateController() {
       ControllerTracking.updatePortNumbers();
@@ -146,9 +593,10 @@ public class RobotContainer {
       RightStickPress = new JoystickButton(object, OIConstants.SmartMap(object, "RStick"));
       Share = new JoystickButton(object, OIConstants.SmartMap(object, "DoubleSquare"));
       Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
+      LeftTrigger = new JoystickButton(object, OIConstants.SmartMap(object, "LTrigger"));
+      RightTrigger = new JoystickButton(object, OIConstants.SmartMap(object, "RTrigger"));
     }
   }
-
   public static class dynamicJoystick {
     public static Joystick object = new Joystick(5);
     public static JoystickButton Trigger;
@@ -184,34 +632,37 @@ public class RobotContainer {
     }
   }
 
-  /**
-   * The container for the robot. Contains subsystems, OI devices, and commands.
-   */
+
   public RobotContainer() {
     m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
-    // m_driveTrain.setDefaultCommand(new DriveCommand(() -> controller0.getLeftY(),
-    // () -> controller0.getRightY()));
-    //configureButtonBindings();
   }
 
   public static void configureButtonBindings() {
     System.out.println("Assigning Buttons");
 
     dynamicControllerXbox.A.whileHeld(() -> System.out.println(dynamicControllerXbox.object.getPort() + ": dynamic XBOX"));
-    dynamicJoystick.Trigger.whileHeld(() -> System.out.println(dynamicJoystick.object.getPort() + ": dynamic JOYSTICK"));
+    dynamicJoystick.Three.whileHeld(() -> System.out.println(dynamicJoystick.object.getPort() + ": dynamic JOYSTICK"));
     dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
-    dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.5)));
 
+    dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
-    dynamicControllerXbox.RightBumper.whileHeld(() -> VisionLight.toggle());
     dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getRoll()));
-
-    dynamicControllerXbox.Y.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance()));
   }
 
   public Command getAutonomousCommand() {
     return null;
+  }
+
+  public static void RemapControllers() {
+    System.out.println("***Started mapping controllers***");
+    dynamicControllerXbox.updateController();
+    dynamicControllerPlaystation.updateController();
+    dynamicJoystick.updateController();
+    PortBoundControllers.updateAllControllers();
+    System.out.println("***Finished mapping controllers***");
   }
 }

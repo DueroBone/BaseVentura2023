@@ -7,6 +7,7 @@ import com.revrobotics.CANSparkMax.IdleMode;
 import edu.wpi.first.wpilibj.RobotState;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import edu.wpi.first.wpilibj2.command.button.Button;
+import frc.robot.RobotContainer;
 import frc.robot.RobotContainer.*;
 import frc.robot.subsystems.DriveTrain;
 
@@ -20,9 +21,7 @@ public class RunInTeleop extends CommandBase {
 
   @Override
   public void initialize() { //Declare rest of variables
-    dynamicControllerXbox.updateController();
-    dynamicControllerPlaystation.updateController();
-    dynamicJoystick.updateController();
+    RobotContainer.RemapControllers();
     counter1 = 0;
   }
 

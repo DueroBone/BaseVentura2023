@@ -12,11 +12,13 @@ public class AutoBalance extends CommandBase {
   DriveTrain m_driveTrain;
   int balancingStage;
   int counter1;
+  double speed = 0;
 
-  public AutoBalance() {
+  public AutoBalance(double speedIn) {
     // Use addRequirements() here to declare subsystem dependencies.
     // m_driveTrain = new DriveTrain();
     // addRequirements(m_driveTrain);
+    this.speed = speedIn;
   }
 
   // Called when the command is initially scheduled.
@@ -35,11 +37,13 @@ public class AutoBalance extends CommandBase {
       if (balancingStage == 0) {
         while (DriveTrain.m_Gyro.getYaw() > 0) {
           System.out.println("FORWARDS");
+          DriveTrain.doTankDrive(speed, speed);
         }
         balancingStage = 1;
       } else if (balancingStage == 1) {
         while (DriveTrain.m_Gyro.getYaw() != 0) {
           System.out.println("BACKWARDS");
+          DriveTrain.doTankDrive(-speed, -speed);
         }
       }
     }
