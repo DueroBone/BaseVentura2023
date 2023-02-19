@@ -11,11 +11,12 @@ public class AutoBalance extends CommandBase {
   /** Creates a new AutoBalance. */
   DriveTrain m_driveTrain;
   int balancingStage;
+  int counter1;
 
   public AutoBalance() {
     // Use addRequirements() here to declare subsystem dependencies.
-    m_driveTrain = new DriveTrain();
-    //addRequirements(m_driveTrain);
+    // m_driveTrain = new DriveTrain();
+    // addRequirements(m_driveTrain);
   }
 
   // Called when the command is initially scheduled.
@@ -23,20 +24,23 @@ public class AutoBalance extends CommandBase {
   public void initialize() {
     DriveTrain.resetGyro();
     balancingStage = 0;
+    counter1 = 0;
   }
 
   // Called every time the scheduler runs while the command is scheduled.
   @Override
   public void execute() {
     // Move Forward until gyro gets past a threshold
-    if (balancingStage == 0) {
-      while (DriveTrain.m_Gyro.getYaw() > 0) {
-        System.out.println("FORWARDS");
-      }
-      balancingStage = 1;
-    } else if (balancingStage == 1) {
-      while (DriveTrain.m_Gyro.getYaw() != 0) {
-        System.out.println("BACKWARDS");
+    if (counter1 % 10 == 0) {
+      if (balancingStage == 0) {
+        while (DriveTrain.m_Gyro.getYaw() > 0) {
+          System.out.println("FORWARDS");
+        }
+        balancingStage = 1;
+      } else if (balancingStage == 1) {
+        while (DriveTrain.m_Gyro.getYaw() != 0) {
+          System.out.println("BACKWARDS");
+        }
       }
     }
   }
