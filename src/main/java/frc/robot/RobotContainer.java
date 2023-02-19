@@ -646,10 +646,11 @@ public class RobotContainer {
 
     dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
     dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.5)));
-
-    dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicControllerPlaystation.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
+    dynamicControllerPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getRoll()));
   }
 
