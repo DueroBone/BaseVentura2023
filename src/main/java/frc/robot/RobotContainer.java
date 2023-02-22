@@ -20,6 +20,7 @@ import frc.robot.commands.GoTele;
 import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.TestMotor;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
 
@@ -645,13 +646,18 @@ public class RobotContainer {
     dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
     dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
-    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.1)));
     dynamicControllerPlaystation.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+
+    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.25)));
     
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getPitch()));
+
+    dynamicControllerXbox.X.whenPressed(()->TestMotor.SetSpeed(1));
+    dynamicControllerXbox.Y.whenPressed(()->TestMotor.SetSpeed(0));
+    dynamicControllerXbox.B.whenPressed(()->TestMotor.SetSpeed(-1));
   }
 
   public Command getAutonomousCommand() {

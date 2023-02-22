@@ -4,6 +4,9 @@
 
 package frc.robot.commands;
 
+import com.revrobotics.CANSparkMax.IdleMode;
+
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.subsystems.DriveTrain;
 
@@ -34,17 +37,34 @@ public class AutoBalance extends CommandBase {
   public void execute() {
     // Move Forward until gyro gets past a threshold
     if (counter1 % 10 == 0) {
+      DriverStation.reportError("Gyro at " + DriveTrain.m_Gyro.getPitch(), false);
       if (balancingStage == 0) {
-        while (DriveTrain.m_Gyro.getPitch() < 0) {
+        DriverStation.reportWarning("Started balance " + balancingStage, false);
+        while (DriveTrain.m_Gyro.getPitch() < 2) {
           System.out.println("FORWARDS");
-          DriveTrain.doTankDrive(-speed, -speed);
+          DriveTrain.doTankDrive(speed, speed);
         }
         balancingStage = 1;
       } else if (balancingStage == 1) {
+        DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kBrake); // Set brake mode
+        DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kBrake);
+        DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kBrake);
+        DriveTrain.motorDriveRight2.setIdleMode(IdleMode.kBrake);
+        DriverStation.reportWarning("Next stage balance " + balancingStage, false);
         while (Math.abs(DriveTrain.m_Gyro.getPitch()) > 1) {
           System.out.println("BACKWARDS");
-          DriveTrain.doTankDrive(speed/2, speed/2);
+          DriveTrain.doTankDrive(-speed / 4, -speed / 4);
         }
+
+        balancingStage = 2;
+      } else if (balancingStage == 2) {
+        while (Math.abs(DriveTrain.m_Gyro.getPitch()) > 1) {
+          System.out.println("SECOND FORWARDS");
+          DriveTrain.doTankDrive(speed / 4, speed / 4);
+        }
+        balancingStage = 3;
+      } else if (balancingStage == 3) {
+        DriverStation.reportWarning("Finished balance " + balancingStage, false);
       }
     }
   }
@@ -57,6 +77,6 @@ public class AutoBalance extends CommandBase {
   // Returns true when the command should end.
   @Override
   public boolean isFinished() {
-    return false;
+    return (balancingStage == 3);
   }
 }
