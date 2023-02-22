@@ -35,15 +35,15 @@ public class AutoBalance extends CommandBase {
     // Move Forward until gyro gets past a threshold
     if (counter1 % 10 == 0) {
       if (balancingStage == 0) {
-        while (DriveTrain.m_Gyro.getYaw() > 0) {
+        while (DriveTrain.m_Gyro.getPitch() < 0) {
           System.out.println("FORWARDS");
-          DriveTrain.doTankDrive(speed, speed);
+          DriveTrain.doTankDrive(-speed, -speed);
         }
         balancingStage = 1;
       } else if (balancingStage == 1) {
-        while (DriveTrain.m_Gyro.getYaw() != 0) {
+        while (Math.abs(DriveTrain.m_Gyro.getPitch()) > 1) {
           System.out.println("BACKWARDS");
-          DriveTrain.doTankDrive(-speed, -speed);
+          DriveTrain.doTankDrive(speed/2, speed/2);
         }
       }
     }

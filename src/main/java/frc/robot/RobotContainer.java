@@ -48,7 +48,7 @@ public class RobotContainer {
     
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
-          System.out.println("Assigning Xbox: " + object.getPort());
+          System.out.println("Assigning static Xbox: " + object.getPort());
           A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
           B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
           X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -115,7 +115,7 @@ public class RobotContainer {
     
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
-          System.out.println("Assigning Xbox: " + object.getPort());
+          System.out.println("Assigning static Xbox: " + object.getPort());
           A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
           B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
           X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -182,7 +182,7 @@ public class RobotContainer {
     
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
-          System.out.println("Assigning Xbox: " + object.getPort());
+          System.out.println("Assigning static Xbox: " + object.getPort());
           A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
           B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
           X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -249,7 +249,7 @@ public class RobotContainer {
     
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
-          System.out.println("Assigning Xbox: " + object.getPort());
+          System.out.println("Assigning static Xbox: " + object.getPort());
           A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
           B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
           X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -316,7 +316,7 @@ public class RobotContainer {
     
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
-          System.out.println("Assigning Xbox: " + object.getPort());
+          System.out.println("Assigning static Xbox: " + object.getPort());
           A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
           B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
           X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -383,7 +383,7 @@ public class RobotContainer {
     
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
-          System.out.println("Assigning Xbox: " + object.getPort());
+          System.out.println("Assigning static Xbox: " + object.getPort());
           A = new JoystickButton(object, OIConstants.SmartMap(object, "A"));
           B = new JoystickButton(object, OIConstants.SmartMap(object, "B"));
           X = new JoystickButton(object, OIConstants.SmartMap(object, "X"));
@@ -645,13 +645,13 @@ public class RobotContainer {
     dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
     dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
-    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.5)));
+    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.1)));
     dynamicControllerPlaystation.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
     
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
-    dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getRoll()));
+    dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getPitch()));
   }
 
   public Command getAutonomousCommand() {
