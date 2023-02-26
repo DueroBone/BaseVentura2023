@@ -19,11 +19,15 @@ public class GoTele extends CommandBase {
   private boolean GoTeleEnabled = true;
   private double deadzone = -1;
   private final DriveTrain drivetrain;
-
-  public GoTele(boolean enabled, double deadzone) {
+  private double speedMultiplier = 1;
+  /**
+   * Identifies active driving controller and activates drivetrain
+   */
+  public GoTele(boolean enabled, double deadzone, double topSpeed) {
     this.drivetrain = RobotContainer.m_driveTrain; // get driveTrain object from RobotContainer
     this.GoTeleEnabled = enabled;
     this.deadzone = deadzone;
+    this.speedMultiplier = topSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.drivetrain);
   }
@@ -72,7 +76,7 @@ public class GoTele extends CommandBase {
     }
     // RobotContainer.controller0.getType() Ps4 = kHIDGamepad Xbox = kXInputGamepad
     // ATK3 = kHIDJoystick
-    double speedMultiplier = 1;
+
     double a = 1 - deadzone;
     a = 1 / a;
     

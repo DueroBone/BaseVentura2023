@@ -64,6 +64,9 @@ public class AutoSpinToAngleTarget extends CommandBase {
     return centerX;
   }
 
+  /**
+   * CRASHES THE ROBOT IMMEDIATELY
+   */
   public AutoSpinToAngleTarget(double turnPower) {
     this.m_driveTrain = RobotContainer.m_driveTrain;
     this.m_visionPipeline = VisionPipeline.m_visionPipeline;

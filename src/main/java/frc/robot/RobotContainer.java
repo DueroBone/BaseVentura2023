@@ -29,6 +29,7 @@ public class RobotContainer {
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
   Compressor c = new Compressor(6, PneumaticsModuleType.REVPH);
+
   public static class PortBoundControllers {
     public static class PortZero {
       public static class Xbox {
@@ -46,7 +47,7 @@ public class RobotContainer {
         static BooleanSupplier bSupplier = () -> false;
         public static Button LeftTrigger = new Button(bSupplier);
         public static Button RightTrigger = new Button(bSupplier);
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           System.out.println("Assigning static Xbox: " + object.getPort());
@@ -62,6 +63,7 @@ public class RobotContainer {
           Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
         }
       }
+
       public static class FlightStick {
         public static Joystick object = new Joystick(1);
         public static JoystickButton Trigger;
@@ -75,12 +77,12 @@ public class RobotContainer {
         public static JoystickButton Nine;
         public static JoystickButton Ten;
         public static JoystickButton Eleven;
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           assignButtons();
         }
-    
+
         public static void assignButtons() {
           System.out.println("Assigning Joystick: " + object.getPort());
           Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
@@ -97,6 +99,7 @@ public class RobotContainer {
         }
       }
     }
+
     public static class PortOne {
       public static class Xbox {
         public static XboxController object = new XboxController(1);
@@ -113,7 +116,7 @@ public class RobotContainer {
         static BooleanSupplier bSupplier = () -> false;
         public static Button LeftTrigger = new Button(bSupplier);
         public static Button RightTrigger = new Button(bSupplier);
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           System.out.println("Assigning static Xbox: " + object.getPort());
@@ -129,6 +132,7 @@ public class RobotContainer {
           Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
         }
       }
+
       public static class FlightStick {
         public static Joystick object = new Joystick(1);
         public static JoystickButton Trigger;
@@ -142,12 +146,12 @@ public class RobotContainer {
         public static JoystickButton Nine;
         public static JoystickButton Ten;
         public static JoystickButton Eleven;
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           assignButtons();
         }
-    
+
         public static void assignButtons() {
           System.out.println("Assigning Joystick: " + object.getPort());
           Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
@@ -164,6 +168,7 @@ public class RobotContainer {
         }
       }
     }
+
     public static class PortTwo {
       public static class Xbox {
         public static XboxController object = new XboxController(2);
@@ -180,7 +185,7 @@ public class RobotContainer {
         static BooleanSupplier bSupplier = () -> false;
         public static Button LeftTrigger = new Button(bSupplier);
         public static Button RightTrigger = new Button(bSupplier);
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           System.out.println("Assigning static Xbox: " + object.getPort());
@@ -196,6 +201,7 @@ public class RobotContainer {
           Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
         }
       }
+
       public static class FlightStick {
         public static Joystick object = new Joystick(2);
         public static JoystickButton Trigger;
@@ -209,12 +215,12 @@ public class RobotContainer {
         public static JoystickButton Nine;
         public static JoystickButton Ten;
         public static JoystickButton Eleven;
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           assignButtons();
         }
-    
+
         public static void assignButtons() {
           System.out.println("Assigning Joystick: " + object.getPort());
           Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
@@ -231,6 +237,7 @@ public class RobotContainer {
         }
       }
     }
+
     public static class PortThree {
       public static class Xbox {
         public static XboxController object = new XboxController(3);
@@ -247,7 +254,7 @@ public class RobotContainer {
         static BooleanSupplier bSupplier = () -> false;
         public static Button LeftTrigger = new Button(bSupplier);
         public static Button RightTrigger = new Button(bSupplier);
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           System.out.println("Assigning static Xbox: " + object.getPort());
@@ -263,6 +270,7 @@ public class RobotContainer {
           Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
         }
       }
+
       public static class FlightStick {
         public static Joystick object = new Joystick(3);
         public static JoystickButton Trigger;
@@ -276,12 +284,12 @@ public class RobotContainer {
         public static JoystickButton Nine;
         public static JoystickButton Ten;
         public static JoystickButton Eleven;
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           assignButtons();
         }
-    
+
         public static void assignButtons() {
           System.out.println("Assigning Joystick: " + object.getPort());
           Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
@@ -298,6 +306,7 @@ public class RobotContainer {
         }
       }
     }
+
     public static class PortFour {
       public static class Xbox {
         public static XboxController object = new XboxController(4);
@@ -314,7 +323,7 @@ public class RobotContainer {
         static BooleanSupplier bSupplier = () -> false;
         public static Button LeftTrigger = new Button(bSupplier);
         public static Button RightTrigger = new Button(bSupplier);
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           System.out.println("Assigning static Xbox: " + object.getPort());
@@ -330,6 +339,7 @@ public class RobotContainer {
           Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
         }
       }
+
       public static class FlightStick {
         public static Joystick object = new Joystick(4);
         public static JoystickButton Trigger;
@@ -343,12 +353,12 @@ public class RobotContainer {
         public static JoystickButton Nine;
         public static JoystickButton Ten;
         public static JoystickButton Eleven;
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           assignButtons();
         }
-    
+
         public static void assignButtons() {
           System.out.println("Assigning Joystick: " + object.getPort());
           Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
@@ -365,6 +375,7 @@ public class RobotContainer {
         }
       }
     }
+
     public static class PortFive {
       public static class Xbox {
         public static XboxController object = new XboxController(5);
@@ -381,7 +392,7 @@ public class RobotContainer {
         static BooleanSupplier bSupplier = () -> false;
         public static Button LeftTrigger = new Button(bSupplier);
         public static Button RightTrigger = new Button(bSupplier);
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           System.out.println("Assigning static Xbox: " + object.getPort());
@@ -397,6 +408,7 @@ public class RobotContainer {
           Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
         }
       }
+
       public static class FlightStick {
         public static Joystick object = new Joystick(5);
         public static JoystickButton Trigger;
@@ -410,12 +422,12 @@ public class RobotContainer {
         public static JoystickButton Nine;
         public static JoystickButton Ten;
         public static JoystickButton Eleven;
-    
+
         public static void updateController() {
           ControllerTracking.updatePortNumbers();
           assignButtons();
         }
-    
+
         public static void assignButtons() {
           System.out.println("Assigning Joystick: " + object.getPort());
           Trigger = new JoystickButton(object, OIConstants.SmartMap(object, "Trigger"));
@@ -432,6 +444,7 @@ public class RobotContainer {
         }
       }
     }
+
     public static void updateAllControllers() {
       if (DriverStation.isJoystickConnected(0)) {
         if (DriverStation.getJoystickType(0) != 20) {
@@ -477,6 +490,7 @@ public class RobotContainer {
       }
     }
   }
+
   public static class legacyControllers {
     public static final XboxController controller0 = new XboxController(0);
     public static final JoystickButton con0ButtonA = new JoystickButton(controller0, OIConstants.kXboxButtonA);
@@ -562,6 +576,7 @@ public class RobotContainer {
       Options = new JoystickButton(object, OIConstants.SmartMap(object, "Options"));
     }
   }
+
   public static class dynamicControllerPlaystation {
     public static XboxController object = new XboxController(5);
     public static JoystickButton A;
@@ -598,6 +613,7 @@ public class RobotContainer {
       RightTrigger = new JoystickButton(object, OIConstants.SmartMap(object, "RTrigger"));
     }
   }
+
   public static class dynamicJoystick {
     public static Joystick object = new Joystick(5);
     public static JoystickButton Trigger;
@@ -633,31 +649,38 @@ public class RobotContainer {
     }
   }
 
-
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1));
+    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1, 1));
   }
 
   public static void configureButtonBindings() {
     System.out.println("Assigning Buttons");
 
-    dynamicControllerXbox.A.whileHeld(() -> System.out.println(dynamicControllerXbox.object.getPort() + ": dynamic XBOX"));
+    dynamicControllerXbox.A
+        .whileHeld(() -> System.out.println(dynamicControllerXbox.object.getPort() + ": dynamic XBOX"));
     dynamicJoystick.Three.whileHeld(() -> System.out.println(dynamicJoystick.object.getPort() + ": dynamic JOYSTICK"));
-    dynamicControllerPlaystation.A.whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
+    dynamicControllerPlaystation.A
+        .whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
 
-    dynamicControllerXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
-    dynamicControllerPlaystation.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicControllerXbox.LeftBumper
+        .whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicControllerPlaystation.LeftBumper
+        .whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
-    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.25)));
-    
+    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.1)));
+
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getPitch()));
 
-    dynamicControllerXbox.X.whenPressed(()->TestMotor.SetSpeed(1));
-    dynamicControllerXbox.Y.whenPressed(()->TestMotor.SetSpeed(0));
-    dynamicControllerXbox.B.whenPressed(()->TestMotor.SetSpeed(-1));
+    dynamicControllerXbox.X.whenPressed(() -> TestMotor.SetSpeed(1));
+    dynamicControllerXbox.Y.whenPressed(() -> TestMotor.SetSpeed(0));
+    dynamicControllerXbox.B.whenPressed(() -> TestMotor.SetSpeed(-1));
+
+    // Possible joystick configuration
+    // 4/5 = grab and release | trigger = scoring position | 2 = bottom position | 3 = top/driving position
+
   }
 
   public Command getAutonomousCommand() {
