@@ -24,6 +24,9 @@ public class Arm {
     preset = postition;
     double desiredHeight = 0;
     double desiredLength = 0;
+    actualHeight = 0; // FIND ACTUAL POSITIONS
+    actualLength = 0;
+
     if (preset == "starting") {
       desiredHeight = positions.startingHeight;
       desiredLength = positions.startingLength;

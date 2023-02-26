@@ -545,7 +545,7 @@ public class RobotContainer {
     public static final JoystickButton con5Button12 = new JoystickButton(controller5, OIConstants.kATK3Button12);
   }
 
-  public static class dynamicControllerXbox {
+  public static class dynamicXbox {
     public static XboxController object = new XboxController(5);
     public static JoystickButton A;
     public static JoystickButton B;
@@ -577,7 +577,7 @@ public class RobotContainer {
     }
   }
 
-  public static class dynamicControllerPlaystation {
+  public static class dynamicPlaystation {
     public static XboxController object = new XboxController(5);
     public static JoystickButton A;
     public static JoystickButton B;
@@ -656,30 +656,27 @@ public class RobotContainer {
   public static void configureButtonBindings() {
     System.out.println("Assigning Buttons");
 
-    dynamicControllerXbox.A
-        .whileHeld(() -> System.out.println(dynamicControllerXbox.object.getPort() + ": dynamic XBOX"));
+    dynamicXbox.A.whileHeld(() -> System.out.println(dynamicXbox.object.getPort() + ": dynamic XBOX"));
     dynamicJoystick.Three.whileHeld(() -> System.out.println(dynamicJoystick.object.getPort() + ": dynamic JOYSTICK"));
-    dynamicControllerPlaystation.A
-        .whileHeld(() -> System.out.println(dynamicControllerPlaystation.object.getPort() + ": dynamic Playstation"));
+    dynamicPlaystation.A.whileHeld(() -> System.out.println(dynamicPlaystation.object.getPort() + ": dynamic Playstation"));
 
-    dynamicControllerXbox.LeftBumper
-        .whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
-    dynamicControllerPlaystation.LeftBumper
-        .whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
+    dynamicPlaystation.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
-    dynamicControllerXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.1)));
+    dynamicXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.1)));
 
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
-    dynamicControllerXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
-    dynamicControllerPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
-    dynamicControllerXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getPitch()));
+    dynamicXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
+    dynamicPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
+    dynamicXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getPitch()));
 
-    dynamicControllerXbox.X.whenPressed(() -> TestMotor.SetSpeed(1));
-    dynamicControllerXbox.Y.whenPressed(() -> TestMotor.SetSpeed(0));
-    dynamicControllerXbox.B.whenPressed(() -> TestMotor.SetSpeed(-1));
+    dynamicXbox.X.whenPressed(() -> TestMotor.SetSpeed(1));
+    dynamicXbox.Y.whenPressed(() -> TestMotor.SetSpeed(0));
+    dynamicXbox.B.whenPressed(() -> TestMotor.SetSpeed(-1));
 
     // Possible joystick configuration
-    // 4/5 = grab and release | trigger = scoring position | 2 = bottom position | 3 = top/driving position
+    // 4/5 = grab and release | trigger = scoring position | 2 = bottom position | 3
+    // = top/driving position
 
   }
 
@@ -689,8 +686,8 @@ public class RobotContainer {
 
   public static void RemapControllers() {
     System.out.println("***Started mapping controllers***");
-    dynamicControllerXbox.updateController();
-    dynamicControllerPlaystation.updateController();
+    dynamicXbox.updateController();
+    dynamicPlaystation.updateController();
     dynamicJoystick.updateController();
     PortBoundControllers.updateAllControllers();
     System.out.println("***Finished mapping controllers***");

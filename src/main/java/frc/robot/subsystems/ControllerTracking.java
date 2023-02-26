@@ -22,8 +22,8 @@ public class ControllerTracking {
         JoystickTypes[i] = testHID.getType();
       }
     }
-    dynamicControllerXbox.object = new XboxController(indexOfType(JoystickTypes, isXbox));
-    dynamicControllerPlaystation.object = new XboxController(indexOfType(JoystickTypes, HIDType.kHIDGamepad));
+    dynamicXbox.object = new XboxController(indexOfType(JoystickTypes, isXbox));
+    dynamicPlaystation.object = new XboxController(indexOfType(JoystickTypes, HIDType.kHIDGamepad));
     dynamicJoystick.object = new Joystick(indexOfType(JoystickTypes, HIDType.kHIDJoystick));
   }
 

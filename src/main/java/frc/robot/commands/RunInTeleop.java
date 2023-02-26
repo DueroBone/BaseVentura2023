@@ -27,15 +27,15 @@ public class RunInTeleop extends CommandBase {
 
   @Override
   public void execute() {
-    BooleanSupplier LT = () -> (dynamicControllerXbox.object.getLeftTriggerAxis() > 0.5);
-    BooleanSupplier RT = () -> (dynamicControllerXbox.object.getRightTriggerAxis() > 0.5);
-    dynamicControllerXbox.LeftTrigger = new Button(LT);
-    dynamicControllerXbox.RightTrigger = new Button(RT);
+    BooleanSupplier LT = () -> (dynamicXbox.object.getLeftTriggerAxis() > 0.5);
+    BooleanSupplier RT = () -> (dynamicXbox.object.getRightTriggerAxis() > 0.5);
+    dynamicXbox.LeftTrigger = new Button(LT);
+    dynamicXbox.RightTrigger = new Button(RT);
     counter1++;
     if (counter1%3 == 0) {
-      if ((dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) != isBraked) {
+      if ((dynamicXbox.object.getRightTriggerAxis() < 0.5) != isBraked) {
         System.out.println("Switched DriveTrain brake mode to " + isBraked);
-        if (dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) {
+        if (dynamicXbox.object.getRightTriggerAxis() < 0.5) {
           DriveTrain.motorDriveLeft1.setIdleMode(IdleMode.kCoast); // Set coast mode
           DriveTrain.motorDriveLeft2.setIdleMode(IdleMode.kCoast);
           DriveTrain.motorDriveRight1.setIdleMode(IdleMode.kCoast);
@@ -48,7 +48,7 @@ public class RunInTeleop extends CommandBase {
         } 
       }
 
-      if (dynamicControllerXbox.object.getRightTriggerAxis() < 0.5) {isBraked = true;}
+      if (dynamicXbox.object.getRightTriggerAxis() < 0.5) {isBraked = true;}
       else {isBraked = false;}
     }
     //Update trigger buttons
