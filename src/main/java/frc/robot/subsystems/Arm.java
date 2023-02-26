@@ -20,7 +20,8 @@ public class Arm {
     extenderMotor.setSmartCurrentLimit(10);
   }
 
-  public static void moveArmToPreset(double lifterSpeed, double extenderSpeed) {
+  public static void moveArmToPreset(String postition, double lifterSpeed, double extenderSpeed) {
+    preset = postition;
     double desiredHeight = 0;
     double desiredLength = 0;
     if (preset == "starting") {
