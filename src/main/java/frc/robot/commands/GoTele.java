@@ -2,6 +2,7 @@ package frc.robot.commands;
 
 import java.text.MessageFormat;
 
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.CommandBase;
 import frc.robot.RobotContainer;
@@ -30,6 +31,9 @@ public class GoTele extends CommandBase {
     this.speedMultiplier = topSpeed;
     // Use addRequirements() here to declare subsystem dependencies.
     addRequirements(this.drivetrain);
+    if (!enabled) {
+      DriverStation.reportError("GOTELE IS DISABLED", false);
+    }
   }
 
   @Override
@@ -87,7 +91,7 @@ public class GoTele extends CommandBase {
         teleLeft = teleLeft + deadzone;
       }
       teleLeft = teleLeft * a;
-      teleLeft = smartSquare(teleLeft, 1);
+      teleLeft = smartSquare(teleLeft, 2);
       teleLeft = teleLeft * speedMultiplier;
     } else {
       teleLeft = 0;
@@ -100,7 +104,7 @@ public class GoTele extends CommandBase {
         teleRight = teleRight + deadzone;
       }
       teleRight = teleRight * a;
-      teleRight = smartSquare(teleRight, 1);
+      teleRight = smartSquare(teleRight, 2);
       teleRight = teleRight * speedMultiplier;
     } else {
       teleRight = 0;

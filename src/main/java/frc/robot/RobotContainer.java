@@ -656,7 +656,7 @@ public class RobotContainer {
   }
 
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(false, 0.1, 1));
+    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1, 1));
   }
 
   public static void configureButtonBindings() {
@@ -669,7 +669,7 @@ public class RobotContainer {
     dynamicXbox.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
     dynamicPlaystation.LeftBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoSpinToAngleTarget(0.5)));
 
-    dynamicXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance(0.1)));
+    dynamicXbox.RightBumper.whenPressed(() -> CommandScheduler.getInstance().schedule(new AutoBalance()));
 
     dynamicJoystick.Trigger.whenPressed(() -> VisionLight.toggle());
     dynamicXbox.RightTrigger.whenPressed(() -> VisionLight.toggle());
