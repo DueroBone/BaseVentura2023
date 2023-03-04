@@ -23,8 +23,29 @@ public final class Constants {
       public static final class DriveConstants {
             public static final int leftDrive1Id = 1;
             public static final int leftDrive2Id = 2;
+            public static final int leftDrive3Id = 2;
             public static final int rightDrive1Id = 3;
             public static final int rightDrive2Id = 4;
+            public static final int rightDrive3Id = 4;
+      }
+
+      /**
+       * For all non-driving devices
+       */
+      public static final class DeviceConstants {
+            public static final int compressorId = 6;
+            public static final int armExtenderId = 7;
+            public static final int armLifterId = 8;
+            public static final int LightPWMId = 0;
+
+            // Main breaker panel
+            public static final int wireLeftDrive1 = 0;
+            public static final int wireLeftDrive2 = 1;
+            public static final int wireLeftDrive3 = 2;
+            public static final int wireRightDrive1 = 4;
+            public static final int wireRightDrive2 = 5;
+            public static final int wireRightDrive3 = 6;
+            public static final int wireVisionLight = 8;
       }
 
       public static final class OIConstants {

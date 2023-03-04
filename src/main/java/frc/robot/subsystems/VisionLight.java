@@ -2,11 +2,12 @@ package frc.robot.subsystems;
 
 import edu.wpi.first.wpilibj.PWM;
 import edu.wpi.first.wpilibj.PWM.PeriodMultiplier;
+import frc.robot.Constants;
 
 public class VisionLight {
 
 
-    static PWM pwm = new PWM(0);
+    static PWM pwm = new PWM(Constants.DeviceConstants.LightPWMId);
     public static void toggle() {
     // Set the PWM pulse width in milliseconds
     pwm.setPeriodMultiplier(PeriodMultiplier.k1X);

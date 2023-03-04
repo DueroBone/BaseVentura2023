@@ -20,6 +20,7 @@ import frc.robot.commands.GoTele;
 import frc.robot.subsystems.VisionLight;
 import frc.robot.subsystems.ControllerTracking;
 import frc.robot.subsystems.DriveTrain;
+import frc.robot.subsystems.Piston;
 import frc.robot.subsystems.TestMotor;
 import edu.wpi.first.wpilibj2.command.Command;
 import edu.wpi.first.wpilibj2.command.CommandScheduler;
@@ -28,7 +29,8 @@ public class RobotContainer {
   // The robot's subsystems and commands are defined here...
   public static final DriveTrain m_driveTrain = new DriveTrain();
 
-  Compressor c = new Compressor(6, PneumaticsModuleType.REVPH);
+  Compressor c = new Compressor(5, PneumaticsModuleType.REVPH);
+  public static final Piston m_piston = new Piston();
 
   public static class PortBoundControllers {
     public static class PortZero {
@@ -557,6 +559,10 @@ public class RobotContainer {
     public static JoystickButton RightStickPress;
     public static JoystickButton Share;
     public static JoystickButton Options;
+    public static POVButton POVUp = new POVButton(object, 0);
+    public static POVButton POVDown = new POVButton(object, 180);
+    public static POVButton POVLeft = new POVButton(object, 270);
+    public static POVButton POVRight = new POVButton(object, 90);
     static BooleanSupplier bSupplier = () -> false;
     public static Button LeftTrigger = new Button(bSupplier);
     public static Button RightTrigger = new Button(bSupplier);
@@ -650,7 +656,7 @@ public class RobotContainer {
   }
 
   public RobotContainer() {
-    m_driveTrain.setDefaultCommand(new GoTele(true, 0.1, 1));
+    m_driveTrain.setDefaultCommand(new GoTele(false, 0.1, 1));
   }
 
   public static void configureButtonBindings() {
@@ -670,13 +676,16 @@ public class RobotContainer {
     dynamicPlaystation.RightTrigger.whenPressed(() -> VisionLight.toggle());
     dynamicXbox.B.whileHeld(() -> System.out.println(DriveTrain.m_Gyro.getPitch()));
 
+    dynamicXbox.X.whenPressed(() -> Piston.contract(true));
+    dynamicXbox.Y.whenPressed(() -> Piston.contract(false));
+    /*
     dynamicXbox.X.whenPressed(() -> TestMotor.SetSpeed(1));
     dynamicXbox.Y.whenPressed(() -> TestMotor.SetSpeed(0));
     dynamicXbox.B.whenPressed(() -> TestMotor.SetSpeed(-1));
+    */
 
     // Possible joystick configuration
-    // 4/5 = grab and release | trigger = scoring position | 2 = bottom position | 3
-    // = top/driving position
+    // 4/5 = grab and release | trigger = scoring position | 2 = bottom position | 3 = top/driving position
 
   }
 

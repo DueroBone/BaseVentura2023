@@ -4,14 +4,16 @@ import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMax.IdleMode;
 import com.revrobotics.CANSparkMaxLowLevel.MotorType;
 
+import frc.robot.Constants.DeviceConstants;;
+
 public class Arm {
   static String preset = "starting";
   static double actualHeight;
   static double actualLength;
   static double toleranceHeight = 5;
   static double toleranceLength = 5;
-  static CANSparkMax lifterMotor = new CANSparkMax(50, MotorType.kBrushless);
-  static CANSparkMax extenderMotor = new CANSparkMax(51, MotorType.kBrushless);
+  static CANSparkMax lifterMotor = new CANSparkMax(DeviceConstants.armLifterId, MotorType.kBrushless);
+  static CANSparkMax extenderMotor = new CANSparkMax(DeviceConstants.armExtenderId, MotorType.kBrushless);
 
   public static void setup() {
     lifterMotor.setIdleMode(IdleMode.kBrake);
