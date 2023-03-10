@@ -28,7 +28,7 @@ public class Robot extends TimedRobot {
     if (!Robot.isSimulation()) {
       UsbCamera visionCamera = CameraServer.startAutomaticCapture();
       visionCamera.setResolution(CamWidth, CamHeight);
-      visionCamera.setBrightness(15);
+      visionCamera.setBrightness(30);
     }
     DriverStation.silenceJoystickConnectionWarning(true);
 
